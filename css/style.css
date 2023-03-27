@@ -1,0 +1,46 @@
+body {
+  padding-top: 3em;
+}
+
+.nav-pills .nav-link.active {
+  background-color: #ffc107;
+}
+
+#posts {
+  height: fit-content;
+}
+
+#crear-post {
+  border-radius: 50%;
+}
+
+#ficha-header {
+  background-image: url("../img/ficha-background.jpg");
+  background-position: top;
+  background-size: cover;
+  /* height: 400px; */
+  margin-top: 40px;
+}
+
+#reparto {
+  text-overflow: ellipsis;
+}
+
+.page-link {
+  color: #ffc107;
+  background-color: #6c757d;
+}
+
+.page-link:hover {
+  color: #ffc107;
+}
+
+.page-link:focus {
+  color: #ffc107;
+  box-shadow: 0 0 0 0.25rem rgba(247, 181, 40, 0.25);
+}
+
+.page-item.active .page-link {
+  background-color: #ffc107;
+  border-color: #ffc107;
+}
