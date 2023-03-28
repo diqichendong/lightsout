@@ -54,7 +54,7 @@
                 Administración
               </a>
             </li>
-            <li><a class="dropdown-item" href="index.html">Salir</a></li>
+            <li><a class="dropdown-item" href="index.php?c=inicio&m=logout">Salir</a></li>
           </ul>
         </div>
       </div>
