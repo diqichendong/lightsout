@@ -424,6 +424,8 @@
 
   <!-- Bootstrap JS -->
   <script src="js/bootstrap.bundle.min.js"></script>
+
+  <script src="js/inicio.js"></script>
 </body>
 
 </html>

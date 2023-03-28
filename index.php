@@ -1,12 +1,10 @@
 <?php
 
-session_start();
-
 require_once "./config/config.php";
 
 // Comprobar el parámetro del controlador
 if (isset($_GET["c"])) {
-  $controllerName = ucwords($_GET["c"]) . "Controller";
+  $controllerName = str_replace("_", "", ucwords($_GET["c"], "_")) . "Controller";
 
   // Comprobar si existe el controlador
   if (file_exists("controller/" . $controllerName . ".php")) {
@@ -34,7 +32,7 @@ if (isset($_GET["c"])) {
 
   } else {
     // No existe el controlador
-    $controllerName = ucwords(DEFAULT_CONTROLLER) . "Controller";
+    $controllerName = str_replace("_", "", ucwords(DEFAULT_CONTROLLER, "_")) . "Controller";
     $method = DEFAULT_METHOD;
     require_once "controller/" . $controllerName . ".php";
 

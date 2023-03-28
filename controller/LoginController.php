@@ -1,6 +1,7 @@
 <?php
 
 require_once "model/Usuario.php";
+session_start();
 
 class LoginController
 {

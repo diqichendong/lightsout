@@ -10,7 +10,7 @@
     <div class="collapse navbar-collapse justify-content-lg-between" id="menu">
       <ul class="navbar-nav mb-2 mb-lg-0 col-lg-9 justify-content-around">
         <li class="nav-item mx-2 text-center fs-5">
-          <a class="nav-link active" aria-current="page" href="index.php?c=inicio">
+          <a class="nav-link" aria-current="page" href="index.php?c=inicio">
             <i class="bi bi-house-fill"></i> Inicio
           </a>
         </li>
@@ -41,19 +41,22 @@
         </form>
         <div class="dropdown">
           <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
-            <img src="img/logo.png" class="rounded-circle" alt="user" width="30px" height="30px" />
+            <img src="assets/perfil/<?= $_SESSION["usuario"]->foto ?>" class="rounded-circle" alt="user" width="30px"
+              height="30px" />
           </button>
           <ul class="dropdown-menu dropdown-menu-end">
             <li>
-              <a class="dropdown-item" href="editar_perfil.html">
+              <a class="dropdown-item" href="index.php?c=editar_perfil">
                 Editar perfil
               </a>
             </li>
-            <li>
-              <a class="dropdown-item" href="administrador.html">
-                Administración
-              </a>
-            </li>
+            <?php if ($_SESSION["usuario"]->tipo == "Administrador") { ?>
+              <li>
+                <a class="dropdown-item" href="administrador.html">
+                  Administración
+                </a>
+              </li>
+            <?php } ?>
             <li><a class="dropdown-item" href="index.php?c=inicio&m=logout">Salir</a></li>
           </ul>
         </div>
