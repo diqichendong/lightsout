@@ -1,5 +1,5 @@
 <!-- Footer -->
-<footer class="container-fluid bg-secondary p-4">
+<footer class="container-fluid bg-secondary p-4 mt-5">
   <div class="d-flex justify-content-center gap-5 text-center">
     <a href="" class="link link-warning text-decoration-none">
       Sobre nosotros

@@ -1,35 +1,48 @@
+import * as v from "./validar.js";
+
 const foto = document.getElementById("foto");
 const archivo = document.getElementById("archivo");
 const guardar = document.getElementById("guardar_foto");
+const guardar_datos = document.getElementById("guardar_datos");
+const cambiar_pwd = document.getElementById("cambiar_pwd");
+const eliminar_cuenta = document.getElementById("eliminar_cuenta");
 
 // Cambiar foto en tiempo real
 archivo.addEventListener("change", (e) => {
-  if (validarFoto(e.target.files[0].name))
+  if (v.validarFoto(e.target.files[0].name))
     foto.src = URL.createObjectURL(e.target.files[0]);
 });
 
 // Validar el archivo subido
 guardar.addEventListener("click", (e) => {
-  if (!validarFoto(archivo.files[0].name)) {
+  if (!v.validarFoto(archivo.files[0].name)) {
     const error_foto = document.getElementById("error_foto");
     error_foto.style.display = "block";
     e.preventDefault();
   }
 });
 
-/**
- * Valida si el archivo subido es una imagen
- * @param {string} nombre_archivo Nombre del archivo subido
- * @returns true si valida, false si no
- */
-function validarFoto(nombre_archivo) {
-  var extensiones_permitidas = ["jpg", "png"];
-  var extension = nombre_archivo.split(".").pop().toLowerCase();
-
-  for (let i = 0; i < extensiones_permitidas.length; i++) {
-    if (extensiones_permitidas[i] == extension) {
-      return true;
-    }
+// Validar datos usuario
+guardar_datos.addEventListener("click", (e) => {
+  let nombre = document.getElementById("nombre").value.trim();
+  let usuario = document.getElementById("usuario").value.trim();
+  if (!v.validarNombre(nombre) || !v.validarLogin(usuario)) {
+    e.preventDefault();
   }
-  return false;
-}
+});
+
+// Validar contraseñas del usuario
+cambiar_pwd.addEventListener("click", (e) => {
+  let new_pass = document.getElementById("new-pass").value;
+  let new_pass_conf = document.getElementById("new-pass-conf").value;
+  if (!v.validarPwd(new_pass, new_pass_conf)) {
+    e.preventDefault();
+  }
+});
+
+// Confirmar eliminar cuenta
+eliminar_cuenta.addEventListener("click", (e) => {
+  if (!confirm("¿Estás seguro que quieres eliminar tu cuenta?")) {
+    e.preventDefault();
+  }
+});

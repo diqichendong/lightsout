@@ -11,6 +11,30 @@
 </head>
 
 <body class="bg-dark min-vh-100 d-flex flex-column justify-content-between align-items-center">
+  <div class="container fixed-top p-3">
+    <!-- Mensaje de login incorrecto -->
+    <?php if (isset($_SESSION["mensaje_error"])) { ?>
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <span>
+          <?= $_SESSION["mensaje_error"] ?>
+        </span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      <?php unset($_SESSION["mensaje_error"]);
+    } ?>
+
+    <!-- Mensaje de usuario creado -->
+    <?php if (isset($_SESSION["mensaje_ok"])) { ?>
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <span>
+          <?= $_SESSION["mensaje_ok"] ?>
+        </span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      <?php unset($_SESSION["mensaje_ok"]);
+    } ?>
+  </div>
+
   <!-- Iniciar sesión -->
   <div class="container pt-5">
     <div class="row justify-content-center m-3">
@@ -51,24 +75,10 @@
   </div>
   <!-- Fin Iniciar sesión -->
 
-
-  <!-- Mensaje de login incorrecto -->
-  <?php if (isset($_SESSION["error_login"])) { ?>
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-      <span>Usuario o contraseña incorrectos.</span>
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-    <?php unset($_SESSION["error_login"]);
-  } ?>
-
-  <!-- Mensaje de usuario creado -->
-  <?php if (isset($_SESSION["usuario_creado"])) { ?>
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-      <span>Usuario creado correctamente.</span>
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-    <?php unset($_SESSION["error_login"]);
-  } ?>
+  <?php
+  // Importar el footer
+  require_once "templates/footer.php";
+  ?>
 
   <script src="js/login.js"></script>
   <script src="js/bootstrap.bundle.min.js"></script>

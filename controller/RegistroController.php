@@ -30,7 +30,7 @@ class RegistroController
     $nombre = $_POST["nombre"];
 
     if ($this->registro->addUsuario($login, $pwd, $email, $nombre, "Normal")) {
-      $_SESSION["usuario_creado"] = true;
+      $_SESSION["mensaje_ok"] = "Usuario creado correctamente.";
     }
 
     header("Location: index.php?c=login");

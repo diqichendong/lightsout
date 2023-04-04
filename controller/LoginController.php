@@ -29,7 +29,7 @@ class LoginController
       $_SESSION["usuario"] = $this->usuario;
       header("Location: index.php?c=inicio");
     } else {
-      $_SESSION["error_login"] = true;
+      $_SESSION["mensaje_error"] = "Usuario o contraseña incorrectos.";
       header("Location: index.php?c=login");
     }
   }
