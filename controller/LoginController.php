@@ -26,6 +26,10 @@ class LoginController
     $pwd = $_POST["pwd"];
 
     if ($this->usuario->existeUsuario($login, $pwd)) {
+      if (isset($_POST["recordar"])) {
+        setcookie("login", $login, time() + 3600 * 24 * 30);
+        setcookie("pwd", $pwd, time() + 3600 * 24 * 30);
+      }
       $_SESSION["usuario"] = $this->usuario;
       header("Location: index.php?c=inicio");
     } else {

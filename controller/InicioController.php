@@ -24,6 +24,8 @@ class InicioController
   function logout()
   {
     session_destroy();
+    setcookie("login", null, -1);
+    setcookie("pwd", null, -1);
     header("Location: index.php?c=login");
   }
 

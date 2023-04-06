@@ -11,6 +11,7 @@
 </head>
 
 <body class="bg-dark min-vh-100 d-flex flex-column justify-content-between align-items-center">
+
   <div class="container fixed-top p-3">
     <!-- Mensaje de login incorrecto -->
     <?php if (isset($_SESSION["mensaje_error"])) { ?>
@@ -48,15 +49,20 @@
           </h4>
           <form action="index.php?c=login&m=login" method="post" class="d-flex flex-wrap justify-content-center my-3">
             <div class="form-floating mb-3 col-12">
-              <input type="text" class="form-control" name="login" id="login" placeholder="login" />
+              <input type="text" class="form-control" name="login" id="login" placeholder="login" value="<?php if (isset($_COOKIE["login"])) {
+                echo $_COOKIE["login"];
+              } ?>" />
               <label for="login" class="form-label">Usuario</label>
             </div>
             <div class="form-floating mb-3 col-12">
-              <input type="password" class="form-control" name="pwd" id="pwd" placeholder="password" />
+              <input type="password" class="form-control" name="pwd" id="pwd" placeholder="password"
+                value="<?php if (isset($_COOKIE["pwd"])) {
+                  echo $_COOKIE["pwd"];
+                } ?>" />
               <label for="pwd" class="form-label">Contraseña</label>
             </div>
             <div class="form-check col-12 mb-3">
-              <input class="form-check-input" type="checkbox" id="recordar" />
+              <input class="form-check-input" type="checkbox" id="recordar" name="recordar" />
               <label class="form-check-label text-light" for="recordar">
                 Recordarme
               </label>
