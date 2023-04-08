@@ -390,34 +390,36 @@
           </button>
         </div>
         <div class="modal-body bg-secondary">
-          <form>
-            <div class="container d-flex align-items-center gap-3 mb-3">
-              <div class="col-9 col-sm-10">
-                <label for="ficha-crear-post" class="col-form-label text-warning">
-                  Ficha:
-                </label>
-                <input class="form-control" list="datalistFichas" id="crear-post-ficha"
-                  placeholder="Buscar película o serie">
-                <datalist id="datalistFichas"></datalist>
-              </div>
+          <form method="post" action="index.php?c=inicio&m=crear_post">
+            <div class="container d-flex align-items-center gap-3 mb-3 p-0">
               <div class="col-3 col-sm-2">
                 <img src="assets/img/default-poster.png" alt="poster" id="crear-post-poster"
                   class="container p-0 rounded border border-warning" />
+              </div>
+              <div class="container col-9 col-sm-10">
+                <label for="ficha-crear-post" class="col-form-label text-warning">
+                  Ficha:
+                </label>
+                <input class="form-control" id="crear-post-buscador" placeholder="Buscar película o serie">
+                <select class="form-select" id="crear-post-fichas" name="id-ficha"></select>
+                <input type="hidden" name="poster" id="poster">
+                <input type="hidden" name="tipo" id="tipo">
+                <input type="hidden" name="titulo" id="titulo">
               </div>
             </div>
             <div class="mb-3">
               <label for="contenido-crear-post" class="col-form-label text-warning">
                 Contenido:
               </label>
-              <textarea class="form-control" id="contenido-crear-post" rows="5"
-                placeholder="Cuéntame algo..."></textarea>
+              <textarea class="form-control" id="contenido-crear-post" name="contenido" rows="5"
+                placeholder="Cuéntame algo..." required></textarea>
             </div>
         </div>
         <div class="modal-footer border-0">
           <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
             Cancelar
           </button>
-          <button type="submit" class="btn btn-outline-warning">POST</button>
+          <button id="post" type="submit" class="btn btn-outline-warning">POST</button>
         </div>
         </form>
       </div>
@@ -433,7 +435,7 @@
   <!-- Bootstrap JS -->
   <script src="js/bootstrap.bundle.min.js"></script>
 
-  <script src="js/inicio.js"></script>
+  <script type="module" src="js/inicio.js"></script>
 </body>
 
 </html>

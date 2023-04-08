@@ -112,3 +112,17 @@ export function validarFoto(nombre_archivo) {
   }
   return false;
 }
+
+/**
+ * Valida si el contenido de un post
+ * @param {string} nombre_archivo Nombre del archivo subido
+ * @returns true si valida, false si no
+ */
+export function validarContenido(contenido) {
+  if (contenido.length < 500) {
+    return true;
+  } else {
+    alert("El contenido no puede superar los 500 caracteres.");
+    return false;
+  }
+}

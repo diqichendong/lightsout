@@ -18,17 +18,12 @@ class Usuario
 
   }
 
-  private function setConexion()
-  {
-    return new Conexion();
-  }
-
   /**
    * Crea un nuevo usuario en la base de datos
    */
   function addUsuario($login, $pwd, $email, $nombre, $tipo)
   {
-    $conn = $this->setConexion();
+    $conn = new Conexion();
     $sql = "insert into usuarios (username, password, email, nombre, tipo, foto, sobre_mi) values ('$login', '$pwd', '$email', '$nombre', '$tipo', 'default.jpg', '')";
 
     return $conn->exec($sql);
@@ -39,7 +34,7 @@ class Usuario
    */
   function existeUsuario($login, $pwd)
   {
-    $conn = $this->setConexion();
+    $conn = new Conexion();
     $sql = "select * from usuarios where username = '$login' and password = '$pwd'";
     $consulta = $conn->consulta($sql);
 
@@ -63,7 +58,7 @@ class Usuario
    */
   function editarFoto($foto)
   {
-    $conn = $this->setConexion();
+    $conn = new Conexion();
     $sql = "update usuarios set foto = '$foto' where id = $this->id";
     $consulta = $conn->prepare($sql);
     $consulta->execute();
@@ -75,7 +70,7 @@ class Usuario
    */
   function actualizarDatos($nombre, $username, $sobre_mi)
   {
-    $conn = $this->setConexion();
+    $conn = new Conexion();
     $sql = "update usuarios set nombre = '$nombre', username = '$username', sobre_mi = '$sobre_mi' where id = $this->id";
     $consulta = $conn->prepare($sql);
     $consulta->execute();
@@ -94,7 +89,7 @@ class Usuario
    */
   function actualizarPassword($new_pwd)
   {
-    $conn = $this->setConexion();
+    $conn = new Conexion();
     $sql = "update usuarios set password = '$new_pwd' where id = $this->id";
     $consulta = $conn->prepare($sql);
     $consulta->execute();
@@ -111,7 +106,7 @@ class Usuario
    */
   function eliminarUsuario()
   {
-    $conn = $this->setConexion();
+    $conn = new Conexion();
     $sql = "delete from usuarios where id = $this->id";
     $consulta = $conn->prepare($sql);
     $consulta->execute();

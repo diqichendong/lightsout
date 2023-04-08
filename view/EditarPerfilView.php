@@ -169,7 +169,7 @@ $u = $_SESSION["usuario"];
               <input type="password" class="form-control" id="new-pass" name="new-pass" />
             </div>
           </div>
-          <div class="row mb-3">
+          <div class="row mb-3 align-items-center">
             <label for="new-pass-conf" class="col-5 col-lg-3 col-form-label fw-bold text-warning text-end">
               Confirmar contraseña nueva:
             </label>
