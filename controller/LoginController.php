@@ -14,7 +14,7 @@ class LoginController
   function index()
   {
     if (isset($_SESSION["usuario"])) {
-      header("Location: index.php?c=inicio");
+      header("Location: inicio");
     } else {
       require_once "view/LoginView.php";
     }
@@ -31,10 +31,10 @@ class LoginController
         setcookie("pwd", $pwd, time() + 3600 * 24 * 30);
       }
       $_SESSION["usuario"] = $this->usuario;
-      header("Location: index.php?c=inicio");
+      header("Location: inicio");
     } else {
       $_SESSION["mensaje_error"] = "Usuario o contraseña incorrectos.";
-      header("Location: index.php?c=login");
+      header("Location: login");
     }
   }
 

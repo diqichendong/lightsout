@@ -46,7 +46,7 @@
           </button>
           <ul class="dropdown-menu dropdown-menu-end">
             <li>
-              <a class="dropdown-item" href="index.php?c=editar_perfil">
+              <a class="dropdown-item" href="editar_perfil">
                 Editar perfil
               </a>
             </li>

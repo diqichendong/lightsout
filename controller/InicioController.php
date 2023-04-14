@@ -19,7 +19,7 @@ class InicioController
     if (isset($_SESSION["usuario"])) {
       require_once "view/InicioView.php";
     } else {
-      header("Location: index.php?c=login");
+      header("Location: login");
     }
   }
 
@@ -28,7 +28,7 @@ class InicioController
     session_destroy();
     setcookie("login", null, -1);
     setcookie("pwd", null, -1);
-    header("Location: index.php?c=login");
+    header("Location: login");
   }
 
   function crear_post()
@@ -47,7 +47,7 @@ class InicioController
 
     Post::addPost($contenido, intval($usuario->id), intval($id_ficha));
 
-    header("Location: index.php?c=inicio");
+    header("Location: inicio");
   }
 
 }

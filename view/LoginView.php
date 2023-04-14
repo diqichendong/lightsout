@@ -55,10 +55,9 @@
               <label for="login" class="form-label">Usuario</label>
             </div>
             <div class="form-floating mb-3 col-12">
-              <input type="password" class="form-control" name="pwd" id="pwd" placeholder="password"
-                value="<?php if (isset($_COOKIE["pwd"])) {
-                  echo $_COOKIE["pwd"];
-                } ?>" />
+              <input type="password" class="form-control" name="pwd" id="pwd" placeholder="password" value="<?php if (isset($_COOKIE["pwd"])) {
+                echo $_COOKIE["pwd"];
+              } ?>" />
               <label for="pwd" class="form-label">Contraseña</label>
             </div>
             <div class="form-check col-12 mb-3">
@@ -73,7 +72,7 @@
           </form>
           <p class="text-center text-light">
             ¿No tienes una cuenta?
-            <a href="index.php?c=registro&m=index" class="link-warning">Regístrate</a>
+            <a href="registro" class="link-warning">Regístrate</a>
           </p>
         </div>
       </div>

@@ -16,7 +16,7 @@ class RegistroController
   function index()
   {
     if (isset($_SESSION["usuario"])) {
-      header("Location: index.php?c=inicio");
+      header("Location: inicio");
     } else {
       require_once "view/RegistroView.php";
     }
@@ -33,7 +33,7 @@ class RegistroController
       $_SESSION["mensaje_ok"] = "Usuario creado correctamente.";
     }
 
-    header("Location: index.php?c=login");
+    header("Location: login");
 
   }
 

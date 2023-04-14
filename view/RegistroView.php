@@ -55,7 +55,7 @@
           </form>
           <p class="text-center text-light">
             ¿Ya tienes una cuenta?
-            <a href="index.php?c=login&m=index" class="link-warning">Iniciar sesión</a>
+            <a href="login" class="link-warning">Iniciar sesión</a>
           </p>
         </div>
       </div>

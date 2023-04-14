@@ -1,0 +1,5 @@
+RewriteEngine On
+RewriteRule ^login$ index.php?c=login
+RewriteRule ^registro$ index.php?c=registro
+RewriteRule ^inicio$ index.php?c=inicio
+RewriteRule ^editar_perfil$ index.php?c=editar_perfil

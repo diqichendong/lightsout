@@ -35,7 +35,7 @@ class EditarPerfilController
       $_SESSION["foto_cambiada"] = true;
     }
 
-    header("Location: index.php?c=editar_perfil");
+    header("Location: editar_perfil");
   }
 
   /**
@@ -50,7 +50,7 @@ class EditarPerfilController
       $_SESSION["datos_actualizados"] = true;
     }
 
-    header("Location: index.php?c=editar_perfil");
+    header("Location: editar_perfil");
   }
 
   /**
@@ -68,7 +68,7 @@ class EditarPerfilController
       $_SESSION["error_pwd"] = true;
     }
 
-    header("Location: index.php?c=editar_perfil");
+    header("Location: editar_perfil");
   }
 
   /**
@@ -80,7 +80,7 @@ class EditarPerfilController
       array_map('unlink', glob("assets/perfil/" . $this->usuario->id . ".*"));
       unset($_SESSION["usuario"]);
       $_SESSION["mensaje_ok"] = "Cuenta eliminada correctamente.";
-      header("Location: index.php?c=login");
+      header("Location: login");
     }
   }
 }
