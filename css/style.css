@@ -2,6 +2,10 @@ body {
   padding-top: 3em;
 }
 
+.header-gap {
+  height: 50px !important;
+}
+
 .nav-pills .nav-link.active {
   background-color: #ffc107;
 }
@@ -43,4 +47,20 @@ body {
 .page-item.active .page-link {
   background-color: #ffc107;
   border-color: #ffc107;
+}
+
+#post-original-contenido {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  white-space: normal !important;
+}
+
+.light-checkbox {
+  display: none;
+}
+
+.bi-lightbulb,
+.bi-lightbulb-fill {
+  cursor: pointer;
 }

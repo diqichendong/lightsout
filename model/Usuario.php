@@ -23,6 +23,7 @@ class Usuario
    */
   function addUsuario($login, $pwd, $email, $nombre, $tipo)
   {
+    $pwd = md5($pwd);
     $conn = new Conexion();
     $sql = "insert into usuarios (username, password, email, nombre, tipo, foto, sobre_mi) values ('$login', '$pwd', '$email', '$nombre', '$tipo', 'default.jpg', '')";
 
@@ -34,6 +35,7 @@ class Usuario
    */
   function existeUsuario($login, $pwd)
   {
+    $pwd = md5($pwd);
     $conn = new Conexion();
     $sql = "select * from usuarios where username = '$login' and password = '$pwd'";
     $consulta = $conn->consulta($sql);
@@ -89,6 +91,7 @@ class Usuario
    */
   function actualizarPassword($new_pwd)
   {
+    $new_pwd = md5($new_pwd);
     $conn = new Conexion();
     $sql = "update usuarios set password = '$new_pwd' where id = $this->id";
     $consulta = $conn->prepare($sql);

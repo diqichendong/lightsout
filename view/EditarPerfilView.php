@@ -13,6 +13,7 @@ $u = $_SESSION["usuario"];
   <title>LightsOUT - Editar perfil</title>
   <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon" />
   <link rel="stylesheet" href="css/bootstrap.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" />
 </head>
 
@@ -23,7 +24,7 @@ $u = $_SESSION["usuario"];
   ?>
 
   <!-- Mensajes -->
-  <div class="container mt-5 pt-5">
+  <div class="container p-3">
     <!-- Mensaje error archivo imagen -->
     <div id="error_foto" class="alert alert-danger alert-dismissible fade show" style="display: none;" role="alert">
       <span>El archivo subido no es válido.</span>
@@ -70,7 +71,7 @@ $u = $_SESSION["usuario"];
   <!-- Fin Mensajes -->
 
   <!-- Editar foto -->
-  <section class="container col-md-8 text-light mb-5 pt-5">
+  <section class="container col-md-8 text-light mb-5">
     <h1 class="text-warning mb-4 pt-2">Cambiar foto</h1>
 
     <div class="container d-flex border border-2 border-warning rounded p-2">

@@ -13,214 +13,109 @@
   <script src="js/jquery-3.6.4.min.js"></script>
 </head>
 
-<body class="bg-dark min-vh-100">
+<body class="bg-dark d-flex flex-column justify-content-between min-vh-100">
 
   <?php
+
+  // Importar funciones
+  require_once "utils/funciones.php";
+
   //Importar cabecera
   require_once "templates/header.php";
   ?>
 
   <!-- MAIN CONTENT -->
-  <div class="container-fluid d-flex justify-content-center gap-2 text-light my-5">
+  <div class="container-fluid d-flex justify-content-center gap-2 text-light mb-5 flex-fill">
     <!-- POSTS -->
-    <section class="col-12 col-md-6 rounded overflow-hidden d-flex flex-column gap-1" id="posts">
-      <!-- Post -->
-      <div class="row p-2 border-2 bg-secondary">
-        <!-- Poster -->
-        <div class="col-3 col-md-2">
-          <a href="ficha.html">
-            <img src="img/poster.jpg" alt="poster" class="container p-0 rounded border border-warning" />
-          </a>
-        </div>
-        <!-- Fin Poster -->
-        <!-- Post body -->
-        <div class="col-9 col-md-10 d-flex flex-wrap">
-          <!-- Título -->
-          <h3 class="col-9 text-warning">Babylon</h3>
-          <!-- Fin Título -->
-          <!-- Fecha -->
-          <span class="col-3 text-white-50 text-end"><small>06/02/23</small></span>
-          <!-- Fin Fecha -->
-          <!-- Texto -->
-          <p class="col-12">
-            Entera, grandiosa, descomunal, extravagante, salvaje…, sin ninguna
-            duda, un peliculón al que no sirve, solo, tentarle una parte.
-            (...) No, no ha buscado un ‘buen trabajo’ Chazelle, ha buscado lo
-            sublime.
-          </p>
-          <!-- Fin Texto -->
-        </div>
-        <!-- Fin Post body -->
-        <!-- Post footer -->
-        <div class="d-flex">
-          <!-- Comentarios -->
-          <div class="col-2 py-2 d-flex align-items-center justify-content-center gap-2">
-            <a href="" class="link-warning">
-              <i class="bi bi-chat"></i>
-            </a>
-            <span>0</span>
-          </div>
-          <!-- Fin Comentarios -->
-          <!-- Lights -->
-          <div class="col-2 py-2 d-flex align-items-center justify-content-center gap-2">
-            <a href="" class="link-warning">
-              <i class="bi bi-lightbulb"></i>
-            </a>
-            <span>0</span>
-          </div>
-          <!-- Fin Lights -->
-          <!-- Usuario -->
-          <div class="col-8 d-flex text-warning">
-            <div class="col-10 col-lg-11 d-flex flex-column justify-content-center align-items-end px-2">
-              <span class="lead">Oti Rodríguez</span>
-              <span class="fw-bold">
-                <small class="text-end">@oti</small>
+    <section class="container col-12 col-md-6 m-0">
+      <h1 class="text-warning fw-bold border-bottom border-top border-warning text-center">
+        POSTS
+      </h1>
+      <div class="col-12 rounded overflow-hidden d-flex flex-column gap-1" id="posts">
+
+        <?php foreach ($_SESSION["posts_inicio"] as $row) { ?>
+          <!-- Post -->
+          <div class="row p-2 border-2 bg-secondary" id="post-<?= $row[0] ?>">
+            <!-- Poster -->
+            <div class="col-3 col-md-2">
+              <a href="ficha/<?= $row[7] ?>/<?= $row["id_ficha"] ?>">
+                <img src="http://image.tmdb.org/t/p/original<?= $row["imagen"] ?>" alt="poster"
+                  class="container p-0 rounded border border-warning" />
+              </a>
+            </div>
+            <!-- Fin Poster -->
+            <!-- Post body -->
+            <div class="col-9 col-md-10 d-flex flex-wrap">
+              <!-- Título -->
+              <h3 class="col-9 text-warning">
+                <?= $row["titulo"] ?>
+                <?= $row[7] == "tv" ? "[TV]" : "" ?>
+              </h3>
+              <!-- Fin Título -->
+              <!-- Fecha -->
+              <span class="col-3 text-white-50 text-end">
+                <small>
+                  <?= formatear_fecha($row["fecha"]) ?>
+                </small>
               </span>
+              <!-- Fin Fecha -->
+              <!-- Texto -->
+              <p class="col-12 contenido">
+                <?= $row["contenido"] ?>
+              </p>
+              <!-- Fin Texto -->
             </div>
-            <div class="col-2 col-lg-1 d-flex align-items-center">
-              <div class="ratio ratio-1x1">
-                <img src="img/logo.png" alt="user" class="rounded-circle" />
+            <!-- Fin Post body -->
+            <!-- Post footer -->
+            <div class="d-flex">
+              <!-- Comentarios -->
+              <div class="col-2 py-2 d-flex align-items-center justify-content-center gap-2">
+                <button class="btn btn-link link-warning btn-comentario px-1" data-bs-toggle="modal"
+                  data-bs-target="#modal-comentarios">
+                  <i class="bi bi-chat" data-id="<?= $row[0] ?>"></i>
+                </button>
+                <span class="contador-comentarios" data-id="<?= $row[0] ?>"></span>
               </div>
-            </div>
-          </div>
-          <!-- Fin usuario -->
-        </div>
-        <!-- Fin Post footer -->
-      </div>
-      <!-- Fin Post -->
-      <!-- Post -->
-      <div class="row p-2 border-2 bg-secondary">
-        <!-- Poster -->
-        <div class="col-3 col-md-2">
-          <a href="ficha.html">
-            <img src="img/poster2.jpg" alt="poster" class="container p-0 rounded border border-warning" />
-          </a>
-        </div>
-        <!-- Fin Poster -->
-        <!-- Post body -->
-        <div class="col-9 col-md-10 d-flex flex-wrap">
-          <!-- Título -->
-          <h3 class="col-9 text-warning">Ant-man y la Avispa: Quantumanía</h3>
-          <!-- Fin Título -->
-          <!-- Fecha -->
-          <span class="col-3 text-white-50 text-end"><small>06/02/23</small></span>
-          <!-- Fin Fecha -->
-          <!-- Texto -->
-          <p class="col-12">
-            Solo se puede hablar bien del entretenimiento, sorpresa visual y
-            ritmo despiadado que ofrece esta película tan hábil para llenar un
-            par de horas con luchas, viajes, acción, tensión…, y sin que
-            apenas necesites saber nada de física cuántica
-          </p>
-          <!-- Fin Texto -->
-        </div>
-        <!-- Fin Post body -->
-        <!-- Post footer -->
-        <div class="d-flex">
-          <!-- Comentarios -->
-          <div class="col-2 py-2 d-flex align-items-center justify-content-center gap-2">
-            <a href="" class="link-warning">
-              <i class="bi bi-chat"></i>
-            </a>
-            <span>0</span>
-          </div>
-          <!-- Fin Comentarios -->
-          <!-- Lights -->
-          <div class="col-2 py-2 d-flex align-items-center justify-content-center gap-2">
-            <a href="" class="link-warning">
-              <i class="bi bi-lightbulb"></i>
-            </a>
-            <span>0</span>
-          </div>
-          <!-- Fin Lights -->
-          <!-- Usuario -->
-          <div class="col-8 d-flex text-warning">
-            <div class="col-10 col-lg-11 d-flex flex-column justify-content-center align-items-end px-2">
-              <span class="lead">Javier Ocaña</span>
-              <span class="fw-bold">
-                <small class="text-end">@jocana</small>
-              </span>
-            </div>
-            <div class="col-2 col-lg-1 d-flex align-items-center">
-              <div class="ratio ratio-1x1">
-                <img src="img/logo.png" alt="user" class="rounded-circle" />
+              <!-- Fin Comentarios -->
+              <!-- Lights -->
+              <div class="col-2 py-2 d-flex align-items-center justify-content-center gap-2">
+                <input type="checkbox" id="light-<?= $row[0] ?>" class="light-checkbox"
+                  data-idusuario="<?= $_SESSION["usuario"]->id ?>">
+                <label class="text-warning px-1" for="light-<?= $row[0] ?>">
+                  <i></i>
+                </label>
+                <span class="contador-lights" data-id="<?= $row[0] ?>"></span>
               </div>
-            </div>
-          </div>
-          <!-- Fin usuario -->
-        </div>
-        <!-- Fin Post footer -->
-      </div>
-      <!-- Fin Post -->
-      <!-- Post -->
-      <div class="row p-2 bg-secondary">
-        <!-- Poster -->
-        <div class="col-3 col-md-2">
-          <a href="ficha.html">
-            <img src="img/poster3.jpg" alt="poster" class="container p-0 rounded border border-warning" />
-          </a>
-        </div>
-        <!-- Fin Poster -->
-        <!-- Post body -->
-        <div class="col-9 col-md-10 d-flex flex-wrap">
-          <!-- Título -->
-          <h3 class="col-9 text-warning">
-            El Gato con Botas: El último deseo
-          </h3>
-          <!-- Fin Título -->
-          <!-- Fecha -->
-          <span class="col-3 text-white-50 text-end"><small>06/02/23</small></span>
-          <!-- Fin Fecha -->
-          <!-- Texto -->
-          <p class="col-12">
-            Apuesta por escapar de la fealdad digital original llevando el
-            estilo de la película hacia el anime más de los años 70 (...) Para
-            quienes no esperaban una nueva vida en el universo
-            Dreamworks/Shrek
-          </p>
-          <!-- Fin Texto -->
-        </div>
-        <!-- Fin Post body -->
-        <!-- Post footer -->
-        <div class="d-flex">
-          <!-- Comentarios -->
-          <div class="col-2 py-2 d-flex align-items-center justify-content-center gap-2">
-            <a href="" class="link-warning">
-              <i class="bi bi-chat"></i>
-            </a>
-            <span>0</span>
-          </div>
-          <!-- Fin Comentarios -->
-          <!-- Lights -->
-          <div class="col-2 py-2 d-flex align-items-center justify-content-center gap-2">
-            <a href="" class="link-warning">
-              <i class="bi bi-lightbulb"></i>
-            </a>
-            <span>0</span>
-          </div>
-          <!-- Fin Lights -->
-          <!-- Usuario -->
-          <div class="col-8 d-flex text-warning">
-            <div class="col-10 col-lg-11 d-flex flex-column justify-content-center align-items-end px-2">
-              <span class="lead">Fausto Fernández</span>
-              <span class="fw-bold">
-                <small class="text-end">@faustofer</small>
-              </span>
-            </div>
-            <div class="col-2 col-lg-1 d-flex align-items-center">
-              <div class="ratio ratio-1x1">
-                <img src="img/logo.png" alt="user" class="rounded-circle" />
+              <!-- Fin Lights -->
+              <!-- Usuario -->
+              <div class="col-8 d-flex text-warning">
+                <div class="col-10 col-lg-11 d-flex flex-column justify-content-center align-items-end px-2">
+                  <span class="lead">
+                    <?= $row["nombre"] ?>
+                  </span>
+                  <span class="fw-bold">
+                    <small class="text-end">@
+                      <?= $row["username"] ?>
+                    </small>
+                  </span>
+                </div>
+                <div class="col-2 col-lg-1 d-flex align-items-center">
+                  <div class="ratio ratio-1x1">
+                    <img src="assets/perfil/<?= $row["foto"] ?>" alt="user" class="rounded-circle" />
+                  </div>
+                </div>
               </div>
+              <!-- Fin usuario -->
             </div>
+            <!-- Fin Post footer -->
           </div>
-          <!-- Fin usuario -->
-        </div>
-        <!-- Fin Post footer -->
+          <!-- Fin Post -->
+        <?php } ?>
+
       </div>
-      <!-- Fin Post -->
 
       <!-- Paginación -->
-      <nav class="my-2">
+      <!-- <nav class="my-2">
         <ul class="pagination justify-content-center">
           <li class="page-item disabled">
             <span class="page-link">Anterior</span>
@@ -238,8 +133,9 @@
             <a class="page-link" href="#">Siguiente</a>
           </li>
         </ul>
-      </nav>
+      </nav> -->
       <!-- Fin paginación -->
+
     </section>
     <!-- Final POSTS -->
 
@@ -389,8 +285,8 @@
             <i class="bi bi-x-lg fw-bold"></i>
           </button>
         </div>
-        <div class="modal-body bg-secondary">
-          <form method="post" action="index.php?c=inicio&m=crear_post">
+        <form method="post" action="index.php?c=inicio&m=crear_post">
+          <div class="modal-body bg-secondary">
             <div class="container d-flex align-items-center gap-3 mb-3 p-0">
               <div class="col-3 col-sm-2">
                 <img src="assets/img/default-poster.png" alt="poster" id="crear-post-poster"
@@ -414,22 +310,73 @@
               <textarea class="form-control" id="contenido-crear-post" name="contenido" rows="5"
                 placeholder="Cuéntame algo..." required></textarea>
             </div>
-        </div>
-        <div class="modal-footer border-0">
-          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-            Cancelar
-          </button>
-          <button id="post" type="submit" class="btn btn-outline-warning">POST</button>
-        </div>
+          </div>
+          <div class="modal-footer border-0">
+            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+              Cancelar
+            </button>
+            <button id="post" type="submit" class="btn btn-outline-warning">POST</button>
+          </div>
         </form>
       </div>
     </div>
   </div>
   <!-- Fin Modal Crear post -->
 
+  <!-- Modal Comentarios -->
+  <div class="modal fade" id="modal-comentarios" data-bs-backdrop="static" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg">
+      <div class="modal-content bg-dark">
+        <div class="modal-header border-0">
+          <h5 class="modal-title text-warning" id="post-original-titulo"></h5>
+          <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">
+            <i class="bi bi-x-lg fw-bold"></i>
+          </button>
+        </div>
+        <div class="modal-body bg-secondary pt-0">
+
+          <!-- Post original -->
+          <div
+            class="container d-flex align-items-center gap-3 p-1 sticky-top bg-secondary border-bottom border-warning mh-50">
+            <div class="col-3 col-sm-2 p-0 p-lg-2">
+              <img src="assets/img/default-poster.png" alt="poster" id="post-original-poster"
+                class="container p-0 rounded border border-warning" />
+            </div>
+            <div class="container col-9 col-sm-10">
+              <h4 id="post-original-usuario" class="text-warning"></h4>
+              <p id="post-original-contenido" class="text-light text-truncate"></p>
+              <span id="post-original-fecha" class="text-white-50"></span>
+            </div>
+          </div>
+          <!-- Fin Post original -->
+          <!-- Comentarios -->
+          <div class="mb-3" id="comentarios-post"></div>
+          <!-- Fin Comentarios -->
+        </div>
+        <form method="post" id="form-comentar">
+          <input type="hidden" name="id-usuario" id="id-usuario" value="<?= $_SESSION["usuario"]->id ?>">
+          <input type="hidden" name="id-post" id="id-post" value="">
+          <div class="modal-footer border-0 d-flex flex-wrap justify-content-around px-0">
+            <div class="col-9 col-sm-10">
+              <textarea class="form-control" name="comentario" id="comentario" rows="2" placeholder="Comentario..."
+                required></textarea>
+            </div>
+            <button id="btn-comentar" type="submit" class="col-2 col-sm-1 btn btn-outline-warning m-0">
+              <i class="bi bi-send-fill"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- Fin Modal Comentarios -->
+
   <?php
   //Importar footer
   require_once "templates/footer.php";
+
+  // Para desarrollo
+  //var_dump($_SESSION["posts_inicio"]);
   ?>
 
   <!-- Bootstrap JS -->

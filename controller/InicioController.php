@@ -3,6 +3,8 @@
 require_once "model/Usuario.php";
 require_once "model/Ficha.php";
 require_once "model/Post.php";
+require_once "model/Comentario.php";
+require_once "model/Light.php";
 
 session_start();
 
@@ -16,6 +18,7 @@ class InicioController
 
   function index()
   {
+    $_SESSION["posts_inicio"] = Post::getPostsInicio($_SESSION["usuario"]->id);
     if (isset($_SESSION["usuario"])) {
       require_once "view/InicioView.php";
     } else {
@@ -23,6 +26,9 @@ class InicioController
     }
   }
 
+  /**
+   * Método para cerrar sesión
+   */
   function logout()
   {
     session_destroy();
@@ -31,6 +37,9 @@ class InicioController
     header("Location: login");
   }
 
+  /**
+   * Método para crear una posts
+   */
   function crear_post()
   {
     $id_ficha = $_POST["id-ficha"];
@@ -45,7 +54,7 @@ class InicioController
       Ficha::addFicha(intval($id_ficha), $titulo, $poster, $tipo);
     }
 
-    Post::addPost($contenido, intval($usuario->id), intval($id_ficha));
+    Post::addPost($contenido, intval($usuario->id), intval($id_ficha), $tipo);
 
     header("Location: inicio");
   }

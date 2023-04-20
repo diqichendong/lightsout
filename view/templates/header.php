@@ -1,7 +1,7 @@
 <!-- CABECERA -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-secondary fixed-top border-bottom border-dark border-2 h-10">
   <div class="container-fluid">
-    <a class="navbar-brand" href="index.php?c=inicio">
+    <a class="navbar-brand" href="inicio">
       <img src="assets/img/logo.png" alt="logo" width="100px" />
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
@@ -10,7 +10,7 @@
     <div class="collapse navbar-collapse justify-content-lg-between" id="menu">
       <ul class="navbar-nav mb-2 mb-lg-0 col-lg-9 justify-content-around">
         <li class="nav-item mx-2 text-center fs-5">
-          <a class="nav-link" aria-current="page" href="index.php?c=inicio">
+          <a class="nav-link" aria-current="page" href="inicio">
             <i class="bi bi-house-fill"></i> Inicio
           </a>
         </li>
@@ -65,3 +65,4 @@
   </div>
 </nav>
 <!-- Fin CABECERA -->
+<div class="header-gap"></div>
