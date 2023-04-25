@@ -85,7 +85,7 @@
   require_once "templates/footer.php";
   ?>
 
-  <script src="js/login.js"></script>
+  <script type="module" src="js/login.js"></script>
   <script src="js/bootstrap.bundle.min.js"></script>
 
 </body>

@@ -5,11 +5,6 @@ require_once "model/Usuario.php";
 
 class Post
 {
-  private $id;
-  private Ficha $ficha;
-  private Usuario $usuario;
-  private $contenido;
-  private $fecha;
 
   function __construct()
   {
@@ -34,6 +29,13 @@ class Post
   {
     $conn = new Conexion();
     $sql = "select * from posts, fichas, usuarios where posts.id = $id_post and posts.id_ficha = fichas.id and posts.id_usuario = usuarios.id";
+    return $conn->consulta($sql);
+  }
+
+  static function get_posts_ficha($tipo, $id)
+  {
+    $conn = new Conexion();
+    $sql = "select * from posts, usuarios where posts.id_usuario = usuarios.id and posts.id_ficha = $id and posts.ficha_tipo = '$tipo' order by posts.fecha desc";
     return $conn->consulta($sql);
   }
 

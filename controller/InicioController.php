@@ -18,8 +18,8 @@ class InicioController
 
   function index()
   {
-    $_SESSION["posts_inicio"] = Post::getPostsInicio($_SESSION["usuario"]->id);
     if (isset($_SESSION["usuario"])) {
+      $_SESSION["posts_inicio"] = Post::getPostsInicio($_SESSION["usuario"]->id);
       require_once "view/InicioView.php";
     } else {
       header("Location: login");
@@ -38,7 +38,7 @@ class InicioController
   }
 
   /**
-   * Método para crear una posts
+   * Método para crear un posts
    */
   function crear_post()
   {

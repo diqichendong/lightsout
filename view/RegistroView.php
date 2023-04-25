@@ -23,23 +23,24 @@
           <form action="index.php?c=registro&m=registrar" method="post" id="formulario_registro"
             class="d-flex flex-wrap justify-content-center my-3">
             <div class="form-floating mb-3 col-12">
-              <input type="text" class="form-control" name="login" id="login" placeholder="login" />
+              <input type="text" class="form-control" name="login" id="login" placeholder="login" required />
               <label for="login" class="form-label">Usuario</label>
             </div>
             <div class="form-floating mb-3 col-12">
-              <input type="text" class="form-control" name="email" id="email" placeholder="email" />
+              <input type="text" class="form-control" name="email" id="email" placeholder="email" required />
               <label for="email" class="form-label">Correo electrónico</label>
             </div>
             <div class="form-floating mb-3 col-12">
-              <input type="password" class="form-control" name="pwd" id="pwd" placeholder="pwd" />
+              <input type="password" class="form-control" name="pwd" id="pwd" placeholder="pwd" required />
               <label for="pwd" class="form-label">Contraseña</label>
             </div>
             <div class="form-floating mb-3 col-12">
-              <input type="password" class="form-control" name="pwd-conf" id="pwd-conf" placeholder="pwd-conf" />
+              <input type="password" class="form-control" name="pwd-conf" id="pwd-conf" placeholder="pwd-conf"
+                required />
               <label for="pwd-conf" class="form-label">Confirmar contraseña</label>
             </div>
             <div class="form-floating mb-3 col-12">
-              <input type="text" class="form-control" name="nombre" id="nombre" placeholder="nombre" />
+              <input type="text" class="form-control" name="nombre" id="nombre" placeholder="nombre" required />
               <label for="pwd" class="form-label">Nombre</label>
             </div>
             <div class="form-check col-12 mb-3">
@@ -69,8 +70,8 @@
   ?>
 
 
-  <script src="js/registro.js"></script>
-  <script src="js/bootstrap.bundle.min.js"></script>
+  <script type="module" src="/js/registro.js"></script>
+  <script src="/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

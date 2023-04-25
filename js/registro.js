@@ -1,4 +1,4 @@
-import * as v from "./validar.js";
+import * as v from "/js/validar.js";
 
 document.getElementById("enviar").addEventListener("click", (e) => {
   const form = document.forms[0];

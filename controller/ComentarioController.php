@@ -54,8 +54,8 @@ class ComentarioController
    */
   function contador_comentarios()
   {
-    if (isset($_POST["id"])) {
-      $id_post = $_POST["id"];
+    if (isset($_POST["id_post"])) {
+      $id_post = $_POST["id_post"];
       echo Comentario::get_contador_comentarios($id_post)[0][0];
     }
   }

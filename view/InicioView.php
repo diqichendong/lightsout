@@ -27,90 +27,95 @@
   <!-- MAIN CONTENT -->
   <div class="container-fluid d-flex justify-content-center gap-2 text-light mb-5 flex-fill">
     <!-- POSTS -->
-    <section class="container col-12 col-md-6 m-0">
+    <section class="container col-12 col-lg-6 m-0">
       <h1 class="text-warning fw-bold border-bottom border-top border-warning text-center">
         POSTS
       </h1>
       <div class="col-12 rounded overflow-hidden d-flex flex-column gap-1" id="posts">
-
-        <?php foreach ($_SESSION["posts_inicio"] as $row) { ?>
-          <!-- Post -->
-          <div class="row p-2 border-2 bg-secondary" id="post-<?= $row[0] ?>">
-            <!-- Poster -->
-            <div class="col-3 col-md-2">
-              <a href="ficha/<?= $row[7] ?>/<?= $row["id_ficha"] ?>">
-                <img src="http://image.tmdb.org/t/p/original<?= $row["imagen"] ?>" alt="poster"
-                  class="container p-0 rounded border border-warning" />
-              </a>
-            </div>
-            <!-- Fin Poster -->
-            <!-- Post body -->
-            <div class="col-9 col-md-10 d-flex flex-wrap">
-              <!-- Título -->
-              <h3 class="col-9 text-warning">
-                <?= $row["titulo"] ?>
-                <?= $row[7] == "tv" ? "[TV]" : "" ?>
-              </h3>
-              <!-- Fin Título -->
-              <!-- Fecha -->
-              <span class="col-3 text-white-50 text-end">
-                <small>
-                  <?= formatear_fecha($row["fecha"]) ?>
-                </small>
-              </span>
-              <!-- Fin Fecha -->
-              <!-- Texto -->
-              <p class="col-12 contenido">
-                <?= $row["contenido"] ?>
-              </p>
-              <!-- Fin Texto -->
-            </div>
-            <!-- Fin Post body -->
-            <!-- Post footer -->
-            <div class="d-flex">
-              <!-- Comentarios -->
-              <div class="col-2 py-2 d-flex align-items-center justify-content-center gap-2">
-                <button class="btn btn-link link-warning btn-comentario px-1" data-bs-toggle="modal"
-                  data-bs-target="#modal-comentarios">
-                  <i class="bi bi-chat" data-id="<?= $row[0] ?>"></i>
-                </button>
-                <span class="contador-comentarios" data-id="<?= $row[0] ?>"></span>
+        <?php if (sizeof($_SESSION["posts_inicio"]) == 0) { ?>
+          <p class="lead text-warning text-center py-5">¡Bienvenido a LightsOUT!</p>
+        <?php } else {
+          foreach ($_SESSION["posts_inicio"] as $row) { ?>
+            <!-- Post -->
+            <div class="row p-2 border-2 bg-secondary" id="post-<?= $row[0] ?>">
+              <!-- Poster -->
+              <div class="col-3 col-md-2">
+                <a href="ficha/<?= $row[7] ?>/<?= $row["id_ficha"] ?>">
+                  <img src="http://image.tmdb.org/t/p/original<?= $row["imagen"] ?>" alt="poster"
+                    class="container p-0 rounded border border-warning" />
+                </a>
               </div>
-              <!-- Fin Comentarios -->
-              <!-- Lights -->
-              <div class="col-2 py-2 d-flex align-items-center justify-content-center gap-2">
-                <input type="checkbox" id="light-<?= $row[0] ?>" class="light-checkbox"
-                  data-idusuario="<?= $_SESSION["usuario"]->id ?>">
-                <label class="text-warning px-1" for="light-<?= $row[0] ?>">
-                  <i></i>
-                </label>
-                <span class="contador-lights" data-id="<?= $row[0] ?>"></span>
+              <!-- Fin Poster -->
+              <!-- Post body -->
+              <div class="col-9 col-md-10 d-flex flex-wrap">
+                <!-- Título -->
+                <a href="ficha/<?= $row[7] ?>/<?= $row["id_ficha"] ?>" class="text-decoration-none col-8">
+                  <h3 class="text-warning">
+                    <?= $row["titulo"] ?>
+                    <?= $row[7] == "tv" ? "[TV]" : "" ?>
+                  </h3>
+                </a>
+                <!-- Fin Título -->
+                <!-- Fecha -->
+                <span class="col-4 text-white-50 text-end">
+                  <small>
+                    <?= formatear_fecha($row["fecha"]) ?>
+                  </small>
+                </span>
+                <!-- Fin Fecha -->
+                <!-- Texto -->
+                <p class="col-12 contenido">
+                  <?= $row["contenido"] ?>
+                </p>
+                <!-- Fin Texto -->
               </div>
-              <!-- Fin Lights -->
-              <!-- Usuario -->
-              <div class="col-8 d-flex text-warning">
-                <div class="col-10 col-lg-11 d-flex flex-column justify-content-center align-items-end px-2">
-                  <span class="lead">
-                    <?= $row["nombre"] ?>
-                  </span>
-                  <span class="fw-bold">
-                    <small class="text-end">@
-                      <?= $row["username"] ?>
-                    </small>
-                  </span>
+              <!-- Fin Post body -->
+              <!-- Post footer -->
+              <div class="d-flex">
+                <!-- Comentarios -->
+                <div class="col-2 py-2 d-flex align-items-center justify-content-center gap-2">
+                  <button class="btn btn-link link-warning btn-comentario px-1" data-bs-toggle="modal"
+                    data-bs-target="#modal-comentarios">
+                    <i class="bi bi-chat" data-id="<?= $row[0] ?>"></i>
+                  </button>
+                  <span class="contador-comentarios" data-id="<?= $row[0] ?>"></span>
                 </div>
-                <div class="col-2 col-lg-1 d-flex align-items-center">
-                  <div class="ratio ratio-1x1">
-                    <img src="assets/perfil/<?= $row["foto"] ?>" alt="user" class="rounded-circle" />
+                <!-- Fin Comentarios -->
+                <!-- Lights -->
+                <div class="col-2 py-2 d-flex align-items-center justify-content-center gap-2">
+                  <input type="checkbox" id="light-<?= $row[0] ?>" class="light-checkbox"
+                    data-idusuario="<?= $_SESSION["usuario"]->id ?>">
+                  <label class="text-warning px-1" for="light-<?= $row[0] ?>">
+                    <i></i>
+                  </label>
+                  <span class="contador-lights" data-id="<?= $row[0] ?>"></span>
+                </div>
+                <!-- Fin Lights -->
+                <!-- Usuario -->
+                <div class="col-8 d-flex text-warning">
+                  <div class="col-10 col-lg-11 d-flex flex-column justify-content-center align-items-end px-2">
+                    <span class="lead">
+                      <?= $row["nombre"] ?>
+                    </span>
+                    <span class="fw-bold">
+                      <small class="text-end">@
+                        <?= $row["username"] ?>
+                      </small>
+                    </span>
+                  </div>
+                  <div class="col-2 col-lg-1 d-flex align-items-center">
+                    <div class="ratio ratio-1x1">
+                      <img src="assets/perfil/<?= $row["foto"] ?>" alt="user" class="rounded-circle" />
+                    </div>
                   </div>
                 </div>
+                <!-- Fin usuario -->
               </div>
-              <!-- Fin usuario -->
+              <!-- Fin Post footer -->
             </div>
-            <!-- Fin Post footer -->
-          </div>
-          <!-- Fin Post -->
-        <?php } ?>
+            <!-- Fin Post -->
+          <?php }
+        } ?>
 
       </div>
 
@@ -140,7 +145,7 @@
     <!-- Final POSTS -->
 
     <!-- ASIDE -->
-    <aside class="d-none d-md-inline col-md-4">
+    <aside class="d-none d-lg-inline col-md-4">
       <!-- Tracker -->
       <div class="container bg-secondary rounded py-2">
         <!-- Pills -->
@@ -266,7 +271,7 @@
     <!-- Fin ASIDE -->
 
     <!-- Crear post -->
-    <div class="container position-fixed bottom-0 end-0 d-flex justify-content-end p-3">
+    <div class="container position-fixed bottom-0 end-0 d-flex justify-content-end p-3 float-end w-auto">
       <button class="btn btn-warning btn-lg" id="crear-post" data-bs-toggle="modal" data-bs-target="#modal-crear-post">
         <i class="bi bi-pencil-square"></i>
       </button>
@@ -323,55 +328,12 @@
   </div>
   <!-- Fin Modal Crear post -->
 
-  <!-- Modal Comentarios -->
-  <div class="modal fade" id="modal-comentarios" data-bs-backdrop="static" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-dialog-scrollable modal-lg">
-      <div class="modal-content bg-dark">
-        <div class="modal-header border-0">
-          <h5 class="modal-title text-warning" id="post-original-titulo"></h5>
-          <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">
-            <i class="bi bi-x-lg fw-bold"></i>
-          </button>
-        </div>
-        <div class="modal-body bg-secondary pt-0">
 
-          <!-- Post original -->
-          <div
-            class="container d-flex align-items-center gap-3 p-1 sticky-top bg-secondary border-bottom border-warning mh-50">
-            <div class="col-3 col-sm-2 p-0 p-lg-2">
-              <img src="assets/img/default-poster.png" alt="poster" id="post-original-poster"
-                class="container p-0 rounded border border-warning" />
-            </div>
-            <div class="container col-9 col-sm-10">
-              <h4 id="post-original-usuario" class="text-warning"></h4>
-              <p id="post-original-contenido" class="text-light text-truncate"></p>
-              <span id="post-original-fecha" class="text-white-50"></span>
-            </div>
-          </div>
-          <!-- Fin Post original -->
-          <!-- Comentarios -->
-          <div class="mb-3" id="comentarios-post"></div>
-          <!-- Fin Comentarios -->
-        </div>
-        <form method="post" id="form-comentar">
-          <input type="hidden" name="id-usuario" id="id-usuario" value="<?= $_SESSION["usuario"]->id ?>">
-          <input type="hidden" name="id-post" id="id-post" value="">
-          <div class="modal-footer border-0 d-flex flex-wrap justify-content-around px-0">
-            <div class="col-9 col-sm-10">
-              <textarea class="form-control" name="comentario" id="comentario" rows="2" placeholder="Comentario..."
-                required></textarea>
-            </div>
-            <button id="btn-comentar" type="submit" class="col-2 col-sm-1 btn btn-outline-warning m-0">
-              <i class="bi bi-send-fill"></i>
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-  <!-- Fin Modal Comentarios -->
 
   <?php
+  // Modal comentarios
+  require_once "templates/comentarios.php";
+
   //Importar footer
   require_once "templates/footer.php";
 
@@ -383,6 +345,8 @@
   <script src="js/bootstrap.bundle.min.js"></script>
 
   <script type="module" src="js/inicio.js"></script>
+  <script type="module" src="js/comentario.js"></script>
+  <script src="js/light.js"></script>
 </body>
 
 </html>
