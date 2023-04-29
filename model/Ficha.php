@@ -28,12 +28,24 @@ class Ficha
 
   static function get_ficha_api($tipo, $id)
   {
-    return json_decode(file_get_contents(API_REQUEST_BASE . "/$tipo/$id?api_key=" . API_KEY . "&language=es"), true);
+    $c = curl_init();
+    curl_setopt($c, CURLOPT_URL, API_REQUEST_BASE . "/$tipo/$id?api_key=" . API_KEY . "&language=es");
+    curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
+    $data = curl_exec($c);
+    curl_close($c);
+
+    return json_decode($data, true);
   }
 
   static function get_director($id)
   {
-    $creditos = json_decode(file_get_contents(API_REQUEST_BASE . "/movie/$id/credits?api_key=" . API_KEY . "&language=es"), true);
+    $c = curl_init();
+    curl_setopt($c, CURLOPT_URL, API_REQUEST_BASE . "/movie/$id/credits?api_key=" . API_KEY . "&language=es");
+    curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
+    $data = curl_exec($c);
+    curl_close($c);
+
+    $creditos = json_decode($data, true);
     foreach ($creditos["crew"] as $persona) {
       if ($persona["job"] == "Director") {
         return $persona["name"];
@@ -43,7 +55,13 @@ class Ficha
 
   static function get_reparto($tipo, $id)
   {
-    $creditos = json_decode(file_get_contents(API_REQUEST_BASE . "/$tipo/$id/credits?api_key=" . API_KEY . "&language=es"), true);
+    $c = curl_init();
+    curl_setopt($c, CURLOPT_URL, API_REQUEST_BASE . "/$tipo/$id/credits?api_key=" . API_KEY . "&language=es");
+    curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
+    $data = curl_exec($c);
+    curl_close($c);
+
+    $creditos = json_decode($data, true);
     $reparto = [];
     foreach ($creditos["cast"] as $persona) {
       array_push($reparto, $persona["name"]);
@@ -52,6 +70,41 @@ class Ficha
       }
     }
     return $reparto;
+  }
+
+  static function get_trailers($tipo, $id)
+  {
+    $c = curl_init();
+    curl_setopt($c, CURLOPT_URL, API_REQUEST_BASE . "/$tipo/$id/videos?api_key=" . API_KEY . "&language=es");
+    curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
+    $data = curl_exec($c);
+    curl_close($c);
+
+    $videos = json_decode($data, true);
+    $trailers = [];
+    foreach ($videos["results"] as $video) {
+      if ($video["site"] == "YouTube" && ($video["type"] == "Trailer" || $video["type"] == "Teaser")) {
+        array_push($trailers, $video);
+      }
+    }
+    return $trailers;
+  }
+
+  static function get_proveedores($tipo, $id)
+  {
+    $c = curl_init();
+    curl_setopt($c, CURLOPT_URL, API_REQUEST_BASE . "/$tipo/$id/watch/providers?api_key=" . API_KEY . "&language=es");
+    curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
+    $data = curl_exec($c);
+    curl_close($c);
+
+    $proveedores = json_decode($data, true);
+
+    if (isset($proveedores["results"]["ES"])) {
+      return $proveedores["results"]["ES"];
+    } else {
+      return [];
+    }
   }
 
   function __get($name)

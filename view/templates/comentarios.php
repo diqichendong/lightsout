@@ -1,6 +1,6 @@
 <!-- Modal Comentarios -->
 <div class="modal fade" id="modal-comentarios" data-bs-backdrop="static" tabindex="-1" role="dialog">
-  <div class="modal-dialog modal-dialog-scrollable modal-lg">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
     <div class="modal-content bg-dark">
       <div class="modal-header border-0">
         <h5 class="modal-title text-warning" id="post-original-titulo"></h5>

@@ -38,6 +38,8 @@ class FichaController
         $_SESSION["nota_media"] = Nota::get_nota_media($id, $tipo);
         $_SESSION["nota_usuario"] = Nota::get_nota($_SESSION["usuario"]->id, $id, $tipo);
         $_SESSION["seguimiento"] = Seguimiento::get_seguimiento($_SESSION["usuario"]->id, $id, $tipo);
+        $_SESSION["trailers"] = Ficha::get_trailers($tipo, $id);
+        $_SESSION["proveedores"] = Ficha::get_proveedores($tipo, $id);
       } else {
         header("Location: inicio");
       }
@@ -56,7 +58,7 @@ class FichaController
     $titulo = $_POST["titulo"];
     $tipo = $_POST["tipo"];
     $poster = $_POST["poster"];
-    $contenido = $_POST["contenido"];
+    $contenido = htmlspecialchars($_POST["contenido"]);
     $usuario = $_SESSION["usuario"];
 
 

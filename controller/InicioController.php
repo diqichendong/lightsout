@@ -46,7 +46,7 @@ class InicioController
     $titulo = $_POST["titulo"];
     $tipo = $_POST["tipo"];
     $poster = $_POST["poster"];
-    $contenido = $_POST["contenido"];
+    $contenido = htmlspecialchars($_POST["contenido"]);
     $usuario = $_SESSION["usuario"];
 
 

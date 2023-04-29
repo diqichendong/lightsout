@@ -116,6 +116,80 @@ class Usuario
     return $consulta->rowCount() > 0;
   }
 
+  /**
+   * Obtener el perfil de un usuario
+   */
+  function obtener_usuario($id_usuario)
+  {
+    $conn = new Conexion();
+    $sql = "select * from usuarios where id = $id_usuario";
+    $consulta = $conn->consulta($sql);
+    if (sizeof($consulta) > 0) {
+      $this->id = $consulta[0]["id"];
+      $this->nombre = $consulta[0]["nombre"];
+      $this->username = $consulta[0]["username"];
+      $this->foto = $consulta[0]["foto"];
+      $this->sobre_mi = $consulta[0]["sobre_mi"];
+      $this->tipo = $consulta[0]["tipo"];
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  /**
+   * Comprueba si el usuario está siguiendo o no al otro usuario
+   */
+  function siguiendo($id_otro_usuario)
+  {
+    $conn = new Conexion();
+    $sql = "select * from amigos where id_usuario_1 = $this->id and id_usuario_2 = $id_otro_usuario";
+    $consulta = $conn->consulta($sql);
+
+    return sizeof($consulta) != 0;
+  }
+
+  /**
+   * Seguir a otro usuario
+   */
+  function seguir($id_otro_usuario)
+  {
+    $conn = new Conexion();
+    $sql = "insert into amigos (id_usuario_1, id_usuario_2) values ($this->id, $id_otro_usuario)";
+    $conn->exec($sql);
+  }
+
+  /**
+   * Dejar de seguir a otro usuario
+   */
+  function dejar_seguir($id_otro_usuario)
+  {
+    $conn = new Conexion();
+    $sql = "delete from amigos where id_usuario_1 = $this->id and id_usuario_2 = $id_otro_usuario";
+    $conn->exec($sql);
+  }
+
+  /**
+   * Obtener número de seguidores
+   */
+  function numero_seguidores()
+  {
+    $conn = new Conexion();
+    $sql = "select count(*) from amigos where id_usuario_2 = $this->id";
+    $consulta = $conn->consulta($sql);
+    return $consulta[0][0];
+  }
+
+  /**
+   * Obtener número de usuarios que sigo
+   */
+  function numero_siguiendo()
+  {
+    $conn = new Conexion();
+    $sql = "select count(*) from amigos where id_usuario_1 = $this->id";
+    $consulta = $conn->consulta($sql);
+    return $consulta[0][0];
+  }
 
   function __get($name)
   {

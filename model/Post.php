@@ -21,7 +21,7 @@ class Post
   static function getPostsInicio($id_usuario)
   {
     $conn = new Conexion();
-    $sql = "select * from posts, fichas, usuarios where posts.id_usuario = usuarios.id and posts.id_ficha = fichas.id and posts.id_usuario = $id_usuario order by posts.fecha DESC";
+    $sql = "select * from posts, fichas, usuarios where posts.id_usuario = usuarios.id and posts.id_ficha = fichas.id and (posts.id_usuario = $id_usuario or posts.id_usuario in (select id_usuario_2 from amigos where id_usuario_1 = $id_usuario)) order by posts.fecha desc limit 200";
     return $conn->consulta($sql);
   }
 
@@ -36,6 +36,13 @@ class Post
   {
     $conn = new Conexion();
     $sql = "select * from posts, usuarios where posts.id_usuario = usuarios.id and posts.id_ficha = $id and posts.ficha_tipo = '$tipo' order by posts.fecha desc";
+    return $conn->consulta($sql);
+  }
+
+  static function get_post_perfil($id_usuario)
+  {
+    $conn = new Conexion();
+    $sql = "select * from posts, fichas where posts.id_ficha = fichas.id and posts.ficha_tipo = fichas.tipo and posts.id_usuario = $id_usuario order by fecha desc";
     return $conn->consulta($sql);
   }
 

@@ -25,9 +25,9 @@
   ?>
 
   <!-- MAIN CONTENT -->
-  <div class="container-fluid d-flex justify-content-center gap-2 text-light mb-5 flex-fill">
+  <div class="container d-flex justify-content-center text-light mb-2 flex-fill flex-wrap">
     <!-- POSTS -->
-    <section class="container col-12 col-lg-6 m-0">
+    <section class="container col-12 col-lg-8 m-0">
       <h1 class="text-warning fw-bold border-bottom border-top border-warning text-center">
         POSTS
       </h1>
@@ -49,7 +49,8 @@
               <!-- Post body -->
               <div class="col-9 col-md-10 d-flex flex-wrap">
                 <!-- Título -->
-                <a href="ficha/<?= $row[7] ?>/<?= $row["id_ficha"] ?>" class="text-decoration-none col-8">
+                <a href="ficha/<?= $row[7] ?>/<?= $row["id_ficha"] ?>"
+                  class="text-decoration-none col-8 col-md-9 col-lg-10">
                   <h3 class="text-warning">
                     <?= $row["titulo"] ?>
                     <?= $row[7] == "tv" ? "[TV]" : "" ?>
@@ -57,7 +58,7 @@
                 </a>
                 <!-- Fin Título -->
                 <!-- Fecha -->
-                <span class="col-4 text-white-50 text-end">
+                <span class="col-4 col-md-3 col-lg-2 text-white-50 text-end">
                   <small>
                     <?= formatear_fecha($row["fecha"]) ?>
                   </small>
@@ -94,9 +95,11 @@
                 <!-- Usuario -->
                 <div class="col-8 d-flex text-warning">
                   <div class="col-10 col-lg-11 d-flex flex-column justify-content-center align-items-end px-2">
-                    <span class="lead">
-                      <?= $row["nombre"] ?>
-                    </span>
+                    <a href="/perfil/<?= $row[10] ?>" class="text-decoration-none link-warning">
+                      <span class="lead">
+                        <?= $row["nombre"] ?>
+                      </span>
+                    </a>
                     <span class="fw-bold">
                       <small class="text-end">@
                         <?= $row["username"] ?>
@@ -104,9 +107,9 @@
                     </span>
                   </div>
                   <div class="col-2 col-lg-1 d-flex align-items-center">
-                    <div class="ratio ratio-1x1">
+                    <a href="/perfil/<?= $row[10] ?>" class="ratio ratio-1x1">
                       <img src="assets/perfil/<?= $row["foto"] ?>" alt="user" class="rounded-circle" />
-                    </div>
+                    </a>
                   </div>
                 </div>
                 <!-- Fin usuario -->
@@ -145,7 +148,7 @@
     <!-- Final POSTS -->
 
     <!-- ASIDE -->
-    <aside class="d-none d-lg-inline col-md-4">
+    <aside class="d-none d-lg-inline col-lg-4">
       <!-- Tracker -->
       <div class="container bg-secondary rounded py-2">
         <!-- Pills -->
@@ -269,16 +272,17 @@
       <!-- Fin Tracker -->
     </aside>
     <!-- Fin ASIDE -->
-
-    <!-- Crear post -->
-    <div class="container position-fixed bottom-0 end-0 d-flex justify-content-end p-3 float-end w-auto">
-      <button class="btn btn-warning btn-lg" id="crear-post" data-bs-toggle="modal" data-bs-target="#modal-crear-post">
-        <i class="bi bi-pencil-square"></i>
-      </button>
-    </div>
-    <!-- Fin Crear post -->
   </div>
   <!-- Final MAIN CONTENT -->
+
+  <!-- Crear post -->
+  <div class="position-sticky bottom-0 float-end p-3 w-auto pe-none">
+    <button class="btn btn-warning btn-lg pe-auto float-end" id="crear-post" data-bs-toggle="modal"
+      data-bs-target="#modal-crear-post">
+      <i class="bi bi-pencil-square"></i>
+    </button>
+  </div>
+  <!-- Fin Crear post -->
 
   <!-- Modal Crear post -->
   <div class="modal fade" id="modal-crear-post" data-bs-backdrop="static" tabindex="-1">
@@ -337,8 +341,6 @@
   //Importar footer
   require_once "templates/footer.php";
 
-  // Para desarrollo
-  //var_dump($_SESSION["posts_inicio"]);
   ?>
 
   <!-- Bootstrap JS -->
