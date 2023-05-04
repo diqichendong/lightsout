@@ -39,7 +39,7 @@
             <!-- Post -->
             <div class="row p-2 border-2 bg-secondary" id="post-<?= $row[0] ?>">
               <!-- Poster -->
-              <div class="col-3 col-md-2">
+              <div class="col-3 col-md-2" title="<?= $row["titulo"] ?>">
                 <a href="ficha/<?= $row[7] ?>/<?= $row["id_ficha"] ?>">
                   <img src="http://image.tmdb.org/t/p/original<?= $row["imagen"] ?>" alt="poster"
                     class="container p-0 rounded border border-warning" />
@@ -106,7 +106,7 @@
                       </small>
                     </span>
                   </div>
-                  <div class="col-2 col-lg-1 d-flex align-items-center">
+                  <div class="col-2 col-lg-1 d-flex align-items-center" title="<?= $row["nombre"] ?>">
                     <a href="/perfil/<?= $row[10] ?>" class="ratio ratio-1x1">
                       <img src="assets/perfil/<?= $row["foto"] ?>" alt="user" class="rounded-circle" />
                     </a>

@@ -22,6 +22,26 @@ class API
     return $res;
   }
 
+  static function get_genero_peliculas()
+  {
+    $c = curl_init();
+    curl_setopt($c, CURLOPT_URL, API_REQUEST_BASE . "/genre/movie/list?api_key=" . API_KEY . "&language=es");
+    curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
+    $data = curl_exec($c);
+    curl_close($c);
+    return json_decode($data, true)["genres"];
+  }
+
+  static function get_genero_series()
+  {
+    $c = curl_init();
+    curl_setopt($c, CURLOPT_URL, API_REQUEST_BASE . "/genre/tv/list?api_key=" . API_KEY . "&language=es");
+    curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
+    $data = curl_exec($c);
+    curl_close($c);
+    return json_decode($data, true)["genres"];
+  }
+
   function __get($name)
   {
     return $this->$name;

@@ -107,6 +107,30 @@ class Ficha
     }
   }
 
+  static function get_fichas_explorar($tipo, $genero, $year, $orden, $pagina)
+  {
+    $url = API_REQUEST_BASE . "/discover/$tipo?api_key=" . API_KEY . "&language=es&page=$pagina";
+    if ($orden == "fecha") {
+      $url .= $tipo == "tv" ? "&sort_by=first_air_data_desc" : "&sort_by=primary_release_date_desc";
+    } else {
+      $url .= "&sort_by=$orden";
+    }
+    if ($genero != "none") {
+      $url .= "&with_genres=$genero";
+    }
+    if ($year != "none") {
+      $url .= $tipo == "tv" ? "&first_air_date_year=$year" : "&primary_release_year=$year";
+    }
+
+    $c = curl_init();
+    curl_setopt($c, CURLOPT_URL, $url);
+    curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
+    $data = curl_exec($c);
+    curl_close($c);
+
+    return json_decode($data, true);
+  }
+
   function __get($name)
   {
     return $this->$name;

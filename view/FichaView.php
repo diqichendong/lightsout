@@ -75,18 +75,16 @@ $seguimiento = sizeof($_SESSION["seguimiento"]) > 0 ? $_SESSION["seguimiento"][0
       <!-- Ficha info -->
       <div class="container d-flex flex-wrap bg-dark my-2 mt-5 p-2 border rounded-top border-warning border-bottom-0">
         <!-- Poster -->
-        <div class="col-2">
-          <img src="<?= API_IMG_BASE . $ficha["poster_path"] ?>" alt="poster" class="container p-0 rounded" />
+        <div class="col-3 col-sm-2">
+          <img src="<?= API_IMG_BASE . $ficha["poster_path"] ?>" alt="poster"
+            class="container p-0 rounded border border-warning" />
         </div>
         <!-- Fin Poster -->
         <!-- Info -->
-        <div class="container-fluid col-10">
+        <div class="container-fluid col-9 col-sm-10">
           <!-- Info header -->
-          <div class="container-fluid d-flex justify-content-between p-0">
-            <p class="text-warning h3 col-6 col-md-8 col-lg-10">
-              <?= $tipo == "tv" ? $ficha["name"] . " [TV]" : $ficha["title"] ?>
-            </p>
-            <div>
+          <div class="container-fluid d-flex flex-column p-0">
+            <div class="align-self-end col-sm-4 col-lg-3">
               <select class="form-select form-select-sm h-min" id="seguimiento" data-id="<?= $ficha["id"] ?>"
                 data-tipo="<?= $tipo ?>">
                 <option value="0" <?= $seguimiento == null ? "selected" : "" ?>>-- Estado --</option>
@@ -98,54 +96,59 @@ $seguimiento = sizeof($_SESSION["seguimiento"]) > 0 ? $_SESSION["seguimiento"][0
                 <option value="Favorita" <?= $seguimiento == "Favorita" ? "selected" : "" ?>>❤️ Favorita</option>
               </select>
             </div>
+            <p class="text-warning h3 col-12">
+              <?= $tipo == "tv" ? $ficha["name"] . " [TV]" : $ficha["title"] ?>
+            </p>
           </div>
           <!-- Fin Info header -->
           <!-- Info body -->
-          <div class="container-fluid d-flex flex-wrap text-light p-0">
-            <div class="col-3 col-lg-2 d-flex flex-column">
-              <span class="text-warning">Año</span>
-              <span>
-                <?= $year ?>
-              </span>
-            </div>
-            <div class="col-4 col-lg-2 d-flex flex-column">
-              <span class="text-warning">
-                <?= $tipo == "tv" ? "Temporadas" : "Duración" ?>
-              </span>
-              <span>
-                <?= $tipo == "tv" ? $ficha["number_of_seasons"] : $ficha["runtime"] . " minutos" ?>
-              </span>
-            </div>
-            <div class="col-5 col-lg-2 d-flex flex-column">
-              <span class="text-warning">
-                <?= $tipo == "tv" ? "Capítulos" : "Director" ?>
-              </span>
-              <span>
-                <?= $tipo == "tv" ? $ficha["number_of_episodes"] : $_SESSION["director"] ?>
-              </span>
-            </div>
-            <div class="col-4 col-lg-3 d-flex flex-column">
-              <span class="text-warning">País</span>
-              <span>
-                <?= $paises[$ficha["production_countries"][0]["iso_3166_1"]] ?>
-              </span>
-            </div>
-            <div class="col-8 col-lg-3 d-flex flex-column">
-              <span class="text-warning">Género</span>
-              <span>
-                <?= implode(", ", $generos) ?>
-              </span>
+          <div class="container-fluid d-flex flex-column text-light p-0">
+            <div class="col-12 mb-3 d-flex flex-wrap">
+              <div class="col-3 col-lg-2 d-flex flex-column">
+                <span class="text-warning">Año</span>
+                <span class="small">
+                  <?= $year ?>
+                </span>
+              </div>
+              <div class="col-4 col-lg-2 d-flex flex-column">
+                <span class="text-warning">
+                  <?= $tipo == "tv" ? "Temporadas" : "Duración" ?>
+                </span>
+                <span class="small">
+                  <?= $tipo == "tv" ? $ficha["number_of_seasons"] : $ficha["runtime"] . " minutos" ?>
+                </span>
+              </div>
+              <div class="col-5 col-lg-2 d-flex flex-column">
+                <span class="text-warning">
+                  <?= $tipo == "tv" ? "Capítulos" : "Director" ?>
+                </span>
+                <span class="small">
+                  <?= $tipo == "tv" ? $ficha["number_of_episodes"] : $_SESSION["director"] ?>
+                </span>
+              </div>
+              <div class="col-4 col-lg-3 d-flex flex-column">
+                <span class="text-warning">País</span>
+                <span class="small">
+                  <?= isset($ficha["production_countries"][0]) ? $paises[$ficha["production_countries"][0]["iso_3166_1"]] : "" ?>
+                </span>
+              </div>
+              <div class="col-8 col-lg-3 d-flex flex-column">
+                <span class="text-warning">Género</span>
+                <span class="small">
+                  <?= implode(", ", $generos) ?>
+                </span>
+              </div>
             </div>
             <div class="d-md-flex flex-wrap collapse" id="collapse">
-              <div class="col-12 d-flex flex-column">
+              <div class="col-12 d-flex flex-column mb-3">
                 <span class="text-warning">Reparto</span>
-                <span id="reparto">
+                <span id="reparto" class="small">
                   <?= implode(", ", $_SESSION["reparto"]) ?>
                 </span>
               </div>
               <div class="col-12 d-flex flex-column">
                 <span class="text-warning">Sinopsis</span>
-                <p>
+                <p class="small">
                   <?= $ficha["overview"] ?>
                 </p>
               </div>
