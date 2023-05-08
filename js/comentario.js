@@ -7,11 +7,11 @@ function comentarios(event) {
   $("#id-post").attr("value", post_id);
   $.post("/index.php?c=post&m=obtener_post", { id: post_id }, function (res) {
     let response = JSON.parse(res);
-    $("#post-original-titulo").text(
+    $("#post-original-titulo").html(
       response[0]["titulo"] + (response[0][7] == "tv" ? " [TV]" : "")
     );
-    $("#post-original-usuario").text(response[0]["nombre"]);
-    $("#post-original-contenido").text(response[0]["contenido"]);
+    $("#post-original-usuario").html(response[0]["nombre"]);
+    $("#post-original-contenido").html(response[0]["contenido"]);
     $("#post-original-poster").attr(
       "src",
       "http://image.tmdb.org/t/p/original" + response[0]["imagen"]

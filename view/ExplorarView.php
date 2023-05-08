@@ -110,12 +110,6 @@
   // Footer
   require_once "templates/footer.php";
 
-  // Para desarrollador
-  var_dump($_SESSION["genero"]);
-  var_dump($_SESSION["tipo"]);
-  var_dump($_SESSION["orden"]);
-  var_dump($_SESSION["year"]);
-  var_dump($_SESSION["hola"]);
   ?>
 
   <!-- Bootstrap JS -->

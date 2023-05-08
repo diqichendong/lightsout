@@ -37,7 +37,7 @@
   </div>
 
   <!-- Iniciar sesión -->
-  <div class="container pt-5">
+  <div class="container pt-5 mb-5">
     <div class="row justify-content-center m-3">
       <img src="assets/img/logo.png" class="col-8 col-lg-4 img-fluid" alt="Logo" />
     </div>

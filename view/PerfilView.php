@@ -88,17 +88,20 @@ $perfil = $_SESSION["perfil"];
         <!-- Pills -->
         <ul class="nav nav-pills nav-fill p-2 mb-3 bg-secondary rounded lead">
           <li class="nav-item">
-            <a class="nav-link link-warning active" data-bs-toggle="pill" href="#tab-posts">
+            <a class="nav-link link-warning <?= $_SESSION["tab"] == "posts" ? "active" : "" ?>" data-bs-toggle="pill"
+              href="#tab-posts">
               Posts
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link link-warning" data-bs-toggle="pill" href="#tab-series">
+            <a class="nav-link link-warning <?= $_SESSION["tab"] == "series" ? "active" : "" ?>" data-bs-toggle="pill"
+              href="#tab-series">
               Series
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link link-warning" data-bs-toggle="pill" href="#tab-peliculas">
+            <a class="nav-link link-warning <?= $_SESSION["tab"] == "peliculas" ? "active" : "" ?>"
+              data-bs-toggle="pill" href="#tab-peliculas">
               Películas
             </a>
           </li>
@@ -108,7 +111,7 @@ $perfil = $_SESSION["perfil"];
         <!-- Contenido tabs -->
         <div class="tab-content">
           <!-- Contenido tab posts -->
-          <div class="tab-pane fade show active" id="tab-posts">
+          <div class="tab-pane fade <?= $_SESSION["tab"] == "posts" ? "show active" : "" ?>" id="tab-posts">
             <!-- Posts -->
             <section class="col-12 rounded overflow-hidden d-flex flex-column gap-1 text-light my-2" id="posts">
               <?php if (sizeof($_SESSION["posts_perfil"]) == 0) { ?>
@@ -123,7 +126,7 @@ $perfil = $_SESSION["perfil"];
                   <div class="row p-2 border-2 bg-secondary">
                     <!-- Poster -->
                     <div class="col-3 col-md-2">
-                      <a href="ficha/<?= $post["ficha_tipo"] ?>/<?= $post["id_ficha"] ?>">
+                      <a href="/ficha/<?= $post["ficha_tipo"] ?>/<?= $post["id_ficha"] ?>">
                         <img src="http://image.tmdb.org/t/p/original<?= $post["imagen"] ?>" alt="poster"
                           class="container p-0 rounded border border-warning" />
                       </a>
@@ -210,17 +213,202 @@ $perfil = $_SESSION["perfil"];
           </div>
           <!-- Fin Contenido tab posts -->
 
-          <!-- Contenido tab trailer -->
-          <div class="tab-pane fade" id="tab-series">
-            <section class="col-12 rounded overflow-hidden d-flex flex-column gap-1 text-light my-2">
+          <!-- Contenido tab series -->
+          <div class="tab-pane fade <?= $_SESSION["tab"] == "series" ? "show active" : "" ?>" id="tab-series">
+            <!-- Series seguidas -->
+            <section class="container-fluid bg-secondary rounded d-flex flex-column p-3 mb-3">
+              <h3 class="text-warning mb-3">Siguiendo</h3>
+              <?php if (sizeof($_SESSION["series_seguidas"]) == 0) { ?>
+                <div class="container bg-secondary rounded p-3">
+                  <p class="lead text-warning text-center py-5">No estás siguiendo ninguna serie.</p>
+                </div>
+              <?php } ?>
 
+              <div class="row row-cols-2 row-cols-sm-3 row-cols-lg-6">
+                <?php foreach ($_SESSION["series_seguidas"] as $pelicula) { ?>
+                  <div class="container-fluid col d-flex flex-column mb-3 justify-content-between"
+                    title="<?= $pelicula["titulo"] ?>">
+                    <a href="/ficha/movie/<?= $pelicula["id_ficha"] ?>" class="flex-fill">
+                      <img
+                        src="<?= $pelicula["imagen"] == null ? "/assets/img/default-poster.png" : API_IMG_BASE . $pelicula["imagen"] ?>"
+                        alt="<?= $pelicula["titulo"] ?>" class="container p-0 rounded border border-warning h-100" />
+                    </a>
+                    <a href="/ficha/movie/<?= $pelicula["id_ficha"] ?>"
+                      class="text-truncate link-warning text-decoration-none text-center">
+                      <?= $pelicula["titulo"] ?>
+                    </a>
+                  </div>
+                <?php } ?>
+              </div>
             </section>
+            <!-- Fin Series seguidas -->
+            <!-- Series pendientes -->
+            <section class="container-fluid bg-secondary rounded d-flex flex-column p-3 mb-3">
+              <h3 class="text-warning mb-3">Pendientes</h3>
+              <?php if (sizeof($_SESSION["series_pendientes"]) == 0) { ?>
+                <div class="container bg-secondary rounded p-3">
+                  <p class="lead text-warning text-center py-5">No tienes ninguna serie pendiente de ver.</p>
+                </div>
+              <?php } ?>
+
+              <div class="row row-cols-2 row-cols-sm-3 row-cols-lg-6">
+                <?php foreach ($_SESSION["series_pendientes"] as $pelicula) { ?>
+                  <div class="container-fluid col d-flex flex-column mb-3 justify-content-between"
+                    title="<?= $pelicula["titulo"] ?>">
+                    <a href="/ficha/movie/<?= $pelicula["id_ficha"] ?>" class="flex-fill">
+                      <img
+                        src="<?= $pelicula["imagen"] == null ? "/assets/img/default-poster.png" : API_IMG_BASE . $pelicula["imagen"] ?>"
+                        alt="<?= $pelicula["titulo"] ?>" class="container p-0 rounded border border-warning h-100" />
+                    </a>
+                    <a href="/ficha/movie/<?= $pelicula["id_ficha"] ?>"
+                      class="text-truncate link-warning text-decoration-none text-center">
+                      <?= $pelicula["titulo"] ?>
+                    </a>
+                  </div>
+                <?php } ?>
+              </div>
+            </section>
+            <!-- Fin Series pendientes -->
+            <!-- Series vistas -->
+            <section class="container-fluid bg-secondary rounded d-flex flex-column p-3 mb-3">
+              <h3 class="text-warning mb-3">Vistas</h3>
+              <?php if (sizeof($_SESSION["series_vistas"]) == 0) { ?>
+                <div class="container bg-secondary rounded p-3">
+                  <p class="lead text-warning text-center py-5">No tienes ninguna serie vista.</p>
+                </div>
+              <?php } ?>
+
+              <div class="row row-cols-2 row-cols-sm-3 row-cols-lg-6">
+                <?php foreach ($_SESSION["series_vistas"] as $pelicula) { ?>
+                  <div class="container-fluid col d-flex flex-column mb-3 justify-content-between"
+                    title="<?= $pelicula["titulo"] ?>">
+                    <a href="/ficha/movie/<?= $pelicula["id_ficha"] ?>" class="flex-fill">
+                      <img
+                        src="<?= $pelicula["imagen"] == null ? "/assets/img/default-poster.png" : API_IMG_BASE . $pelicula["imagen"] ?>"
+                        alt="<?= $pelicula["titulo"] ?>" class="container p-0 rounded border border-warning h-100" />
+                    </a>
+                    <a href="/ficha/movie/<?= $pelicula["id_ficha"] ?>"
+                      class="text-truncate link-warning text-decoration-none text-center">
+                      <?= $pelicula["titulo"] ?>
+                    </a>
+                  </div>
+                <?php } ?>
+              </div>
+            </section>
+            <!-- Fin Series vistas -->
+            <!-- Series favoritas -->
+            <section class="container-fluid bg-secondary rounded d-flex flex-column p-3" id="series-favoritas">
+              <h3 class="text-warning mb-3">Favoritas</h3>
+              <?php if (sizeof($_SESSION["series_favoritas"]) == 0) { ?>
+                <div class="container bg-secondary rounded p-3">
+                  <p class="lead text-warning text-center py-5">No tienes ninguna serie favorita.</p>
+                </div>
+              <?php } ?>
+
+              <div class="row row-cols-2 row-cols-sm-3 row-cols-lg-6">
+                <?php foreach ($_SESSION["series_favoritas"] as $pelicula) { ?>
+                  <div class="container-fluid col d-flex flex-column mb-3 justify-content-between"
+                    title="<?= $pelicula["titulo"] ?>">
+                    <a href="/ficha/movie/<?= $pelicula["id_ficha"] ?>" class="flex-fill">
+                      <img
+                        src="<?= $pelicula["imagen"] == null ? "/assets/img/default-poster.png" : API_IMG_BASE . $pelicula["imagen"] ?>"
+                        alt="<?= $pelicula["titulo"] ?>" class="container p-0 rounded border border-warning h-100" />
+                    </a>
+                    <a href="/ficha/movie/<?= $pelicula["id_ficha"] ?>"
+                      class="text-truncate link-warning text-decoration-none text-center">
+                      <?= $pelicula["titulo"] ?>
+                    </a>
+                  </div>
+                <?php } ?>
+              </div>
+            </section>
+            <!-- Fin Series favoritas -->
           </div>
-          <!-- Fin Contenido tab trailer -->
+          <!-- Fin Contenido tab series -->
 
           <!-- Contenido tab películas -->
-          <div class="tab-pane fade" id="tab-peliculas">
+          <div class="tab-pane fade <?= $_SESSION["tab"] == "peliculas" ? "show active" : "" ?>" id="tab-peliculas">
+            <!-- Películas pendientes -->
+            <section class="container-fluid bg-secondary rounded d-flex flex-column p-3 mb-3">
+              <h3 class="text-warning mb-3">Pendientes</h3>
+              <?php if (sizeof($_SESSION["peliculas_pendientes"]) == 0) { ?>
+                <div class="container bg-secondary rounded p-3">
+                  <p class="lead text-warning text-center py-5">No tienes ninguna película pendiente de ver.</p>
+                </div>
+              <?php } ?>
 
+              <div class="row row-cols-2 row-cols-sm-3 row-cols-lg-6">
+                <?php foreach ($_SESSION["peliculas_pendientes"] as $pelicula) { ?>
+                  <div class="container-fluid col d-flex flex-column mb-3 justify-content-between"
+                    title="<?= $pelicula["titulo"] ?>">
+                    <a href="/ficha/movie/<?= $pelicula["id_ficha"] ?>" class="flex-fill">
+                      <img
+                        src="<?= $pelicula["imagen"] == null ? "/assets/img/default-poster.png" : API_IMG_BASE . $pelicula["imagen"] ?>"
+                        alt="<?= $pelicula["titulo"] ?>" class="container p-0 rounded border border-warning h-100" />
+                    </a>
+                    <a href="/ficha/movie/<?= $pelicula["id_ficha"] ?>"
+                      class="text-truncate link-warning text-decoration-none text-center">
+                      <?= $pelicula["titulo"] ?>
+                    </a>
+                  </div>
+                <?php } ?>
+              </div>
+            </section>
+            <!-- Fin Películas pendientes -->
+            <!-- Películas vistas -->
+            <section class="container-fluid bg-secondary rounded d-flex flex-column p-3 mb-3">
+              <h3 class="text-warning mb-3">Vistas</h3>
+              <?php if (sizeof($_SESSION["peliculas_vistas"]) == 0) { ?>
+                <div class="container bg-secondary rounded p-3">
+                  <p class="lead text-warning text-center py-5">No tienes ninguna película vista.</p>
+                </div>
+              <?php } ?>
+
+              <div class="row row-cols-2 row-cols-sm-3 row-cols-lg-6">
+                <?php foreach ($_SESSION["peliculas_vistas"] as $pelicula) { ?>
+                  <div class="container-fluid col d-flex flex-column mb-3 justify-content-between"
+                    title="<?= $pelicula["titulo"] ?>">
+                    <a href="/ficha/movie/<?= $pelicula["id_ficha"] ?>" class="flex-fill">
+                      <img
+                        src="<?= $pelicula["imagen"] == null ? "/assets/img/default-poster.png" : API_IMG_BASE . $pelicula["imagen"] ?>"
+                        alt="<?= $pelicula["titulo"] ?>" class="container p-0 rounded border border-warning h-100" />
+                    </a>
+                    <a href="/ficha/movie/<?= $pelicula["id_ficha"] ?>"
+                      class="text-truncate link-warning text-decoration-none text-center">
+                      <?= $pelicula["titulo"] ?>
+                    </a>
+                  </div>
+                <?php } ?>
+              </div>
+            </section>
+            <!-- Fin Películas vistas -->
+            <!-- Películas favoritas -->
+            <section class="container-fluid bg-secondary rounded d-flex flex-column p-3">
+              <h3 class="text-warning mb-3">Favoritas</h3>
+              <?php if (sizeof($_SESSION["peliculas_favoritas"]) == 0) { ?>
+                <div class="container bg-secondary rounded p-3">
+                  <p class="lead text-warning text-center py-5">No tienes ninguna película favorita.</p>
+                </div>
+              <?php } ?>
+
+              <div class="row row-cols-2 row-cols-sm-3 row-cols-lg-6">
+                <?php foreach ($_SESSION["peliculas_favoritas"] as $pelicula) { ?>
+                  <div class="container-fluid col d-flex flex-column mb-3 justify-content-between"
+                    title="<?= $pelicula["titulo"] ?>">
+                    <a href="/ficha/movie/<?= $pelicula["id_ficha"] ?>" class="flex-fill">
+                      <img
+                        src="<?= $pelicula["imagen"] == null ? "/assets/img/default-poster.png" : API_IMG_BASE . $pelicula["imagen"] ?>"
+                        alt="<?= $pelicula["titulo"] ?>" class="container p-0 rounded border border-warning h-100" />
+                    </a>
+                    <a href="/ficha/movie/<?= $pelicula["id_ficha"] ?>"
+                      class="text-truncate link-warning text-decoration-none text-center">
+                      <?= $pelicula["titulo"] ?>
+                    </a>
+                  </div>
+                <?php } ?>
+              </div>
+            </section>
+            <!-- Fin Películas favoritas -->
           </div>
           <!-- Fin Contenido tab películas -->
         </div>
