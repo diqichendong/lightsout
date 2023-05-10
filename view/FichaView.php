@@ -245,9 +245,11 @@ $seguimiento = sizeof($_SESSION["seguimiento"]) > 0 ? $_SESSION["seguimiento"][0
                     <!-- Usuario -->
                     <div class="col-8 d-flex text-warning">
                       <div class="col-10 col-lg-11 d-flex flex-column justify-content-center align-items-end px-2">
-                        <span class="lead">
-                          <?= $post["nombre"] ?>
-                        </span>
+                        <a href="/perfil/<?= $post["id_usuario"] ?>/posts" class="text-decoration-none link-warning">
+                          <span class="lead">
+                            <?= $post["nombre"] ?>
+                          </span>
+                        </a>
                         <span class="fw-bold">
                           <small class="text-end">@
                             <?= $post["username"] ?>
@@ -255,9 +257,9 @@ $seguimiento = sizeof($_SESSION["seguimiento"]) > 0 ? $_SESSION["seguimiento"][0
                         </span>
                       </div>
                       <div class="col-2 col-lg-1 d-flex align-items-center">
-                        <div class="ratio ratio-1x1">
+                        <a href="/perfil/<?= $post["id_usuario"] ?>/posts" class="ratio ratio-1x1">
                           <img src="/assets/perfil/<?= $post["foto"] ?>" alt="user" class="rounded-circle" />
-                        </div>
+                        </a>
                       </div>
                     </div>
                     <!-- Fin usuario -->

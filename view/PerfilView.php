@@ -216,7 +216,7 @@ $perfil = $_SESSION["perfil"];
           <!-- Contenido tab series -->
           <div class="tab-pane fade <?= $_SESSION["tab"] == "series" ? "show active" : "" ?>" id="tab-series">
             <!-- Series seguidas -->
-            <section class="container-fluid bg-secondary rounded d-flex flex-column p-3 mb-3">
+            <section class="container-fluid bg-secondary rounded d-flex flex-column p-3 mb-3" id="siguiendo">
               <h3 class="text-warning mb-3">Siguiendo</h3>
               <?php if (sizeof($_SESSION["series_seguidas"]) == 0) { ?>
                 <div class="container bg-secondary rounded p-3">
@@ -225,25 +225,48 @@ $perfil = $_SESSION["perfil"];
               <?php } ?>
 
               <div class="row row-cols-2 row-cols-sm-3 row-cols-lg-6">
-                <?php foreach ($_SESSION["series_seguidas"] as $pelicula) { ?>
+                <?php foreach ($_SESSION["series_seguidas"] as $serie) { ?>
                   <div class="container-fluid col d-flex flex-column mb-3 justify-content-between"
-                    title="<?= $pelicula["titulo"] ?>">
-                    <a href="/ficha/movie/<?= $pelicula["id_ficha"] ?>" class="flex-fill">
+                    title="<?= $serie["titulo"] ?>">
+                    <a href="/ficha/tv/<?= $serie["id_ficha"] ?>" class="flex-fill">
                       <img
-                        src="<?= $pelicula["imagen"] == null ? "/assets/img/default-poster.png" : API_IMG_BASE . $pelicula["imagen"] ?>"
-                        alt="<?= $pelicula["titulo"] ?>" class="container p-0 rounded border border-warning h-100" />
+                        src="<?= $serie["imagen"] == null ? "/assets/img/default-poster.png" : API_IMG_BASE . $serie["imagen"] ?>"
+                        alt="<?= $serie["titulo"] ?>" class="container p-0 rounded border border-warning h-100" />
                     </a>
-                    <a href="/ficha/movie/<?= $pelicula["id_ficha"] ?>"
+                    <a href="/ficha/tv/<?= $serie["id_ficha"] ?>"
                       class="text-truncate link-warning text-decoration-none text-center">
-                      <?= $pelicula["titulo"] ?>
+                      <?= $serie["titulo"] ?>
                     </a>
                   </div>
                 <?php } ?>
               </div>
+              <?php if (isset($_SESSION["ver_mas_series_seguidas"])) { ?>
+                <div class="collapse row row-cols-2 row-cols-sm-3 row-cols-lg-6" id="ver-mas-series_seguidas">
+                  <?php foreach ($_SESSION["ver_mas_series_seguidas"] as $serie) { ?>
+                    <div class="container-fluid col d-flex flex-column mb-3 justify-content-between"
+                      title="<?= $serie["titulo"] ?>">
+                      <a href="/ficha/tv/<?= $serie["id_ficha"] ?>" class="flex-fill">
+                        <img
+                          src="<?= $serie["imagen"] == null ? "/assets/img/default-poster.png" : API_IMG_BASE . $serie["imagen"] ?>"
+                          alt="<?= $serie["titulo"] ?>" class="container p-0 rounded border border-warning h-100" />
+                      </a>
+                      <a href="/ficha/tv/<?= $serie["id_ficha"] ?>"
+                        class="text-truncate link-warning text-decoration-none text-center">
+                        <?= $serie["titulo"] ?>
+                      </a>
+                    </div>
+                  <?php } ?>
+                </div>
+                <div class="container d-flex justify-content-center">
+                  <a class="btn btn-outline-warning" data-bs-toggle="collapse" href="#ver-mas-series_seguidas">
+                    Ver más
+                  </a>
+                </div>
+              <?php } ?>
             </section>
             <!-- Fin Series seguidas -->
             <!-- Series pendientes -->
-            <section class="container-fluid bg-secondary rounded d-flex flex-column p-3 mb-3">
+            <section class="container-fluid bg-secondary rounded d-flex flex-column p-3 mb-3" id="series-pendientes">
               <h3 class="text-warning mb-3">Pendientes</h3>
               <?php if (sizeof($_SESSION["series_pendientes"]) == 0) { ?>
                 <div class="container bg-secondary rounded p-3">
@@ -252,21 +275,44 @@ $perfil = $_SESSION["perfil"];
               <?php } ?>
 
               <div class="row row-cols-2 row-cols-sm-3 row-cols-lg-6">
-                <?php foreach ($_SESSION["series_pendientes"] as $pelicula) { ?>
+                <?php foreach ($_SESSION["series_pendientes"] as $serie) { ?>
                   <div class="container-fluid col d-flex flex-column mb-3 justify-content-between"
-                    title="<?= $pelicula["titulo"] ?>">
-                    <a href="/ficha/movie/<?= $pelicula["id_ficha"] ?>" class="flex-fill">
+                    title="<?= $serie["titulo"] ?>">
+                    <a href="/ficha/tv/<?= $serie["id_ficha"] ?>" class="flex-fill">
                       <img
-                        src="<?= $pelicula["imagen"] == null ? "/assets/img/default-poster.png" : API_IMG_BASE . $pelicula["imagen"] ?>"
-                        alt="<?= $pelicula["titulo"] ?>" class="container p-0 rounded border border-warning h-100" />
+                        src="<?= $serie["imagen"] == null ? "/assets/img/default-poster.png" : API_IMG_BASE . $serie["imagen"] ?>"
+                        alt="<?= $serie["titulo"] ?>" class="container p-0 rounded border border-warning h-100" />
                     </a>
-                    <a href="/ficha/movie/<?= $pelicula["id_ficha"] ?>"
+                    <a href="/ficha/tv/<?= $serie["id_ficha"] ?>"
                       class="text-truncate link-warning text-decoration-none text-center">
-                      <?= $pelicula["titulo"] ?>
+                      <?= $serie["titulo"] ?>
                     </a>
                   </div>
                 <?php } ?>
               </div>
+              <?php if (isset($_SESSION["ver_mas_series_pendientes"])) { ?>
+                <div class="collapse row row-cols-2 row-cols-sm-3 row-cols-lg-6" id="ver-mas-series_pendientes">
+                  <?php foreach ($_SESSION["ver_mas_series_pendientes"] as $serie) { ?>
+                    <div class="container-fluid col d-flex flex-column mb-3 justify-content-between"
+                      title="<?= $serie["titulo"] ?>">
+                      <a href="/ficha/tv/<?= $serie["id_ficha"] ?>" class="flex-fill">
+                        <img
+                          src="<?= $serie["imagen"] == null ? "/assets/img/default-poster.png" : API_IMG_BASE . $serie["imagen"] ?>"
+                          alt="<?= $serie["titulo"] ?>" class="container p-0 rounded border border-warning h-100" />
+                      </a>
+                      <a href="/ficha/tv/<?= $serie["id_ficha"] ?>"
+                        class="text-truncate link-warning text-decoration-none text-center">
+                        <?= $serie["titulo"] ?>
+                      </a>
+                    </div>
+                  <?php } ?>
+                </div>
+                <div class="container d-flex justify-content-center">
+                  <a class="btn btn-outline-warning" data-bs-toggle="collapse" href="#ver-mas-series_pendientes">
+                    Ver más
+                  </a>
+                </div>
+              <?php } ?>
             </section>
             <!-- Fin Series pendientes -->
             <!-- Series vistas -->
@@ -279,21 +325,44 @@ $perfil = $_SESSION["perfil"];
               <?php } ?>
 
               <div class="row row-cols-2 row-cols-sm-3 row-cols-lg-6">
-                <?php foreach ($_SESSION["series_vistas"] as $pelicula) { ?>
+                <?php foreach ($_SESSION["series_vistas"] as $serie) { ?>
                   <div class="container-fluid col d-flex flex-column mb-3 justify-content-between"
-                    title="<?= $pelicula["titulo"] ?>">
-                    <a href="/ficha/movie/<?= $pelicula["id_ficha"] ?>" class="flex-fill">
+                    title="<?= $serie["titulo"] ?>">
+                    <a href="/ficha/tv/<?= $serie["id_ficha"] ?>" class="flex-fill">
                       <img
-                        src="<?= $pelicula["imagen"] == null ? "/assets/img/default-poster.png" : API_IMG_BASE . $pelicula["imagen"] ?>"
-                        alt="<?= $pelicula["titulo"] ?>" class="container p-0 rounded border border-warning h-100" />
+                        src="<?= $serie["imagen"] == null ? "/assets/img/default-poster.png" : API_IMG_BASE . $serie["imagen"] ?>"
+                        alt="<?= $serie["titulo"] ?>" class="container p-0 rounded border border-warning h-100" />
                     </a>
-                    <a href="/ficha/movie/<?= $pelicula["id_ficha"] ?>"
+                    <a href="/ficha/tv/<?= $serie["id_ficha"] ?>"
                       class="text-truncate link-warning text-decoration-none text-center">
-                      <?= $pelicula["titulo"] ?>
+                      <?= $serie["titulo"] ?>
                     </a>
                   </div>
                 <?php } ?>
               </div>
+              <?php if (isset($_SESSION["ver_mas_series_vistas"])) { ?>
+                <div class="collapse row row-cols-2 row-cols-sm-3 row-cols-lg-6" id="ver-mas-series_vistas">
+                  <?php foreach ($_SESSION["ver_mas_series_vistas"] as $serie) { ?>
+                    <div class="container-fluid col d-flex flex-column mb-3 justify-content-between"
+                      title="<?= $serie["titulo"] ?>">
+                      <a href="/ficha/tv/<?= $serie["id_ficha"] ?>" class="flex-fill">
+                        <img
+                          src="<?= $serie["imagen"] == null ? "/assets/img/default-poster.png" : API_IMG_BASE . $serie["imagen"] ?>"
+                          alt="<?= $serie["titulo"] ?>" class="container p-0 rounded border border-warning h-100" />
+                      </a>
+                      <a href="/ficha/tv/<?= $serie["id_ficha"] ?>"
+                        class="text-truncate link-warning text-decoration-none text-center">
+                        <?= $serie["titulo"] ?>
+                      </a>
+                    </div>
+                  <?php } ?>
+                </div>
+                <div class="container d-flex justify-content-center">
+                  <a class="btn btn-outline-warning" data-bs-toggle="collapse" href="#ver-mas-series_vistas">
+                    Ver más
+                  </a>
+                </div>
+              <?php } ?>
             </section>
             <!-- Fin Series vistas -->
             <!-- Series favoritas -->
@@ -306,21 +375,44 @@ $perfil = $_SESSION["perfil"];
               <?php } ?>
 
               <div class="row row-cols-2 row-cols-sm-3 row-cols-lg-6">
-                <?php foreach ($_SESSION["series_favoritas"] as $pelicula) { ?>
+                <?php foreach ($_SESSION["series_favoritas"] as $serie) { ?>
                   <div class="container-fluid col d-flex flex-column mb-3 justify-content-between"
-                    title="<?= $pelicula["titulo"] ?>">
-                    <a href="/ficha/movie/<?= $pelicula["id_ficha"] ?>" class="flex-fill">
+                    title="<?= $serie["titulo"] ?>">
+                    <a href="/ficha/tv/<?= $serie["id_ficha"] ?>" class="flex-fill">
                       <img
-                        src="<?= $pelicula["imagen"] == null ? "/assets/img/default-poster.png" : API_IMG_BASE . $pelicula["imagen"] ?>"
-                        alt="<?= $pelicula["titulo"] ?>" class="container p-0 rounded border border-warning h-100" />
+                        src="<?= $serie["imagen"] == null ? "/assets/img/default-poster.png" : API_IMG_BASE . $serie["imagen"] ?>"
+                        alt="<?= $serie["titulo"] ?>" class="container p-0 rounded border border-warning h-100" />
                     </a>
-                    <a href="/ficha/movie/<?= $pelicula["id_ficha"] ?>"
+                    <a href="/ficha/tv/<?= $serie["id_ficha"] ?>"
                       class="text-truncate link-warning text-decoration-none text-center">
-                      <?= $pelicula["titulo"] ?>
+                      <?= $serie["titulo"] ?>
                     </a>
                   </div>
                 <?php } ?>
               </div>
+              <?php if (isset($_SESSION["ver_mas_series_favoritas"])) { ?>
+                <div class="collapse row row-cols-2 row-cols-sm-3 row-cols-lg-6" id="ver-mas-series_favoritas">
+                  <?php foreach ($_SESSION["ver_mas_series_favoritas"] as $serie) { ?>
+                    <div class="container-fluid col d-flex flex-column mb-3 justify-content-between"
+                      title="<?= $serie["titulo"] ?>">
+                      <a href="/ficha/tv/<?= $serie["id_ficha"] ?>" class="flex-fill">
+                        <img
+                          src="<?= $serie["imagen"] == null ? "/assets/img/default-poster.png" : API_IMG_BASE . $serie["imagen"] ?>"
+                          alt="<?= $serie["titulo"] ?>" class="container p-0 rounded border border-warning h-100" />
+                      </a>
+                      <a href="/ficha/tv/<?= $serie["id_ficha"] ?>"
+                        class="text-truncate link-warning text-decoration-none text-center">
+                        <?= $serie["titulo"] ?>
+                      </a>
+                    </div>
+                  <?php } ?>
+                </div>
+                <div class="container d-flex justify-content-center">
+                  <a class="btn btn-outline-warning" data-bs-toggle="collapse" href="#ver-mas-series_favoritas">
+                    Ver más
+                  </a>
+                </div>
+              <?php } ?>
             </section>
             <!-- Fin Series favoritas -->
           </div>
@@ -329,7 +421,7 @@ $perfil = $_SESSION["perfil"];
           <!-- Contenido tab películas -->
           <div class="tab-pane fade <?= $_SESSION["tab"] == "peliculas" ? "show active" : "" ?>" id="tab-peliculas">
             <!-- Películas pendientes -->
-            <section class="container-fluid bg-secondary rounded d-flex flex-column p-3 mb-3">
+            <section class="container-fluid bg-secondary rounded d-flex flex-column p-3 mb-3" id="peliculas-pendientes">
               <h3 class="text-warning mb-3">Pendientes</h3>
               <?php if (sizeof($_SESSION["peliculas_pendientes"]) == 0) { ?>
                 <div class="container bg-secondary rounded p-3">
@@ -353,6 +445,29 @@ $perfil = $_SESSION["perfil"];
                   </div>
                 <?php } ?>
               </div>
+              <?php if (isset($_SESSION["ver_mas_peliculas_pendientes"])) { ?>
+                <div class="collapse row row-cols-2 row-cols-sm-3 row-cols-lg-6" id="ver-mas-peliculas-pendientes">
+                  <?php foreach ($_SESSION["ver_mas_peliculas_pendientes"] as $pelicula) { ?>
+                    <div class="container-fluid col d-flex flex-column mb-3 justify-content-between"
+                      title="<?= $pelicula["titulo"] ?>">
+                      <a href="/ficha/movie/<?= $pelicula["id_ficha"] ?>" class="flex-fill">
+                        <img
+                          src="<?= $pelicula["imagen"] == null ? "/assets/img/default-poster.png" : API_IMG_BASE . $pelicula["imagen"] ?>"
+                          alt="<?= $pelicula["titulo"] ?>" class="container p-0 rounded border border-warning h-100" />
+                      </a>
+                      <a href="/ficha/movie/<?= $pelicula["id_ficha"] ?>"
+                        class="text-truncate link-warning text-decoration-none text-center">
+                        <?= $pelicula["titulo"] ?>
+                      </a>
+                    </div>
+                  <?php } ?>
+                </div>
+                <div class="container d-flex justify-content-center">
+                  <a class="btn btn-outline-warning" data-bs-toggle="collapse" href="#ver-mas-peliculas-pendientes">
+                    Ver más
+                  </a>
+                </div>
+              <?php } ?>
             </section>
             <!-- Fin Películas pendientes -->
             <!-- Películas vistas -->
@@ -380,6 +495,29 @@ $perfil = $_SESSION["perfil"];
                   </div>
                 <?php } ?>
               </div>
+              <?php if (isset($_SESSION["ver_mas_peliculas_vistas"])) { ?>
+                <div class="collapse row row-cols-2 row-cols-sm-3 row-cols-lg-6" id="ver-mas-peliculas-vistas">
+                  <?php foreach ($_SESSION["ver_mas_peliculas_vistas"] as $pelicula) { ?>
+                    <div class="container-fluid col d-flex flex-column mb-3 justify-content-between"
+                      title="<?= $pelicula["titulo"] ?>">
+                      <a href="/ficha/movie/<?= $pelicula["id_ficha"] ?>" class="flex-fill">
+                        <img
+                          src="<?= $pelicula["imagen"] == null ? "/assets/img/default-poster.png" : API_IMG_BASE . $pelicula["imagen"] ?>"
+                          alt="<?= $pelicula["titulo"] ?>" class="container p-0 rounded border border-warning h-100" />
+                      </a>
+                      <a href="/ficha/movie/<?= $pelicula["id_ficha"] ?>"
+                        class="text-truncate link-warning text-decoration-none text-center">
+                        <?= $pelicula["titulo"] ?>
+                      </a>
+                    </div>
+                  <?php } ?>
+                </div>
+                <div class="container d-flex justify-content-center">
+                  <a class="btn btn-outline-warning" data-bs-toggle="collapse" href="#ver-mas-peliculas-vistas">
+                    Ver más
+                  </a>
+                </div>
+              <?php } ?>
             </section>
             <!-- Fin Películas vistas -->
             <!-- Películas favoritas -->
@@ -407,6 +545,29 @@ $perfil = $_SESSION["perfil"];
                   </div>
                 <?php } ?>
               </div>
+              <?php if (isset($_SESSION["ver_mas_peliculas_favoritas"])) { ?>
+                <div class="collapse row row-cols-2 row-cols-sm-3 row-cols-lg-6" id="ver-mas-peliculas-favoritas">
+                  <?php foreach ($_SESSION["ver_mas_peliculas_favoritas"] as $pelicula) { ?>
+                    <div class="container-fluid col d-flex flex-column mb-3 justify-content-between"
+                      title="<?= $pelicula["titulo"] ?>">
+                      <a href="/ficha/movie/<?= $pelicula["id_ficha"] ?>" class="flex-fill">
+                        <img
+                          src="<?= $pelicula["imagen"] == null ? "/assets/img/default-poster.png" : API_IMG_BASE . $pelicula["imagen"] ?>"
+                          alt="<?= $pelicula["titulo"] ?>" class="container p-0 rounded border border-warning h-100" />
+                      </a>
+                      <a href="/ficha/movie/<?= $pelicula["id_ficha"] ?>"
+                        class="text-truncate link-warning text-decoration-none text-center">
+                        <?= $pelicula["titulo"] ?>
+                      </a>
+                    </div>
+                  <?php } ?>
+                </div>
+                <div class="container d-flex justify-content-center">
+                  <a class="btn btn-outline-warning" data-bs-toggle="collapse" href="#ver-mas-peliculas-favoritas">
+                    Ver más
+                  </a>
+                </div>
+              <?php } ?>
             </section>
             <!-- Fin Películas favoritas -->
           </div>

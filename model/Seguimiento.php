@@ -48,7 +48,7 @@ class Seguimiento
   static function peliculas_pendientes($id_usuario)
   {
     $conn = new Conexion();
-    $sql = "select * from fichas, seguimiento where fichas.id = seguimiento.id_ficha and seguimiento.ficha_tipo = 'movie' and seguimiento. estado = 'Pendiente' and seguimiento.id_usuario = $id_usuario";
+    $sql = "select * from fichas, seguimiento where fichas.id = seguimiento.id_ficha and seguimiento.ficha_tipo = 'movie' and seguimiento. estado = 'Pendiente' and seguimiento.id_usuario = $id_usuario order by seguimiento.fecha_actualizacion desc";
     return $conn->consulta($sql);
   }
 
@@ -58,7 +58,7 @@ class Seguimiento
   static function peliculas_vistas($id_usuario)
   {
     $conn = new Conexion();
-    $sql = "select * from fichas, seguimiento where fichas.id = seguimiento.id_ficha and seguimiento.ficha_tipo = 'movie' and seguimiento. estado = 'Vista' and seguimiento.id_usuario = $id_usuario";
+    $sql = "select * from fichas, seguimiento where fichas.id = seguimiento.id_ficha and seguimiento.ficha_tipo = 'movie' and seguimiento. estado = 'Vista' and seguimiento.id_usuario = $id_usuario order by seguimiento.fecha_actualizacion desc";
     return $conn->consulta($sql);
   }
 
@@ -68,7 +68,7 @@ class Seguimiento
   static function peliculas_favoritas($id_usuario)
   {
     $conn = new Conexion();
-    $sql = "select * from fichas, seguimiento where fichas.id = seguimiento.id_ficha and seguimiento.ficha_tipo = 'movie' and seguimiento. estado = 'Favorita' and seguimiento.id_usuario = $id_usuario";
+    $sql = "select * from fichas, seguimiento where fichas.id = seguimiento.id_ficha and seguimiento.ficha_tipo = 'movie' and seguimiento. estado = 'Favorita' and seguimiento.id_usuario = $id_usuario order by seguimiento.fecha_actualizacion desc";
     return $conn->consulta($sql);
   }
 
@@ -78,7 +78,7 @@ class Seguimiento
   static function series_pendientes($id_usuario)
   {
     $conn = new Conexion();
-    $sql = "select * from fichas, seguimiento where fichas.id = seguimiento.id_ficha and seguimiento.ficha_tipo = 'tv' and seguimiento. estado = 'Pendiente' and seguimiento.id_usuario = $id_usuario";
+    $sql = "select * from fichas, seguimiento where fichas.id = seguimiento.id_ficha and seguimiento.ficha_tipo = 'tv' and seguimiento. estado = 'Pendiente' and seguimiento.id_usuario = $id_usuario order by seguimiento.fecha_actualizacion desc";
     return $conn->consulta($sql);
   }
 
@@ -88,7 +88,7 @@ class Seguimiento
   static function series_vistas($id_usuario)
   {
     $conn = new Conexion();
-    $sql = "select * from fichas, seguimiento where fichas.id = seguimiento.id_ficha and seguimiento.ficha_tipo = 'tv' and seguimiento. estado = 'Vista' and seguimiento.id_usuario = $id_usuario";
+    $sql = "select * from fichas, seguimiento where fichas.id = seguimiento.id_ficha and seguimiento.ficha_tipo = 'tv' and seguimiento. estado = 'Vista' and seguimiento.id_usuario = $id_usuario order by seguimiento.fecha_actualizacion desc";
     return $conn->consulta($sql);
   }
 
@@ -98,7 +98,7 @@ class Seguimiento
   static function series_favoritas($id_usuario)
   {
     $conn = new Conexion();
-    $sql = "select * from fichas, seguimiento where fichas.id = seguimiento.id_ficha and seguimiento.ficha_tipo = 'tv' and seguimiento. estado = 'Favorita' and seguimiento.id_usuario = $id_usuario";
+    $sql = "select * from fichas, seguimiento where fichas.id = seguimiento.id_ficha and seguimiento.ficha_tipo = 'tv' and seguimiento. estado = 'Favorita' and seguimiento.id_usuario = $id_usuario order by seguimiento.fecha_actualizacion desc";
     return $conn->consulta($sql);
   }
 
@@ -108,7 +108,7 @@ class Seguimiento
   static function series_seguidas($id_usuario)
   {
     $conn = new Conexion();
-    $sql = "select * from fichas, seguimiento where fichas.id = seguimiento.id_ficha and seguimiento.ficha_tipo = 'tv' and seguimiento. estado = 'Siguiendo' and seguimiento.id_usuario = $id_usuario";
+    $sql = "select * from fichas, seguimiento where fichas.id = seguimiento.id_ficha and seguimiento.ficha_tipo = 'tv' and seguimiento. estado = 'Siguiendo' and seguimiento.id_usuario = $id_usuario order by seguimiento.fecha_actualizacion desc";
     return $conn->consulta($sql);
   }
 

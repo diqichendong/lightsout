@@ -95,7 +95,7 @@
                 <!-- Usuario -->
                 <div class="col-8 d-flex text-warning">
                   <div class="col-10 col-lg-11 d-flex flex-column justify-content-center align-items-end px-2">
-                    <a href="/perfil/<?= $row[10] ?>" class="text-decoration-none link-warning">
+                    <a href="/perfil/<?= $row[10] ?>/posts" class="text-decoration-none link-warning">
                       <span class="lead">
                         <?= $row["nombre"] ?>
                       </span>
@@ -107,7 +107,7 @@
                     </span>
                   </div>
                   <div class="col-2 col-lg-1 d-flex align-items-center" title="<?= $row["nombre"] ?>">
-                    <a href="/perfil/<?= $row[10] ?>" class="ratio ratio-1x1">
+                    <a href="/perfil/<?= $row[10] ?>/posts" class="ratio ratio-1x1">
                       <img src="assets/perfil/<?= $row["foto"] ?>" alt="user" class="rounded-circle" />
                     </a>
                   </div>
@@ -175,94 +175,77 @@
         <div class="tab-content">
           <!-- Panel siguiendo -->
           <div class="tab-pane container active my-2" id="siguiendo">
-            <p class="text-end">
-              <a href="" class="link link-warning">
-                <small>Ver todos</small>
-              </a>
-            </p>
+            <?php if ($_SESSION["ver_todas_siguiendo"]) { ?>
+              <p class="text-end">
+                <a href="/perfil/<?= $_SESSION["usuario"]->id ?>/series#siguiendo" class="link link-warning">
+                  <small>Ver todas</small>
+                </a>
+              </p>
+            <?php } ?>
             <div class="container-fluid row justify-content-center gap-2 p-0 m-0">
-              <a href="ficha.html" class="col-md-5 col-lg-3 p-0">
-                <img src="img/poster.jpg" alt="poster" class="rounded border border-warning p-0 col-12" />
-              </a>
-              <a href="ficha.html" class="col-md-5 col-lg-3 p-0">
-                <img src="img/poster2.jpg" alt="poster" class="rounded border border-warning p-0 col-12" />
-              </a>
-              <a href="ficha.html" class="col-md-5 col-lg-3 p-0">
-                <img src="img/poster3.jpg" alt="poster" class="rounded border border-warning p-0 col-12" />
-              </a>
-              <a href="ficha.html" class="col-md-5 col-lg-3 p-0">
-                <img src="img/poster3.jpg" alt="poster" class="rounded border border-warning p-0 col-12" />
-              </a>
-              <a href="ficha.html" class="col-md-5 col-lg-3 p-0">
-                <img src="img/poster.jpg" alt="poster"
-                  class="rounded border border-warning p-0 d-none d-lg-inline col-12" />
-              </a>
-              <a href="ficha.html" class="col-md-5 col-lg-3 p-0">
-                <img src="img/poster2.jpg" alt="poster"
-                  class="rounded border border-warning p-0 d-none d-lg-inline col-12" />
-              </a>
+              <?php foreach ($_SESSION["siguiendo"] as $serie) { ?>
+                <div class="container col-md-5 col-lg-3 p-0 d-flex flex-column" title="<?= $serie["titulo"] ?>">
+                  <a href="/ficha/tv/<?= $serie["id_ficha"] ?>">
+                    <img src="<?= API_IMG_BASE . $serie["imagen"] ?>" alt="<?= $serie["titulo"] ?>"
+                      class="rounded border border-warning p-0 col-12 h-100" />
+                  </a>
+                  <a href="/ficha/tv/<?= $serie["id_ficha"] ?>"
+                    class="text-truncate link-warning text-decoration-none text-center">
+                    <?= $serie["titulo"] ?>
+                  </a>
+                </div>
+              <?php } ?>
             </div>
           </div>
           <!-- Fin Panel siguiendo -->
           <!-- Panel series pendientes -->
           <div class="tab-pane container fade my-2" id="series-pendientes">
-            <p class="text-end">
-              <a href="" class="link link-warning">
-                <small>Ver todos</small>
-              </a>
-            </p>
+            <?php if ($_SESSION["ver_todas_series_pendientes"]) { ?>
+              <p class="text-end">
+                <a href="/perfil/<?= $_SESSION["usuario"]->id ?>/series#series-pendientes" class="link link-warning">
+                  <small>Ver todas</small>
+                </a>
+              </p>
+            <?php } ?>
             <div class="container-fluid row justify-content-center gap-2 p-0 m-0">
-              <a href="ficha.html" class="col-md-5 col-lg-3 p-0">
-                <img src="img/poster2.jpg" alt="poster" class="rounded border border-warning p-0 col-12" />
-              </a>
-              <a href="ficha.html" class="col-md-5 col-lg-3 p-0">
-                <img src="img/poster.jpg" alt="poster" class="rounded border border-warning p-0 col-12" />
-              </a>
-              <a href="ficha.html" class="col-md-5 col-lg-3 p-0">
-                <img src="img/poster3.jpg" alt="poster" class="rounded border border-warning p-0 col-12" />
-              </a>
-              <a href="ficha.html" class="col-md-5 col-lg-3 p-0">
-                <img src="img/poster.jpg" alt="poster" class="rounded border border-warning p-0 col-12" />
-              </a>
-              <a href="ficha.html" class="col-md-5 col-lg-3 p-0">
-                <img src="img/poster3.jpg" alt="poster"
-                  class="rounded border border-warning p-0 d-none d-lg-inline col-12" />
-              </a>
-              <a href="ficha.html" class="col-md-5 col-lg-3 p-0">
-                <img src="img/poster2.jpg" alt="poster"
-                  class="rounded border border-warning p-0 d-none d-lg-inline col-12" />
-              </a>
+              <?php foreach ($_SESSION["series_pendientes"] as $serie) { ?>
+                <div class="container col-md-5 col-lg-3 p-0 d-flex flex-column" title="<?= $serie["titulo"] ?>">
+                  <a href="/ficha/tv/<?= $serie["id_ficha"] ?>">
+                    <img src="<?= API_IMG_BASE . $serie["imagen"] ?>" alt="<?= $serie["titulo"] ?>"
+                      class="rounded border border-warning p-0 col-12 h-100" />
+                  </a>
+                  <a href="/ficha/tv/<?= $serie["id_ficha"] ?>"
+                    class="text-truncate link-warning text-decoration-none text-center">
+                    <?= $serie["titulo"] ?>
+                  </a>
+                </div>
+              <?php } ?>
             </div>
           </div>
           <!-- Fin Panel series pendientes -->
           <!-- Panel peliculas pendientes -->
           <div class="tab-pane container fade my-2" id="peliculas-pendientes">
-            <p class="text-end">
-              <a href="" class="link link-warning">
-                <small>Ver todos</small>
-              </a>
-            </p>
+            <?php if ($_SESSION["ver_todas_peliculas_pendientes"]) { ?>
+              <p class="text-end">
+                <a href="/perfil/<?= $_SESSION["usuario"]->id ?>/peliculas#peliculas-pendientes"
+                  class="link link-warning">
+                  <small>Ver todas</small>
+                </a>
+              </p>
+            <?php } ?>
             <div class="container-fluid row justify-content-center gap-2 p-0 m-0">
-              <a href="ficha.html" class="col-md-5 col-lg-3 p-0">
-                <img src="img/poster3.jpg" alt="poster" class="rounded border border-warning p-0 col-12" />
-              </a>
-              <a href="ficha.html" class="col-md-5 col-lg-3 p-0">
-                <img src="img/poster2.jpg" alt="poster" class="rounded border border-warning p-0 col-12" />
-              </a>
-              <a href="ficha.html" class="col-md-5 col-lg-3 p-0">
-                <img src="img/poster.jpg" alt="poster" class="rounded border border-warning p-0 col-12" />
-              </a>
-              <a href="ficha.html" class="col-md-5 col-lg-3 p-0">
-                <img src="img/poster2.jpg" alt="poster" class="rounded border border-warning p-0 col-12" />
-              </a>
-              <a href="ficha.html" class="col-md-5 col-lg-3 p-0">
-                <img src="img/poster.jpg" alt="poster"
-                  class="rounded border border-warning p-0 d-none d-lg-inline col-12" />
-              </a>
-              <a href="ficha.html" class="col-md-5 col-lg-3 p-0">
-                <img src="img/poster3.jpg" alt="poster"
-                  class="rounded border border-warning p-0 d-none d-lg-inline col-12" />
-              </a>
+              <?php foreach ($_SESSION["peliculas_pendientes"] as $pelicula) { ?>
+                <div class="container col-md-5 col-lg-3 p-0 d-flex flex-column" title="<?= $pelicula["titulo"] ?>">
+                  <a href="/ficha/movie/<?= $pelicula["id_ficha"] ?>">
+                    <img src="<?= API_IMG_BASE . $pelicula["imagen"] ?>" alt="<?= $pelicula["titulo"] ?>"
+                      class="rounded border border-warning p-0 col-12 h-100" />
+                  </a>
+                  <a href="/ficha/movie/<?= $pelicula["id_ficha"] ?>"
+                    class="text-truncate link-warning text-decoration-none text-center">
+                    <?= $pelicula["titulo"] ?>
+                  </a>
+                </div>
+              <?php } ?>
             </div>
           </div>
           <!-- Fin Panel peliculas pendientes -->
