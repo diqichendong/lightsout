@@ -121,29 +121,6 @@
         } ?>
 
       </div>
-
-      <!-- Paginación -->
-      <!-- <nav class="my-2">
-        <ul class="pagination justify-content-center">
-          <li class="page-item disabled">
-            <span class="page-link">Anterior</span>
-          </li>
-          <li class="page-item active">
-            <a class="page-link" href="#">1</a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="#">2</a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="#">3</a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="#">Siguiente</a>
-          </li>
-        </ul>
-      </nav> -->
-      <!-- Fin paginación -->
-
     </section>
     <!-- Final POSTS -->
 
@@ -175,9 +152,14 @@
         <div class="tab-content">
           <!-- Panel siguiendo -->
           <div class="tab-pane container active my-2" id="siguiendo">
+            <?php if (sizeof($_SESSION["siguiendo"]) == 0) { ?>
+              <div class="container bg-secondary rounded p-3">
+                <p class="lead text-warning text-center py-5">No sigues ninguna serie.</p>
+              </div>
+            <?php } ?>
             <?php if ($_SESSION["ver_todas_siguiendo"]) { ?>
               <p class="text-end">
-                <a href="/perfil/<?= $_SESSION["usuario"]->id ?>/series#siguiendo" class="link link-warning">
+                <a href="/perfil/<?= $_SESSION["usuario"]->id ?>/series" class="link link-warning">
                   <small>Ver todas</small>
                 </a>
               </p>
@@ -200,9 +182,14 @@
           <!-- Fin Panel siguiendo -->
           <!-- Panel series pendientes -->
           <div class="tab-pane container fade my-2" id="series-pendientes">
+            <?php if (sizeof($_SESSION["series_pendientes"]) == 0) { ?>
+              <div class="container bg-secondary rounded p-3">
+                <p class="lead text-warning text-center py-5">No tienes series pendientes.</p>
+              </div>
+            <?php } ?>
             <?php if ($_SESSION["ver_todas_series_pendientes"]) { ?>
               <p class="text-end">
-                <a href="/perfil/<?= $_SESSION["usuario"]->id ?>/series#series-pendientes" class="link link-warning">
+                <a href="/perfil/<?= $_SESSION["usuario"]->id ?>/series" class="link link-warning">
                   <small>Ver todas</small>
                 </a>
               </p>
@@ -225,10 +212,14 @@
           <!-- Fin Panel series pendientes -->
           <!-- Panel peliculas pendientes -->
           <div class="tab-pane container fade my-2" id="peliculas-pendientes">
+            <?php if (sizeof($_SESSION["peliculas_pendientes"]) == 0) { ?>
+              <div class="container bg-secondary rounded p-3">
+                <p class="lead text-warning text-center py-5">No tienes películas pendientes.</p>
+              </div>
+            <?php } ?>
             <?php if ($_SESSION["ver_todas_peliculas_pendientes"]) { ?>
               <p class="text-end">
-                <a href="/perfil/<?= $_SESSION["usuario"]->id ?>/peliculas#peliculas-pendientes"
-                  class="link link-warning">
+                <a href="/perfil/<?= $_SESSION["usuario"]->id ?>/peliculas" class="link link-warning">
                   <small>Ver todas</small>
                 </a>
               </p>

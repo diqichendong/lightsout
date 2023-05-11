@@ -188,28 +188,6 @@ $perfil = $_SESSION["perfil"];
               ?>
             </section>
             <!-- Fin Posts -->
-
-            <!-- Paginación -->
-            <!-- <nav class="my-2">
-          <ul class="pagination justify-content-center">
-            <li class="page-item disabled">
-              <span class="page-link">Anterior</span>
-            </li>
-            <li class="page-item active">
-              <a class="page-link" href="#">1</a>
-            </li>
-            <li class="page-item">
-              <span class="page-link">2</span>
-            </li>
-            <li class="page-item">
-              <a class="page-link" href="#">3</a>
-            </li>
-            <li class="page-item">
-              <a class="page-link" href="#">Siguiente</a>
-            </li>
-          </ul>
-        </nav> -->
-            <!-- Fin paginación -->
           </div>
           <!-- Fin Contenido tab posts -->
 
@@ -594,6 +572,13 @@ $perfil = $_SESSION["perfil"];
   <script type="module" src="/js/perfil.js"></script>
   <script type="module" src="/js/comentario.js"></script>
   <script src="/js/light.js"></script>
+
+  <script>
+    <?php if ($_SESSION["perfil"]->id == $_SESSION["usuario"]->id) { ?>
+      // Pagina activa en el menu
+      $("#menu a").eq(3).addClass("active");
+    <?php } ?>
+  </script>
 </body>
 
 </html>

@@ -104,7 +104,7 @@ class PerfilController
       $_SESSION["usuario"]->seguir($id_otro_usuario);
     }
 
-    header("Location: /perfil/$id_otro_usuario");
+    header("Location: /perfil/$id_otro_usuario/posts");
   }
 
   /**
@@ -117,7 +117,7 @@ class PerfilController
       $_SESSION["usuario"]->dejar_seguir($id_otro_usuario);
     }
 
-    header("Location: /perfil/$id_otro_usuario");
+    header("Location: /perfil/$id_otro_usuario/posts");
   }
 
 }

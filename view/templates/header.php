@@ -31,12 +31,13 @@
         </li>
       </ul>
       <div class="d-flex gap-2 justify-content-center justify-content-lg-end">
-        <form>
+        <form method="get" action="/index.php">
           <div class="input-group">
             <span class="input-group-text text-warning bg-secondary">
               <i class="bi bi-search"></i>
             </span>
-            <input type="text" class="form-control" placeholder="Buscar" />
+            <input type="search" class="form-control" name="q" placeholder="Buscar" />
+            <input type="hidden" name="c" value="busqueda">
           </div>
         </form>
         <div class="dropdown">
