@@ -18,6 +18,62 @@ class Busqueda
     return $conn->consulta($sql);
   }
 
+  static function buscar_peliculas($query)
+  {
+    $c = curl_init();
+    curl_setopt($c, CURLOPT_URL, API_REQUEST_BASE . "/search/movie?api_key=" . API_KEY . "&language=es&query=" . urlencode($query) . "&include_adult=false");
+    curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
+    $data = curl_exec($c);
+    curl_close($c);
+
+    $response = json_decode($data, true);
+    $resultados = $response["results"];
+
+    $total_paginas = $response["total_pages"];
+    if ($total_paginas > 1) {
+      $paginas = $total_paginas > 1 && $total_paginas <= 3 ? $total_paginas : 3;
+      for ($i = 2; $i <= $paginas; $i++) {
+        $c = curl_init();
+        curl_setopt($c, CURLOPT_URL, API_REQUEST_BASE . "/search/movie?api_key=" . API_KEY . "&language=es&query=" . urlencode($query) . "&include_adult=false&page=$i");
+        curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
+        $data = curl_exec($c);
+        curl_close($c);
+
+        $resultados = array_merge($resultados, json_decode($data, true)["results"]);
+      }
+    }
+
+    return $resultados;
+  }
+
+  static function buscar_series($query)
+  {
+    $c = curl_init();
+    curl_setopt($c, CURLOPT_URL, API_REQUEST_BASE . "/search/tv?api_key=" . API_KEY . "&language=es&query=" . urlencode($query) . "&include_adult=false");
+    curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
+    $data = curl_exec($c);
+    curl_close($c);
+
+    $response = json_decode($data, true);
+    $resultados = $response["results"];
+
+    $total_paginas = $response["total_pages"];
+    if ($total_paginas > 1) {
+      $paginas = $total_paginas > 1 && $total_paginas <= 3 ? $total_paginas : 3;
+      for ($i = 2; $i <= $paginas; $i++) {
+        $c = curl_init();
+        curl_setopt($c, CURLOPT_URL, API_REQUEST_BASE . "/search/tv?api_key=" . API_KEY . "&language=es&query=" . urlencode($query) . "&include_adult=false&page=$i");
+        curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
+        $data = curl_exec($c);
+        curl_close($c);
+
+        $resultados = array_merge($resultados, json_decode($data, true)["results"]);
+      }
+    }
+
+    return $resultados;
+  }
+
   function __get($name)
   {
     return $this->$name;

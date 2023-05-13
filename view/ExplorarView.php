@@ -27,77 +27,88 @@
   <!-- Main -->
   <div class="flex-fill">
     <!-- Filtro -->
-    <form class="container rounded bg-secondary p-3 mb-3 d-flex flex-wrap" method="get" id="filtro" action="/index.php">
-      <div class="col-6 col-md-3 px-1 my-1">
-        <div class="form-floating">
-          <select class="form-select" id="tipo" name="tipo">
-            <option value="movie" <?= $_SESSION["tipo"] == "movie" ? "selected" : "" ?>>Películas</option>
-            <option value="tv" <?= $_SESSION["tipo"] == "tv" ? "selected" : "" ?>>Series</option>
-          </select>
-          <label for="tipo">Tipo</label>
+    <form class="container mb-3" method="get" id="filtro" action="/index.php">
+      <div class="container-fluid rounded bg-secondary p-3 d-flex flex-wrap">
+        <div class="col-6 col-md-3 px-1 my-1">
+          <div class="form-floating">
+            <select class="form-select" id="tipo" name="tipo">
+              <option value="movie" <?= $_SESSION["tipo"] == "movie" ? "selected" : "" ?>>Películas</option>
+              <option value="tv" <?= $_SESSION["tipo"] == "tv" ? "selected" : "" ?>>Series</option>
+            </select>
+            <label for="tipo">Tipo</label>
+          </div>
         </div>
-      </div>
-      <div class="col-6 col-md-3 px-1 my-1">
-        <div class="form-floating">
-          <select class="form-select" id="genero" name="genero">
-            <option value="none" <?= $_SESSION["genero"] == "none" ? "selected" : "" ?>>Ninguno</option>
-            <?php foreach ($_SESSION["generos"] as $genero) { ?>
-              <option value="<?= $genero["id"] ?>" <?= $_SESSION["genero"] == $genero["id"] ? "selected" : "" ?>>
-                <?= $genero["name"] ?>
+        <div class="col-6 col-md-3 px-1 my-1">
+          <div class="form-floating">
+            <select class="form-select" id="genero" name="genero">
+              <option value="none" <?= $_SESSION["genero"] == "none" ? "selected" : "" ?>>Ninguno</option>
+              <?php foreach ($_SESSION["generos"] as $genero) { ?>
+                <option value="<?= $genero["id"] ?>" <?= $_SESSION["genero"] == $genero["id"] ? "selected" : "" ?>>
+                  <?= $genero["name"] ?>
+                </option>
+              <?php } ?>
+            </select>
+            <label for="genero">Género</label>
+          </div>
+        </div>
+        <div class="col-6 col-md-3 px-1 my-1">
+          <div class="form-floating">
+            <select class="form-select" id="year" name="year">
+              <option value="none" <?= $_SESSION["year"] == "none" ? "selected" : "" ?>>Ninguno</option>
+              <?php for ($year = intval(date("Y")); $year >= 1900; $year--) { ?>
+                <option value="<?= $year ?>" <?= intval($_SESSION["year"]) == $year ? "selected" : "" ?>>
+                  <?= $year ?>
+                </option>
+              <?php } ?>
+            </select>
+            <label for="year">Año</label>
+          </div>
+        </div>
+        <div class="col-6 col-md-3 px-1 my-1">
+          <div class="form-floating">
+            <select class="form-select" id="orden" name="orden">
+              <option value="popularity.desc" <?= $_SESSION["orden"] == "popularity.desc" ? "selected" : "" ?>>
+                Poularidad
               </option>
-            <?php } ?>
-          </select>
-          <label for="genero">Género</label>
-        </div>
-      </div>
-      <div class="col-6 col-md-3 px-1 my-1">
-        <div class="form-floating">
-          <select class="form-select" id="year" name="year">
-            <option value="none" <?= $_SESSION["year"] == "none" ? "selected" : "" ?>>Ninguno</option>
-            <?php for ($year = intval(date("Y")); $year >= 1900; $year--) { ?>
-              <option value="<?= $year ?>" <?= intval($_SESSION["year"]) == $year ? "selected" : "" ?>>
-                <?= $year ?>
+              <option value="fecha" <?= $_SESSION["orden"] == "fecha" ? "selected" : "" ?>>
+                Fecha
               </option>
-            <?php } ?>
-          </select>
-          <label for="year">Año</label>
+            </select>
+            <label for="orden">Ordenar por</label>
+          </div>
         </div>
+        <input type="hidden" name="pagina" value="<?= $_SESSION["pagina"] ?>">
+        <input type="hidden" name="c" value="explorar">
       </div>
-      <div class="col-6 col-md-3 px-1 my-1">
-        <div class="form-floating">
-          <select class="form-select" id="orden" name="orden">
-            <option value="popularity.desc" <?= $_SESSION["orden"] == "popularity.desc" ? "selected" : "" ?>>
-              Poularidad
-            </option>
-            <option value="fecha" <?= $_SESSION["orden"] == "fecha" ? "selected" : "" ?>>
-              Fecha
-            </option>
-          </select>
-          <label for="orden">Ordenar por</label>
-        </div>
-      </div>
-      <input type="hidden" name="pagina" value="<?= $_SESSION["pagina"] ?>">
-      <input type="hidden" name="c" value="explorar">
     </form>
     <!-- Fin Filtro -->
 
     <!-- Resultados -->
-    <div class="container bg-secondary rounded d-flex flex-wrap p-3" id="resultados">
-      <?php foreach ($_SESSION["fichas_explorar"]["results"] as $ficha) { ?>
-        <div class="container col-6 col-sm-4 col-md-3 col-lg-2 d-flex flex-column mb-3 justify-content-between"
-          title="<?= isset($ficha["title"]) ? $ficha["title"] : $ficha["name"] ?>">
-          <a href="/ficha/<?= isset($ficha["title"]) ? "movie" : "tv" ?>/<?= $ficha["id"] ?>" class="flex-fill">
-            <img
-              src="<?= $ficha["poster_path"] == null ? "/assets/img/default-poster.png" : API_IMG_BASE . $ficha["poster_path"] ?>"
-              alt="<?= isset($ficha["title"]) ? $ficha["title"] : $ficha["name"] ?>"
-              class="container p-0 rounded border border-warning h-100" />
-          </a>
-          <a href="/ficha/<?= isset($ficha["title"]) ? "movie" : "tv" ?>/<?= $ficha["id"] ?>"
-            class="text-truncate link-warning text-decoration-none text-center">
-            <?= isset($ficha["title"]) ? $ficha["title"] : $ficha["name"] ?>
-          </a>
+    <div class="container">
+      <div class="container-fluid bg-secondary rounded p-3">
+        <div class="container-fluid d-flex flex-wrap bg-secondary rounded p-3" id="resultados">
+          <?php foreach ($_SESSION["fichas_explorar"]["results"] as $ficha) { ?>
+            <div class="container col-6 col-sm-4 col-md-3 col-lg-2 d-flex flex-column mb-3 justify-content-between"
+              title="<?= isset($ficha["title"]) ? $ficha["title"] : $ficha["name"] ?>">
+              <a href="/ficha/<?= isset($ficha["title"]) ? "movie" : "tv" ?>/<?= $ficha["id"] ?>" class="flex-fill">
+                <img
+                  src="<?= $ficha["poster_path"] == null ? "/assets/img/default-poster.png" : API_IMG_BASE . $ficha["poster_path"] ?>"
+                  alt="<?= isset($ficha["title"]) ? $ficha["title"] : $ficha["name"] ?>"
+                  class="container p-0 rounded border border-warning h-100" />
+              </a>
+              <a href="/ficha/<?= isset($ficha["title"]) ? "movie" : "tv" ?>/<?= $ficha["id"] ?>"
+                class="text-truncate link-warning text-decoration-none text-center">
+                <?= isset($ficha["title"]) ? $ficha["title"] : $ficha["name"] ?>
+              </a>
+            </div>
+          <?php } ?>
         </div>
-      <?php } ?>
+        <div class="container d-flex justify-content-center">
+          <button class="btn btn-outline-warning" id="cargar-mas">
+            Cargar más
+          </button>
+        </div>
+      </div>
     </div>
     <!-- Fin Resultados -->
   </div>

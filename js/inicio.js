@@ -6,50 +6,54 @@ $("#menu a").eq(0).addClass("active");
 // Buscador en la ventana modal de peliculas y series
 $("#crear-post-buscador").keyup((e) => {
   let q = e.target.value;
-  $.post("ajax/buscar_ficha.php", { query: q }, function (res) {
-    const response = JSON.parse(res);
+  $.post(
+    "index.php?c=busqueda&m=buscar_ficha_crear_post",
+    { query: q },
+    function (res) {
+      const response = JSON.parse(res);
 
-    $("#crear-post-fichas").html(
-      "<option value=0>-- Elige una ficha --</option>"
-    );
-    $("#crear-post-poster").attr("src", "assets/img/default-poster.png");
-    response.results.forEach((elem) => {
-      if (elem.media_type == "movie") {
-        let fecha = elem.release_date;
-        let titulo = elem.title + " (" + fecha.split("-")[0] + ")";
-        $("#crear-post-fichas").append(
-          "<option value='" +
-            elem.id +
-            "' data-poster='" +
-            elem.poster_path +
-            "' data-titulo='" +
-            elem.title +
-            "' data-tipo='" +
-            elem.media_type +
-            "'>" +
-            titulo +
-            "</option>"
-        );
-      }
-      if (elem.media_type == "tv") {
-        let fecha = elem.first_air_date;
-        let titulo = elem.name + " [TV] (" + fecha.split("-")[0] + ")";
-        $("#crear-post-fichas").append(
-          "<option value='" +
-            elem.id +
-            "' data-poster='" +
-            elem.poster_path +
-            "' data-titulo='" +
-            elem.name +
-            "' data-tipo='" +
-            elem.media_type +
-            "'>" +
-            titulo +
-            "</option>"
-        );
-      }
-    });
-  });
+      $("#crear-post-fichas").html(
+        "<option value=0>-- Elige una ficha --</option>"
+      );
+      $("#crear-post-poster").attr("src", "assets/img/default-poster.png");
+      response.results.forEach((elem) => {
+        if (elem.media_type == "movie") {
+          let fecha = elem.release_date;
+          let titulo = elem.title + " (" + fecha.split("-")[0] + ")";
+          $("#crear-post-fichas").append(
+            "<option value='" +
+              elem.id +
+              "' data-poster='" +
+              elem.poster_path +
+              "' data-titulo='" +
+              elem.title +
+              "' data-tipo='" +
+              elem.media_type +
+              "'>" +
+              titulo +
+              "</option>"
+          );
+        }
+        if (elem.media_type == "tv") {
+          let fecha = elem.first_air_date;
+          let titulo = elem.name + " [TV] (" + fecha.split("-")[0] + ")";
+          $("#crear-post-fichas").append(
+            "<option value='" +
+              elem.id +
+              "' data-poster='" +
+              elem.poster_path +
+              "' data-titulo='" +
+              elem.name +
+              "' data-tipo='" +
+              elem.media_type +
+              "'>" +
+              titulo +
+              "</option>"
+          );
+        }
+      });
+    }
+  );
 });
 
 // Cambios cuando seleccionamos una ficha

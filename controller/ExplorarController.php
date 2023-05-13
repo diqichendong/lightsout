@@ -57,7 +57,7 @@ class ExplorarController
     echo API::get_genero_peliculas();
   }
 
-  function filtrar()
+  function cargar_mas()
   {
     if (isset($_POST["tipo"]) && isset($_POST["genero"]) && isset($_POST["year"]) && isset($_POST["orden"]) && isset($_POST["pagina"])) {
       $tipo = $_POST["tipo"];
@@ -66,10 +66,9 @@ class ExplorarController
       $orden = $_POST["orden"];
       $pagina = $_POST["pagina"];
 
-      echo Ficha::get_fichas_explorar($tipo, $genero, $year, $orden, $pagina);
+      echo json_encode(Ficha::get_fichas_explorar($tipo, $genero, $year, $orden, $pagina));
     }
   }
 
 }
-
 ?>
