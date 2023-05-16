@@ -191,11 +191,66 @@ class Usuario
     return $consulta[0][0];
   }
 
+  /**
+   * Obtener todos los usuarios
+   */
+  static function get_usuarios()
+  {
+    $id_usuario_actual = $_SESSION["usuario"]->id;
+    $conn = new Conexion();
+    $sql = "select * from usuarios where id != $id_usuario_actual";
+    return $conn->consulta($sql);
+  }
+
+  /**
+   * Obtener usuario
+   */
+  static function get_usuario($id_usuario)
+  {
+    $conn = new Conexion();
+    $sql = "select * from usuarios where id = $id_usuario";
+    return $conn->consulta($sql)[0];
+  }
+
+  /**
+   * Editar usuario
+   */
+  static function editar_usuario($id, $nombre, $username, $email, $tipo)
+  {
+    $conn = new Conexion();
+    $sql = "update usuarios set nombre = '$nombre', username = '$username', email = '$email', tipo = '$tipo' where id = $id";
+    $conn->exec($sql);
+  }
+
+  /**
+   * Eliminar usuario
+   */
+  static function eliminar_usuario($id)
+  {
+    $conn = new Conexion();
+    $sql = "delete from usuarios where id = $id";
+    $conn->exec($sql);
+  }
+
+  /**
+   * Buscar usuarios
+   */
+  static function buscar_usuarios($query)
+  {
+    $id_usuario_actual = $_SESSION["usuario"]->id;
+    $conn = new Conexion();
+    if ($query != "") {
+      $sql = "select * from usuarios where id != $id_usuario_actual and (lower(nombre) like '%$query%' or lower(username) like '%$query%')";
+    } else {
+      $sql = "select * from usuarios where id != $id_usuario_actual";
+    }
+    return $conn->consulta($sql);
+  }
+
   function __get($name)
   {
     return $this->$name;
   }
-
 }
 
 ?>

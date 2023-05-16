@@ -53,7 +53,7 @@
             </li>
             <?php if ($_SESSION["usuario"]->tipo == "Administrador") { ?>
               <li>
-                <a class="dropdown-item" href="administrador.html">
+                <a class="dropdown-item" href="/administrador">
                   Administración
                 </a>
               </li>
