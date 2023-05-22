@@ -162,7 +162,7 @@ $perfil = $_SESSION["perfil"];
                       <!-- Comentarios -->
                       <div class="col-3 py-2 d-flex align-items-center justify-content-center gap-2">
                         <button class="btn btn-link link-warning btn-comentario px-1" data-bs-toggle="modal"
-                          data-bs-target="#modal-comentarios">
+                          data-bs-target="#modal-comentarios" title="Comentarios">
                           <i class="bi bi-chat" data-id="<?= $post[0] ?>"></i>
                         </button>
                         <span class="contador-comentarios" data-id="<?= $post[0] ?>"></span>
@@ -172,12 +172,22 @@ $perfil = $_SESSION["perfil"];
                       <div class="col-3 py-2 d-flex align-items-center justify-content-center gap-2">
                         <input type="checkbox" id="light-<?= $post[0] ?>" class="light-checkbox"
                           data-idusuario="<?= $_SESSION["usuario"]->id ?>">
-                        <label class="text-warning px-1" for="light-<?= $post[0] ?>">
+                        <label class="text-warning px-1" for="light-<?= $post[0] ?>" title="Lights">
                           <i></i>
                         </label>
                         <span class="contador-lights" data-id="<?= $post[0] ?>"></span>
                       </div>
                       <!-- Fin Lights -->
+                      <!-- Denunciar -->
+                      <div class="col-3 py-2 d-flex align-items-center justify-content-center gap-2">
+                        <?php if ($post["id_usuario"] != $_SESSION["usuario"]->id) { ?>
+                          <button class="btn btn-link link-danger btn-denunciar-post px-1" data-id="<?= $post[0] ?>"
+                            title="Denunciar">
+                            <i class="bi bi-exclamation-triangle-fill"></i>
+                          </button>
+                        <?php } ?>
+                      </div>
+                      <!-- Fin Denunciar -->
                     </div>
                     <!-- Fin Post footer -->
                   </div>
@@ -572,12 +582,15 @@ $perfil = $_SESSION["perfil"];
   <script type="module" src="/js/perfil.js"></script>
   <script type="module" src="/js/comentario.js"></script>
   <script src="/js/light.js"></script>
+  <script src="/js/denunciar.js"></script>
 
   <script>
     <?php if ($_SESSION["perfil"]->id == $_SESSION["usuario"]->id) { ?>
       // Pagina activa en el menu
       $("#menu a").eq(3).addClass("active");
     <?php } ?>
+
+    id_usuario_actual = <?= $_SESSION["usuario"]->id ?>
   </script>
 </body>
 

@@ -1,7 +1,7 @@
 import * as v from "/js/validar.js";
 
 // Botón de editar lista de usuarios
-$(".btn-editar").click(function (e) {
+$(document).on("click", ".btn-editar", function (e) {
   let id_usuario = $(this).data("id");
 
   $.post(
@@ -19,8 +19,8 @@ $(".btn-editar").click(function (e) {
   );
 });
 
-// Botón "Editar" del modal de editar usuario
-$("#editar").click(function (e) {
+// Botón "Guardar" del modal de editar usuario
+$("#guardar").click(function (e) {
   const form = document.forms[0];
 
   let nombre = form.elements["nombre"].value.trim();

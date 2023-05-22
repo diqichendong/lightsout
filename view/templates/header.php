@@ -19,11 +19,11 @@
             <i class="bi bi-compass-fill"></i> Explorar
           </a>
         </li>
-        <li class="nav-item mx-2 text-center fs-5">
+        <!-- <li class="nav-item mx-2 text-center fs-5">
           <a class="nav-link" href="#">
             <i class="bi bi-chat-dots-fill"></i> Chat
           </a>
-        </li>
+        </li> -->
         <li class="nav-item mx-2 text-center fs-5">
           <a class="nav-link" href="/perfil/<?= $_SESSION["usuario"]->id ?>/posts">
             <i class="bi bi-person-fill"></i> Perfil
@@ -45,7 +45,12 @@
             <img src="/assets/perfil/<?= $_SESSION["usuario"]->foto ?>" class="rounded-circle" alt="user" width="30px"
               height="30px" />
           </button>
-          <ul class="dropdown-menu dropdown-menu-end">
+          <ul class="dropdown-menu dropdown-menu-end text-center">
+            <li>
+              <a class="dropdown-item disabled" href="">
+                <?= $_SESSION["usuario"]->nombre ?>
+              </a>
+            </li>
             <li>
               <a class="dropdown-item" href="/editar_perfil">
                 Editar perfil

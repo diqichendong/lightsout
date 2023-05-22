@@ -12,6 +12,11 @@ body {
   text-shadow: 0 0 10px #ffd862;
 }
 
+.dropdown-item.disabled {
+  color: black;
+  font-weight: bold;
+}
+
 .nav-pills .nav-link.active {
   background-color: #ffc107;
 }

@@ -170,7 +170,7 @@
             <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
               Cancelar
             </button>
-            <button id="editar" type="submit" class="btn btn-outline-warning">Editar</button>
+            <button id="guardar" type="submit" class="btn btn-outline-warning">Guardar</button>
           </div>
         </form>
       </div>

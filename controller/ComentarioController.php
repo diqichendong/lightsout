@@ -1,6 +1,7 @@
 <?php
 
 require_once "model/Comentario.php";
+require_once "model/Denuncia.php";
 
 session_start();
 
@@ -57,6 +58,17 @@ class ComentarioController
     if (isset($_POST["id_post"])) {
       $id_post = $_POST["id_post"];
       echo Comentario::get_contador_comentarios($id_post)[0][0];
+    }
+  }
+
+  /**
+   * Denunciar comentario
+   */
+  function denunciar()
+  {
+    if (isset($_POST["id"])) {
+      $id_comentario = $_POST["id"];
+      echo Denuncia::denunciar_comentario($id_comentario);
     }
   }
 

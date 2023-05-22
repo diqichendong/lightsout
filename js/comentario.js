@@ -10,7 +10,13 @@ function comentarios(event) {
     $("#post-original-titulo").html(
       response[0]["titulo"] + (response[0][7] == "tv" ? " [TV]" : "")
     );
-    $("#post-original-usuario").html(response[0]["nombre"]);
+    $("#post-original-usuario").html(
+      `
+      <a href="/perfil/${response[0]["id_usuario"]}/posts" class="text-decoration-none link-warning">
+        ${response[0]["nombre"]}
+      </a>
+      `
+    );
     $("#post-original-contenido").html(response[0]["contenido"]);
     $("#post-original-poster").attr(
       "src",
@@ -31,21 +37,37 @@ function comentarios(event) {
       } else {
         $("#comentarios-post").html("");
         response.forEach((c) => {
+          console.log(c[0]);
           $("#comentarios-post").append(
-            "<div class='border-top border-warning py-3'>" +
-              "<h6 class='text-warning'>" +
-              c["nombre"] +
-              " <span class='text-white-50'>@" +
-              c["username"] +
-              "</span>" +
-              "</h6>" +
-              "<p class='text-light'>" +
-              c["contenido"] +
-              "</p>" +
-              "<span class='text-white-50'>" +
-              f.obtener_fecha(c["fecha"]) +
-              "</span>" +
-              "</div>"
+            `
+            <div class='container-fluid d-flex flex-wrap border-top border-warning py-3'>
+              <h6 class='col-11 text-warning'>
+                <a href="/perfil/${
+                  c["id_usuario"]
+                }" class="link-warning text-decoration-none">
+                  ${c["nombre"]}
+                </a>
+                <small class='text-white-50'>@${c["username"]}</small>
+              </h6>
+              <div class='col-1'>
+                ${
+                  id_usuario_actual != c["id_usuario"]
+                    ? `
+                <button class="btn btn-link link-danger btn-denunciar-comentario px-1" data-id="${c[0]}" title="Denunciar">
+                  <i class="bi bi-exclamation-triangle-fill"></i>
+                </button>
+                `
+                    : ""
+                }
+              </div>
+              <p class='col-12 text-light'>
+                ${c["contenido"]}
+              </p>
+              <span class='col-12 text-white-50'>
+                ${f.obtener_fecha(c["fecha"])}
+              </span>
+            </div>
+            `
           );
         });
       }
@@ -54,10 +76,10 @@ function comentarios(event) {
 }
 
 // Añadir evento de click en el icono de comentarios
-$(".btn-comentario").click(comentarios);
+$(document).on("click", ".btn-comentario", comentarios);
 
 // Envío del comentario
-$("#btn-comentar").click(function (e) {
+$(document).on("click", "#btn-comentar", function (e) {
   e.preventDefault();
 
   //Validar comentario

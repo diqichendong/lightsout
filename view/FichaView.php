@@ -226,7 +226,7 @@ $seguimiento = sizeof($_SESSION["seguimiento"]) > 0 ? $_SESSION["seguimiento"][0
                     <!-- Comentarios -->
                     <div class="col-2 py-2 d-flex align-items-center justify-content-center gap-2">
                       <button class="btn btn-link link-warning btn-comentario px-1" data-bs-toggle="modal"
-                        data-bs-target="#modal-comentarios">
+                        data-bs-target="#modal-comentarios" title="Comentarios">
                         <i class="bi bi-chat" data-id="<?= $post[0] ?>"></i>
                       </button>
                       <span class="contador-comentarios" data-id="<?= $post[0] ?>"></span>
@@ -236,14 +236,24 @@ $seguimiento = sizeof($_SESSION["seguimiento"]) > 0 ? $_SESSION["seguimiento"][0
                     <div class="col-2 py-2 d-flex align-items-center justify-content-center gap-2">
                       <input type="checkbox" id="light-<?= $post[0] ?>" class="light-checkbox"
                         data-idusuario="<?= $_SESSION["usuario"]->id ?>">
-                      <label class="text-warning px-1" for="light-<?= $post[0] ?>">
+                      <label class="text-warning px-1" for="light-<?= $post[0] ?>" title="Lights">
                         <i></i>
                       </label>
                       <span class="contador-lights" data-id="<?= $post[0] ?>"></span>
                     </div>
                     <!-- Fin Lights -->
+                    <!-- Denunciar -->
+                    <div class="col-2 py-2 d-flex align-items-center justify-content-center gap-2">
+                      <?php if ($post["id_usuario"] != $_SESSION["usuario"]->id) { ?>
+                        <button class="btn btn-link link-danger btn-denunciar-post px-1" data-id="<?= $post[0] ?>"
+                          title="Denunciar">
+                          <i class="bi bi-exclamation-triangle-fill"></i>
+                        </button>
+                      <?php } ?>
+                    </div>
+                    <!-- Fin Denunciar -->
                     <!-- Usuario -->
-                    <div class="col-8 d-flex text-warning">
+                    <div class="col-6 d-flex text-warning">
                       <div class="col-10 col-lg-11 d-flex flex-column justify-content-center align-items-end px-2">
                         <a href="/perfil/<?= $post["id_usuario"] ?>/posts" class="text-decoration-none link-warning">
                           <span class="lead">
@@ -273,28 +283,6 @@ $seguimiento = sizeof($_SESSION["seguimiento"]) > 0 ? $_SESSION["seguimiento"][0
             ?>
           </section>
           <!-- Fin Posts -->
-
-          <!-- Paginación -->
-          <!-- <nav class="my-2">
-          <ul class="pagination justify-content-center">
-            <li class="page-item disabled">
-              <span class="page-link">Anterior</span>
-            </li>
-            <li class="page-item active">
-              <a class="page-link" href="#">1</a>
-            </li>
-            <li class="page-item">
-              <span class="page-link">2</span>
-            </li>
-            <li class="page-item">
-              <a class="page-link" href="#">3</a>
-            </li>
-            <li class="page-item">
-              <a class="page-link" href="#">Siguiente</a>
-            </li>
-          </ul>
-        </nav> -->
-          <!-- Fin paginación -->
         </div>
         <!-- Fin Contenido tab posts -->
 
@@ -451,6 +439,11 @@ $seguimiento = sizeof($_SESSION["seguimiento"]) > 0 ? $_SESSION["seguimiento"][0
   <script type="module" src="/js/ficha.js"></script>
   <script type="module" src="/js/comentario.js"></script>
   <script src="/js/light.js"></script>
+  <script src="/js/denunciar.js"></script>
+
+  <script>
+    id_usuario_actual = <?= $_SESSION["usuario"]->id ?>
+  </script>
 </body>
 
 </html>
