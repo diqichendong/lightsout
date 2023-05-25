@@ -33,6 +33,30 @@ class PostController
     }
   }
 
+  /**
+   * Permitir post denunciado
+   */
+  function permitir()
+  {
+    if (isset($_POST["id"])) {
+      $id_post = $_POST["id"];
+      Denuncia::eliminar_denuncia_post($id_post);
+      $_SESSION["mensaje"] = "Post permitido correctamente.";
+    }
+  }
+
+  /**
+   * Borrar post denunciado
+   */
+  function borrar()
+  {
+    if (isset($_POST["id"])) {
+      $id_post = $_POST["id"];
+      Denuncia::eliminar_post($id_post);
+      $_SESSION["mensaje"] = "Post eliminado correctamente.";
+    }
+  }
+
 }
 
 ?>

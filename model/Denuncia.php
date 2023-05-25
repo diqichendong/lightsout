@@ -23,6 +23,34 @@ class Denuncia
     $consulta = $conn->exec($sql);
   }
 
+  static function eliminar_denuncia_post($id_post)
+  {
+    $conn = new Conexion();
+    $sql = "delete from denuncias_posts where id_post = $id_post";
+    $conn->exec($sql);
+  }
+
+  static function eliminar_post($id_post)
+  {
+    $conn = new Conexion();
+    $sql = "delete from posts where id = $id_post";
+    $conn->exec($sql);
+  }
+
+  static function eliminar_denuncia_comentario($id_comentario)
+  {
+    $conn = new Conexion();
+    $sql = "delete from denuncias_comentarios where id_comentario = $id_comentario";
+    $conn->exec($sql);
+  }
+
+  static function eliminar_comentario($id_comentario)
+  {
+    $conn = new Conexion();
+    $sql = "delete from comentarios where id = $id_comentario";
+    $conn->exec($sql);
+  }
+
   function __get($name)
   {
     return $this->$name;

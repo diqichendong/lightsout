@@ -106,3 +106,51 @@ $("#buscar-usuarios").keyup(function (e) {
     }
   );
 });
+
+// Permitir post
+$(".btn-permitir-post").click(function (e) {
+  let id_post = $(this).data("id");
+  if (confirm("¿Estás seguro que quieres permitir este post?")) {
+    $.post("/index.php?c=post&m=permitir", { id: id_post }, function (res) {
+      location.href = "/administrador/moderar_posts";
+    });
+  }
+});
+
+// Borrar post
+$(".btn-borrar-post").click(function (e) {
+  let id_post = $(this).data("id");
+  if (confirm("¿Estás seguro que quieres borrar este post?")) {
+    $.post("/index.php?c=post&m=borrar", { id: id_post }, function (res) {
+      location.href = "/administrador/moderar_posts";
+    });
+  }
+});
+
+// Permitir comentario
+$(".btn-permitir-comentario").click(function (e) {
+  let id_comentario = $(this).data("id");
+  if (confirm("¿Estás seguro que quieres permitir este comentario?")) {
+    $.post(
+      "/index.php?c=comentario&m=permitir",
+      { id: id_comentario },
+      function (res) {
+        location.href = "/administrador/moderar_comentarios";
+      }
+    );
+  }
+});
+
+// Borrar comentario
+$(".btn-borrar-comentario").click(function (e) {
+  let id_comentario = $(this).data("id");
+  if (confirm("¿Estás seguro que quieres borrar este comentario?")) {
+    $.post(
+      "/index.php?c=comentario&m=borrar",
+      { id: id_comentario },
+      function (res) {
+        location.href = "/administrador/moderar_comentarios";
+      }
+    );
+  }
+});

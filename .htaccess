@@ -6,4 +6,4 @@ RewriteRule ^editar_perfil$ index.php?c=editar_perfil
 RewriteRule ^ficha/(.*)/(.*)$ index.php?c=ficha&tipo=$1&id=$2 [NC,L]
 RewriteRule ^perfil/(.*)/(.*)$ index.php?c=perfil&id=$1&tab=$2 [NC,L]
 RewriteRule ^explorar$ index.php?c=explorar
-RewriteRule ^administrador$ index.php?c=administrador
+RewriteRule ^administrador/(.*)$ index.php?c=administrador&tab=$1 [NC,L]

@@ -17,10 +17,13 @@ class AdministradorController
   function index()
   {
     if (isset($_SESSION["usuario"])) {
-      if ($_SESSION["usuario"]->tipo == "Normal") {
+      if ($_SESSION["usuario"]->tipo == "Normal" || !isset($_GET["tab"])) {
         header("Location: /inicio");
       }
+      $_SESSION["tab"] = $_GET["tab"];
       $_SESSION["usuarios"] = Usuario::get_usuarios();
+      $_SESSION["posts_denunciados"] = Post::get_posts_denunciados();
+      $_SESSION["comentarios_denunciados"] = Comentario::get_comentarios_denunciados();
 
       require_once "view/AdministradorView.php";
     } else {
@@ -45,9 +48,9 @@ class AdministradorController
     $tipo = $_POST["tipo"];
 
     Usuario::editar_usuario($id, $nombre, $username, $email, $tipo);
-    $_SESSION["editar_usuario_ok"] = "El usuario $nombre (@$username) ha sido editado correctamente.";
+    $_SESSION["mensaje"] = "El usuario $nombre (@$username) ha sido editado correctamente.";
 
-    header("Location: /administrador");
+    header("Location: /administrador/gestion_usuarios");
   }
 
   function eliminar_usuario()
@@ -58,7 +61,9 @@ class AdministradorController
       $username = $_POST["username"];
 
       Usuario::eliminar_usuario($id);
-      $_SESSION["eliminar_usuario_ok"] = "El usuario $nombre (@$username) ha sido eliminado correctamente.";
+      $_SESSION["mensaje"] = "El usuario $nombre (@$username) ha sido eliminado correctamente.";
+
+      header("Location: /administrador/gestion_usuarios");
     }
   }
 

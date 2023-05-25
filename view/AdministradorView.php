@@ -24,46 +24,36 @@
   require_once "utils/funciones.php";
   ?>
 
-  <!-- Mensaje de usuario editado -->
-  <?php if (isset($_SESSION["editar_usuario_ok"])) { ?>
+  <!-- Mensaje -->
+  <?php if (isset($_SESSION["mensaje"])) { ?>
     <div class="container alert alert-success alert-dismissible fade show" role="alert">
       <span>
-        <?= $_SESSION["editar_usuario_ok"] ?>
+        <?= $_SESSION["mensaje"] ?>
       </span>
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
-    <?php unset($_SESSION["editar_usuario_ok"]);
+    <?php unset($_SESSION["mensaje"]);
   } ?>
-  </div>
-
-  <!-- Mensaje de usuario eliminado -->
-  <?php if (isset($_SESSION["eliminar_usuario_ok"])) { ?>
-    <div class="container alert alert-success alert-dismissible fade show" role="alert">
-      <span>
-        <?= $_SESSION["eliminar_usuario_ok"] ?>
-      </span>
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-    <?php unset($_SESSION["eliminar_usuario_ok"]);
-  } ?>
-  </div>
 
   <!-- Main -->
   <div class="container flex-fill">
     <!-- Pills -->
     <ul class="nav nav-pills nav-fill p-2 mb-3 bg-secondary rounded lead">
       <li class="nav-item">
-        <a class="nav-link link-warning active" data-bs-toggle="pill" href="#tab-usuarios">
+        <a class="nav-link link-warning <?= $_SESSION["tab"] == "gestion_usuarios" ? "active" : "" ?>"
+          data-bs-toggle="pill" href="#tab-usuarios">
           Gestión de usuarios
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link link-warning" data-bs-toggle="pill" href="#tab-posts">
+        <a class="nav-link link-warning <?= $_SESSION["tab"] == "moderar_posts" ? "active" : "" ?>"
+          data-bs-toggle="pill" href="#tab-posts">
           Moderar posts
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link link-warning" data-bs-toggle="pill" href="#tab-comentarios">
+        <a class="nav-link link-warning <?= $_SESSION["tab"] == "moderar_comentarios" ? "active" : "" ?>"
+          data-bs-toggle="pill" href="#tab-comentarios">
           Moderar comentarios
         </a>
       </li>
@@ -73,7 +63,7 @@
     <!-- Contenido tabs -->
     <div class="tab-content">
       <!-- Contenido tab gestión usuarios -->
-      <div class="tab-pane fade show active" id="tab-usuarios">
+      <div class="tab-pane fade <?= $_SESSION["tab"] == "gestion_usuarios" ? "show active" : "" ?>" id="tab-usuarios">
         <section class="container-fluid col-md-10 col-lg-8 text-light border border-warning rounded py-2">
           <!-- Buscador de usuarios -->
           <div class="col-md-6 col-lg-5">
@@ -123,6 +113,186 @@
         </section>
       </div>
       <!-- Fin Contenido tab gestión usuarios -->
+      <!-- Contenido tab moderar posts -->
+      <div class="tab-pane fade <?= $_SESSION["tab"] == "moderar_posts" ? "show active" : "" ?>" id="tab-posts">
+        <section class="container-fluid col-md-10 col-lg-8 text-light border border-warning rounded py-2">
+          <!-- Lista posts denunciados -->
+          <div class="container-fluid d-flex flex-column gap-1 overflow-auto rounded" style="max-height: 500px;"
+            id="lista-usuarios">
+            <?php if (sizeof($_SESSION["posts_denunciados"]) == 0) { ?>
+              <div class="container bg-secondary rounded">
+                <p class="lead text-warning text-center py-5">
+                  No hay ningún post que necesite moderación.
+                </p>
+              </div>
+              <?php
+            } else {
+              foreach ($_SESSION["posts_denunciados"] as $post) {
+                ?>
+                <!-- Post -->
+                <div class="row p-2 border-2 bg-secondary">
+                  <!-- Post body -->
+                  <div class="col-12 d-flex flex-wrap">
+                    <!-- Título -->
+                    <a href="ficha/<?= $post["ficha_tipo"] ?>/<?= $post["id_ficha"] ?>"
+                      class="text-decoration-none col-8 col-md-9 col-lg-10">
+                      <h3 class="text-warning">
+                        <?= $post["titulo"] ?>
+                        <?= $post["ficha_tipo"] == "tv" ? "[TV]" : "" ?>
+                      </h3>
+                    </a>
+                    <!-- Fin Título -->
+                    <!-- Fecha -->
+                    <span class="col-4 col-md-3 col-lg-2 text-white-50 text-end">
+                      <small>
+                        <?= formatear_fecha($post["fecha"]) ?>
+                      </small>
+                    </span>
+                    <!-- Fin Fecha -->
+                    <!-- Texto -->
+                    <p class="col-12 p-2">
+                      <?= $post["contenido"] ?>
+                    </p>
+                    <!-- Fin Texto -->
+                  </div>
+                  <!-- Fin Post body -->
+                  <!-- Post footer -->
+                  <div class="d-flex">
+                    <!-- Permitir -->
+                    <div class="col-2 py-2 d-flex align-items-center justify-content-center gap-2">
+                      <button class="btn btn-success btn-permitir-post px-1" data-id="<?= $post["id_post"] ?>">
+                        <i class="bi bi-check-circle-fill"></i> Permitir
+                      </button>
+                    </div>
+                    <!-- Fin Permitir -->
+                    <!-- Borrar -->
+                    <div class="col-2 py-2 d-flex align-items-center justify-content-center gap-2">
+                      <button class="btn btn-danger btn-borrar-post px-1" data-id="<?= $post["id_post"] ?>">
+                        <i class="bi bi-x-circle-fill"></i> Borrar
+                      </button>
+                    </div>
+                    <!-- Fin Borrar -->
+                    <!-- Usuario -->
+                    <div class="col-8 d-flex text-warning">
+                      <div class="col-10 col-lg-11 d-flex flex-column justify-content-center align-items-end px-2">
+                        <a href="/perfil/<?= $post["id_usuario"] ?>/posts" class="text-decoration-none link-warning">
+                          <span class="lead">
+                            <?= $post["nombre"] ?>
+                          </span>
+                        </a>
+                        <span class="fw-bold">
+                          <small class="text-end">@
+                            <?= $post["username"] ?>
+                          </small>
+                        </span>
+                      </div>
+                      <div class="col-2 col-lg-1 d-flex align-items-center">
+                        <a href="/perfil/<?= $post["id_usuario"] ?>/posts" class="ratio ratio-1x1">
+                          <img src="/assets/perfil/<?= $post["foto"] ?>" alt="user" class="rounded-circle" />
+                        </a>
+                      </div>
+                    </div>
+                    <!-- Fin usuario -->
+                  </div>
+                  <!-- Fin Post footer -->
+                </div>
+                <!-- Fin Post -->
+                <?php
+              }
+            }
+            ?>
+          </div>
+          <!-- Fin lista posts denunciados -->
+        </section>
+      </div>
+      <!-- Fin Contenido tab moderar posts -->
+      <!-- Contenido tab moderar comentarios -->
+      <div class="tab-pane fade <?= $_SESSION["tab"] == "moderar_comentarios" ? "show active" : "" ?>"
+        id="tab-comentarios">
+        <section class="container-fluid col-md-10 col-lg-8 text-light border border-warning rounded py-2">
+          <!-- Lista comentarios denunciados -->
+          <div class="container-fluid d-flex flex-column gap-1 overflow-auto rounded" style="max-height: 500px;"
+            id="lista-usuarios">
+            <?php if (sizeof($_SESSION["comentarios_denunciados"]) == 0) { ?>
+              <div class="container bg-secondary rounded">
+                <p class="lead text-warning text-center py-5">
+                  No hay ningún comentario que necesite moderación.
+                </p>
+              </div>
+              <?php
+            } else {
+              foreach ($_SESSION["comentarios_denunciados"] as $comentario) {
+                ?>
+                <!-- Comentario -->
+                <div class="row p-2 border-2 bg-secondary">
+                  <!-- Comentario body -->
+                  <div class="col-12 d-flex flex-wrap">
+                    <!-- Fecha -->
+                    <span class="col-12 text-white-50 text-end">
+                      <small>
+                        <?= formatear_fecha($comentario["fecha"]) ?>
+                      </small>
+                    </span>
+                    <!-- Fin Fecha -->
+                    <!-- Texto -->
+                    <p class="col-12 p-2">
+                      <?= $comentario["contenido"] ?>
+                    </p>
+                    <!-- Fin Texto -->
+                  </div>
+                  <!-- Fin Comentario body -->
+                  <!-- Comentario footer -->
+                  <div class="d-flex">
+                    <!-- Permitir -->
+                    <div class="col-2 py-2 d-flex align-items-center justify-content-center gap-2">
+                      <button class="btn btn-success btn-permitir-comentario px-1"
+                        data-id="<?= $comentario["id_comentario"] ?>">
+                        <i class="bi bi-check-circle-fill"></i> Permitir
+                      </button>
+                    </div>
+                    <!-- Fin Permitir -->
+                    <!-- Borrar -->
+                    <div class="col-2 py-2 d-flex align-items-center justify-content-center gap-2">
+                      <button class="btn btn-danger btn-borrar-comentario px-1"
+                        data-id="<?= $comentario["id_comentario"] ?>">
+                        <i class="bi bi-x-circle-fill"></i> Borrar
+                      </button>
+                    </div>
+                    <!-- Fin Borrar -->
+                    <!-- Usuario -->
+                    <div class="col-8 d-flex text-warning">
+                      <div class="col-10 col-lg-11 d-flex flex-column justify-content-center align-items-end px-2">
+                        <a href="/perfil/<?= $comentario["id_usuario"] ?>/posts" class="text-decoration-none link-warning">
+                          <span class="lead">
+                            <?= $comentario["nombre"] ?>
+                          </span>
+                        </a>
+                        <span class="fw-bold">
+                          <small class="text-end">@
+                            <?= $comentario["username"] ?>
+                          </small>
+                        </span>
+                      </div>
+                      <div class="col-2 col-lg-1 d-flex align-items-center">
+                        <a href="/perfil/<?= $comentario["id_usuario"] ?>/posts" class="ratio ratio-1x1">
+                          <img src="/assets/perfil/<?= $comentario["foto"] ?>" alt="user" class="rounded-circle" />
+                        </a>
+                      </div>
+                    </div>
+                    <!-- Fin usuario -->
+                  </div>
+                  <!-- Fin Comentario footer -->
+                </div>
+                <!-- Fin Comentario -->
+                <?php
+              }
+            }
+            ?>
+          </div>
+          <!-- Fin lista comentarios denunciados -->
+        </section>
+      </div>
+      <!-- Fin Contenido tab moderar comentarios -->
     </div>
     <!-- Fin Contenido tabs -->
   </div>

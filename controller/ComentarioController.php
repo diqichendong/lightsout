@@ -72,6 +72,30 @@ class ComentarioController
     }
   }
 
+  /**
+   * Permitir comentario denunciado
+   */
+  function permitir()
+  {
+    if (isset($_POST["id"])) {
+      $id_comentario = $_POST["id"];
+      Denuncia::eliminar_denuncia_comentario($id_comentario);
+      $_SESSION["mensaje"] = "Comentario permitido correctamente.";
+    }
+  }
+
+  /**
+   * Borrar comentario denunciado
+   */
+  function borrar()
+  {
+    if (isset($_POST["id"])) {
+      $id_comentario = $_POST["id"];
+      Denuncia::eliminar_comentario($id_comentario);
+      $_SESSION["mensaje"] = "Comentario eliminado correctamente.";
+    }
+  }
+
 }
 
 ?>

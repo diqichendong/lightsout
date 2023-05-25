@@ -41,6 +41,14 @@ class Comentario
     return $conn->consulta($sql);
   }
 
+  static function get_comentarios_denunciados()
+  {
+    $id_usuario_actual = $_SESSION["usuario"]->id;
+    $conn = new Conexion();
+    $sql = "select * from denuncias_comentarios, comentarios, usuarios where denuncias_comentarios.id_comentario = comentarios.id and comentarios.id_usuario = usuarios.id and usuarios.id != $id_usuario_actual";
+    return $conn->consulta($sql);
+  }
+
   function __get($name)
   {
     return $this->$name;

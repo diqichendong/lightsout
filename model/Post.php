@@ -46,6 +46,14 @@ class Post
     return $conn->consulta($sql);
   }
 
+  static function get_posts_denunciados()
+  {
+    $id_usuario_actual = $_SESSION["usuario"]->id;
+    $conn = new Conexion();
+    $sql = "select * from denuncias_posts, posts, usuarios, fichas where denuncias_posts.id_post = posts.id and posts.id_usuario = usuarios.id and posts.id_ficha = fichas.id and posts.ficha_tipo = fichas.tipo and usuarios.id != $id_usuario_actual";
+    return $conn->consulta($sql);
+  }
+
   function __get($name)
   {
     return $this->$name;
