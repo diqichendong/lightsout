@@ -39,6 +39,7 @@ class PerfilController
 
         // Posts del  usuario
         $_SESSION["posts_perfil"] = Post::get_post_perfil($id_perfil);
+        $_SESSION["hay_posts_buffer"] = Post::hayPostsBufferPerfil($id_perfil);
 
         // Listas de las peliculas
         $_SESSION["peliculas_pendientes"] = Seguimiento::peliculas_pendientes($id_perfil);

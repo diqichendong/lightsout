@@ -283,6 +283,13 @@ $seguimiento = sizeof($_SESSION["seguimiento"]) > 0 ? $_SESSION["seguimiento"][0
             ?>
           </section>
           <!-- Fin Posts -->
+          <!-- Botón cargar más -->
+          <div class="container py-2 justify-content-center">
+            <button class="btn btn-outline-warning" id="btn-cargar-mas">
+              Cargar más
+            </button>
+          </div>
+          <!-- Fin Botón cargar más -->
         </div>
         <!-- Fin Contenido tab posts -->
 
@@ -428,9 +435,6 @@ $seguimiento = sizeof($_SESSION["seguimiento"]) > 0 ? $_SESSION["seguimiento"][0
 
   // Footer
   require_once "templates/footer.php";
-
-  // Para desarrollador
-  //var_dump($_SESSION["posts_ficha"]);
   ?>
 
   <!-- Bootstrap JS -->
@@ -442,7 +446,10 @@ $seguimiento = sizeof($_SESSION["seguimiento"]) > 0 ? $_SESSION["seguimiento"][0
   <script src="/js/denunciar.js"></script>
 
   <script>
-    id_usuario_actual = <?= $_SESSION["usuario"]->id ?>
+    id_usuario_actual = <?= $_SESSION["usuario"]->id ?>;
+    hay_posts_buffer = <?= $_SESSION["hay_posts_buffer"] ? "true" : "false" ?>;
+    ficha_tipo = "<?= $_SESSION["tipo"] ?>";
+    ficha_id = <?= $_SESSION["id"] ?>;
   </script>
 </body>
 

@@ -129,8 +129,15 @@
             <!-- Fin Post -->
           <?php }
         } ?>
-
       </div>
+
+      <!-- Botón cargar más -->
+      <div class="container py-2 justify-content-center">
+        <button class="btn btn-outline-warning" id="btn-cargar-mas">
+          Cargar más
+        </button>
+      </div>
+      <!-- Fin Botón cargar más -->
     </section>
     <!-- Final POSTS -->
 
@@ -336,7 +343,8 @@
   <script src="js/denunciar.js"></script>
 
   <script>
-    id_usuario_actual = <?= $_SESSION["usuario"]->id ?>
+    id_usuario_actual = <?= $_SESSION["usuario"]->id ?>;
+    hay_posts_buffer = <?= $_SESSION["hay_posts_buffer"] ? "true" : "false" ?>;
   </script>
 </body>
 

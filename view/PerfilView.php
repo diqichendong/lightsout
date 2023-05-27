@@ -198,6 +198,13 @@ $perfil = $_SESSION["perfil"];
               ?>
             </section>
             <!-- Fin Posts -->
+            <!-- Botón cargar más -->
+            <div class="container py-2 justify-content-center">
+              <button class="btn btn-outline-warning" id="btn-cargar-mas">
+                Cargar más
+              </button>
+            </div>
+            <!-- Fin Botón cargar más -->
           </div>
           <!-- Fin Contenido tab posts -->
 
@@ -590,7 +597,9 @@ $perfil = $_SESSION["perfil"];
       $("#menu a").eq(3).addClass("active");
     <?php } ?>
 
-    id_usuario_actual = <?= $_SESSION["usuario"]->id ?>
+    id_usuario_actual = <?= $_SESSION["usuario"]->id ?>;
+    hay_posts_buffer = <?= $_SESSION["hay_posts_buffer"] ? "true" : "false" ?>;
+    id_perfil = <?= $_SESSION["perfil"]->id ?>;
   </script>
 </body>
 

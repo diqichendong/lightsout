@@ -27,6 +27,7 @@ class FichaController
         $id = $_GET["id"];
         $_SESSION["ficha"] = Ficha::get_ficha_api($tipo, $id);
         $_SESSION["tipo"] = $tipo;
+        $_SESSION["id"] = $id;
         if (!isset($_SESSION["paises"])) {
           $_SESSION["paises"] = API::get_paises();
         }
@@ -35,6 +36,7 @@ class FichaController
         }
         $_SESSION["reparto"] = Ficha::get_reparto($tipo, $id);
         $_SESSION["posts_ficha"] = Post::get_posts_ficha($tipo, $id);
+        $_SESSION["hay_posts_buffer"] = Post::hayPostsBufferFicha($tipo, $id);
         $_SESSION["nota_media"] = Nota::get_nota_media($id, $tipo);
         $_SESSION["nota_usuario"] = Nota::get_nota($_SESSION["usuario"]->id, $id, $tipo);
         $_SESSION["seguimiento"] = Seguimiento::get_seguimiento($_SESSION["usuario"]->id, $id, $tipo);

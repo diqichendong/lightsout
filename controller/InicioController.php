@@ -22,6 +22,7 @@ class InicioController
     if (isset($_SESSION["usuario"])) {
       //Posts inicio
       $_SESSION["posts_inicio"] = Post::getPostsInicio($_SESSION["usuario"]->id);
+      $_SESSION["hay_posts_buffer"] = Post::hayPostsBufferInicio($_SESSION["usuario"]->id);
 
       //Seguimiento
       $_SESSION["siguiendo"] = Seguimiento::series_seguidas($_SESSION["usuario"]->id);

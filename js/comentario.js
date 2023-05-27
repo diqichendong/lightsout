@@ -114,23 +114,37 @@ $(document).on("click", "#btn-comentar", function (e) {
         id_usuario: $("#id-usuario").attr("value"),
       },
       function (res) {
-        let response = JSON.parse(res);
-        console.log(response);
+        let response = JSON.parse(res)[0];
         $("#comentarios-post").prepend(
-          "<div class='border-top border-warning py-3'>" +
-            "<h6 class='text-warning'>" +
-            response[0]["nombre"] +
-            " <span class='text-white-50'>@" +
-            response[0]["username"] +
-            "</span>" +
-            "</h6>" +
-            "<p class='text-light'>" +
-            response[0]["contenido"] +
-            "</p>" +
-            "<span class='text-white-50'>" +
-            f.obtener_fecha(response[0]["fecha"]) +
-            "</span>" +
-            "</div>"
+          `
+            <div class='container-fluid d-flex flex-wrap border-top border-warning py-3'>
+              <h6 class='col-11 text-warning'>
+                <a href="/perfil/${
+                  response["id_usuario"]
+                }" class="link-warning text-decoration-none">
+                  ${response["nombre"]}
+                </a>
+                <small class='text-white-50'>@${response["username"]}</small>
+              </h6>
+              <div class='col-1'>
+                ${
+                  id_usuario_actual != response["id_usuario"]
+                    ? `
+                <button class="btn btn-link link-danger btn-denunciar-comentario px-1" data-id="${c[0]}" title="Denunciar">
+                  <i class="bi bi-exclamation-triangle-fill"></i>
+                </button>
+                `
+                    : ""
+                }
+              </div>
+              <p class='col-12 text-light'>
+                ${response["contenido"]}
+              </p>
+              <span class='col-12 text-white-50'>
+                ${f.obtener_fecha(response["fecha"])}
+              </span>
+            </div>
+            `
         );
       }
     );

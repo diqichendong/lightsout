@@ -21,7 +21,22 @@ class Post
   static function getPostsInicio($id_usuario)
   {
     $conn = new Conexion();
-    $sql = "select * from posts, fichas, usuarios where posts.id_usuario = usuarios.id and posts.id_ficha = fichas.id and (posts.id_usuario = $id_usuario or posts.id_usuario in (select id_usuario_2 from amigos where id_usuario_1 = $id_usuario)) order by posts.fecha desc limit 200";
+    $sql = "select * from posts, fichas, usuarios where posts.id_usuario = usuarios.id and posts.ficha_tipo = fichas.tipo and posts.id_ficha = fichas.id and (posts.id_usuario = $id_usuario or posts.id_usuario in (select id_usuario_2 from amigos where id_usuario_1 = $id_usuario)) order by posts.fecha desc limit 5";
+    return $conn->consulta($sql);
+  }
+
+  static function hayPostsBufferInicio($id_usuario)
+  {
+    $conn = new Conexion();
+    $sql = "select count(*) from posts where id_usuario = $id_usuario or id_usuario in (select id_usuario_2 from amigos where id_usuario_1 = $id_usuario)";
+    $consulta = $conn->consulta($sql);
+    return $consulta[0][0] > 5;
+  }
+
+  static function getPostsBufferInicio($id_usuario)
+  {
+    $conn = new Conexion();
+    $sql = "select * from posts, fichas, usuarios where posts.id_usuario = usuarios.id and posts.ficha_tipo = fichas.tipo and posts.id_ficha = fichas.id and (posts.id_usuario = $id_usuario or posts.id_usuario in (select id_usuario_2 from amigos where id_usuario_1 = $id_usuario)) order by posts.fecha desc limit 5, 200";
     return $conn->consulta($sql);
   }
 
@@ -35,14 +50,44 @@ class Post
   static function get_posts_ficha($tipo, $id)
   {
     $conn = new Conexion();
-    $sql = "select * from posts, usuarios where posts.id_usuario = usuarios.id and posts.id_ficha = $id and posts.ficha_tipo = '$tipo' order by posts.fecha desc";
+    $sql = "select * from posts, usuarios where posts.id_usuario = usuarios.id and posts.id_ficha = $id and posts.ficha_tipo = '$tipo' order by posts.fecha desc limit 5";
+    return $conn->consulta($sql);
+  }
+
+  static function hayPostsBufferFicha($tipo, $id)
+  {
+    $conn = new Conexion();
+    $sql = "select count(*) from posts where id_ficha = $id and ficha_tipo = '$tipo'";
+    $consulta = $conn->consulta($sql);
+    return $consulta[0][0] > 5;
+  }
+
+  static function getPostsBufferFicha($tipo, $id)
+  {
+    $conn = new Conexion();
+    $sql = "select * from posts, usuarios where posts.id_usuario = usuarios.id and posts.id_ficha = $id and posts.ficha_tipo = '$tipo' order by posts.fecha desc limit 5, 200";
     return $conn->consulta($sql);
   }
 
   static function get_post_perfil($id_usuario)
   {
     $conn = new Conexion();
-    $sql = "select * from posts, fichas where posts.id_ficha = fichas.id and posts.ficha_tipo = fichas.tipo and posts.id_usuario = $id_usuario order by fecha desc";
+    $sql = "select * from posts, fichas where posts.id_ficha = fichas.id and posts.ficha_tipo = fichas.tipo and posts.id_usuario = $id_usuario order by fecha desc limit 5";
+    return $conn->consulta($sql);
+  }
+
+  static function hayPostsBufferPerfil($id_usuario)
+  {
+    $conn = new Conexion();
+    $sql = "select count(*) from posts where id_usuario = $id_usuario";
+    $consulta = $conn->consulta($sql);
+    return $consulta[0][0] > 5;
+  }
+
+  static function getPostsBufferPerfil($id_usuario)
+  {
+    $conn = new Conexion();
+    $sql = "select * from posts, fichas where posts.id_ficha = fichas.id and posts.ficha_tipo = fichas.tipo and posts.id_usuario = $id_usuario order by fecha desc limit 5, 200";
     return $conn->consulta($sql);
   }
 
