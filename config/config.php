@@ -7,7 +7,7 @@ define("DB_USER", "lightsout");
 define("DB_PASS", "lightsout");
 
 // Controlador y método por defecto
-define("DEFAULT_CONTROLLER", "login");
+define("DEFAULT_CONTROLLER", "informacion");
 define("DEFAULT_METHOD", "index");
 
 // API TMDB

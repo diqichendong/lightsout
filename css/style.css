@@ -76,3 +76,32 @@ body {
 .bi-lightbulb-fill {
   cursor: pointer;
 }
+
+#presentacion-fondo {
+  height: 100%;
+  background-image: url("/assets/img/background.jpg");
+  background-position: center;
+  filter: blur(2px);
+}
+
+#presentacion {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  text-align: center;
+}
+
+#presentacion h1 {
+  font-size: 50px;
+  text-shadow: 0 0 10px gold;
+}
+
+#presentacion a {
+  box-shadow: 0 0 10px gold;
+}
+
+footer {
+  z-index: 100;
+}
