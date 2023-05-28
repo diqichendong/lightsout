@@ -15,6 +15,7 @@ class RegistroController
 
   function index()
   {
+    // Usuario logeado
     if (isset($_SESSION["usuario"])) {
       header("Location: inicio");
     } else {
@@ -22,6 +23,9 @@ class RegistroController
     }
   }
 
+  /**
+   * Realizar registro
+   */
   function registrar()
   {
     $login = $_POST["login"];

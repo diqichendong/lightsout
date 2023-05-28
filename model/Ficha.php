@@ -9,6 +9,9 @@ class Ficha
 
   }
 
+  /**
+   * Comprobar si ya existe la ficha
+   */
   static function existeFicha(int $id, string $tipo)
   {
     $conn = new Conexion();
@@ -19,6 +22,9 @@ class Ficha
     return $consulta->rowCount() > 0;
   }
 
+  /**
+   * Añadir una ficha
+   */
   static function addFicha(int $id, string $titulo, string $poster, string $tipo)
   {
     $conn = new Conexion();
@@ -26,6 +32,9 @@ class Ficha
     $conn->exec($sql);
   }
 
+  /**
+   * Obtener los datos de una ficha en la API
+   */
   static function get_ficha_api($tipo, $id)
   {
     $c = curl_init();
@@ -37,6 +46,9 @@ class Ficha
     return json_decode($data, true);
   }
 
+  /**
+   * Obtener el director
+   */
   static function get_director($id)
   {
     $c = curl_init();
@@ -53,6 +65,9 @@ class Ficha
     }
   }
 
+  /**
+   * Obtener el reparto
+   */
   static function get_reparto($tipo, $id)
   {
     $c = curl_init();
@@ -72,6 +87,9 @@ class Ficha
     return $reparto;
   }
 
+  /**
+   * Obtener los trailers
+   */
   static function get_trailers($tipo, $id)
   {
     $c = curl_init();
@@ -90,6 +108,9 @@ class Ficha
     return $trailers;
   }
 
+  /**
+   * Obtener los proveedores
+   */
   static function get_proveedores($tipo, $id)
   {
     $c = curl_init();
@@ -107,6 +128,9 @@ class Ficha
     }
   }
 
+  /**
+   * Obtener las fichas para el apartado de explorar
+   */
   static function get_fichas_explorar($tipo, $genero, $year, $orden, $pagina)
   {
     $url = API_REQUEST_BASE . "/discover/$tipo?api_key=" . API_KEY . "&language=es&include_adult=false&page=$pagina";
@@ -129,11 +153,6 @@ class Ficha
     curl_close($c);
 
     return json_decode($data, true);
-  }
-
-  function __get($name)
-  {
-    return $this->$name;
   }
 }
 

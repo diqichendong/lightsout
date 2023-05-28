@@ -14,7 +14,9 @@
   <!-- Registro -->
   <div class="container p-5">
     <div class="row justify-content-center">
-      <img src="assets/img/logo.png" class="col-8 col-lg-4 img-fluid" alt="Logo" />
+      <a href="/" class="text-center col-8 col-lg-4">
+        <img src="assets/img/logo.png" class="img-fluid" alt="Logo" />
+      </a>
     </div>
     <div class="row d-flex justify-content-center">
       <div class="card col-10 col-lg-6 bg-secondary m-3">
@@ -45,11 +47,11 @@
             </div>
             <div class="form-check col-12 mb-3">
               <input class="form-check-input" type="checkbox" name="tcp" id="tcp" />
-              <label class="form-check-label text-light" for="recordar">
+              <label class="form-check-label text-light" for="tcp">
                 Acepto los
-                <a href="" class="link-warning">términos y condiciones de uso</a>
+                <a href="/condiciones_uso" class="link-warning">términos y condiciones de uso</a>
                 y la
-                <a href="" class="link-warning">política de privacidad</a>.
+                <a href="/politica_privacidad" class="link-warning">política de privacidad</a>.
               </label>
             </div>
             <button type="submit" id="enviar" class="btn btn-warning">Registrarse</button>
@@ -63,12 +65,6 @@
     </div>
   </div>
   <!-- Fin Registro -->
-
-  <?php
-  // Importar el footer
-  require_once "templates/footer.php";
-  ?>
-
 
   <script type="module" src="/js/registro.js"></script>
   <script src="/js/bootstrap.bundle.min.js"></script>

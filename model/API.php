@@ -8,6 +8,9 @@ class API
 
   }
 
+  /**
+   * Obtener todos los paises de la API
+   */
   static function get_paises()
   {
     $c = curl_init();
@@ -22,6 +25,9 @@ class API
     return $res;
   }
 
+  /**
+   * Obtener todos los géneros de películas de la API
+   */
   static function get_genero_peliculas()
   {
     $c = curl_init();
@@ -32,6 +38,9 @@ class API
     return json_decode($data, true)["genres"];
   }
 
+  /**
+   * Obtener todos los géneros de series de la API
+   */
   static function get_genero_series()
   {
     $c = curl_init();
@@ -40,11 +49,6 @@ class API
     $data = curl_exec($c);
     curl_close($c);
     return json_decode($data, true)["genres"];
-  }
-
-  function __get($name)
-  {
-    return $this->$name;
   }
 }
 

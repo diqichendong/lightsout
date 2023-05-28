@@ -23,7 +23,7 @@ class PostController
   }
 
   /**
-   * Denunciar post
+   * Denunciar post (AJAX)
    */
   function denunciar()
   {
@@ -34,7 +34,7 @@ class PostController
   }
 
   /**
-   * Permitir post denunciado
+   * Permitir post denunciado (AJAX)
    */
   function permitir()
   {
@@ -46,7 +46,7 @@ class PostController
   }
 
   /**
-   * Borrar post denunciado
+   * Borrar post denunciado (AJAX)
    */
   function borrar()
   {
@@ -58,7 +58,7 @@ class PostController
   }
 
   /**
-   * Obtener el posts buffer de inicio
+   * Obtener el posts buffer de inicio (AJAX)
    */
   function posts_buffer_inicio()
   {
@@ -69,7 +69,7 @@ class PostController
   }
 
   /**
-   * Obtener el posts buffer de ficha
+   * Obtener el posts buffer de ficha (AJAX)
    */
   function posts_buffer_ficha()
   {
@@ -81,7 +81,7 @@ class PostController
   }
 
   /**
-   * Obtener el posts buffer de perfil
+   * Obtener el posts buffer de perfil (AJAX)
    */
   function posts_buffer_perfil()
   {

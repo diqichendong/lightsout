@@ -126,9 +126,6 @@
   <!-- Bootstrap JS -->
   <script src="/js/bootstrap.bundle.min.js"></script>
 
-  <script>
-    var total_paginas = <?= $_SESSION["fichas_explorar"]["total_pages"] > 10 ? 10 : intval($_SESSION["fichas_explorar"]["total_pages"]) ?>;
-  </script>
   <script src="/js/explorar.js"></script>
 </body>
 

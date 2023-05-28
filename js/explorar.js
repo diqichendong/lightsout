@@ -24,7 +24,6 @@ $("#cargar-mas").click(function (e) {
     { tipo: tipo, genero: genero, year: year, orden: orden, pagina: pagina },
     function (res) {
       let response = JSON.parse(res);
-      console.log(response);
       response["results"].forEach((ficha) => {
         let titulo = ficha.hasOwnProperty("title") ? ficha.title : ficha.name;
         let poster =

@@ -62,7 +62,6 @@ if (hay_posts_buffer) {
 
 // Botón cargar más
 $("#btn-cargar-mas").on("click", function (e) {
-  console.log(posts_buffer);
   let contador = 0;
   for (let i = 0; i < posts_buffer.length; i++) {
     const post = posts_buffer[i];

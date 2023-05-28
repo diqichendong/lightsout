@@ -10,6 +10,9 @@ class Busqueda
 
   }
 
+  /**
+   * Buscar un usuario que tenga coincidencias con una query
+   */
   static function buscar_usuario($query)
   {
     $id_usuario = $_SESSION["usuario"]->id;
@@ -18,6 +21,9 @@ class Busqueda
     return $conn->consulta($sql);
   }
 
+  /**
+   * Buscar películas que tenga coincidencias con una query
+   */
   static function buscar_peliculas($query)
   {
     $c = curl_init();
@@ -46,6 +52,9 @@ class Busqueda
     return $resultados;
   }
 
+  /**
+   * Buscar películas que tenga coincidencias con una query
+   */
   static function buscar_series($query)
   {
     $c = curl_init();
@@ -72,11 +81,6 @@ class Busqueda
     }
 
     return $resultados;
-  }
-
-  function __get($name)
-  {
-    return $this->$name;
   }
 }
 

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LightsOUT</title>
-  <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon" />
+  <link rel="shortcut icon" href="/assets/img/favicon.ico" type="image/x-icon" />
   <link rel="stylesheet" href="css/bootstrap.min.css" />
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" />
@@ -15,15 +15,9 @@
 
 <body class="bg-dark d-flex flex-column justify-content-between min-vh-100">
 
-  <!-- CABECERA -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-secondary fixed-top border-bottom border-dark border-2 h-10">
-    <div class="container-fluid d-flex justify-content-center">
-      <a class="navbar-brand" href="">
-        <img src="img/logo.png" alt="logo" width="100px" />
-      </a>
-    </div>
-  </nav>
-  <!-- Fin CABECERA -->
+  <?php
+  require_once "templates/header_informacion.php";
+  ?>
 
   <!-- MAIN CONTENT -->
   <div class="flex-fill d-flex flex-column">

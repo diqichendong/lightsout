@@ -446,10 +446,10 @@ $seguimiento = sizeof($_SESSION["seguimiento"]) > 0 ? $_SESSION["seguimiento"][0
   <script src="/js/denunciar.js"></script>
 
   <script>
-    id_usuario_actual = <?= $_SESSION["usuario"]->id ?>;
-    hay_posts_buffer = <?= $_SESSION["hay_posts_buffer"] ? "true" : "false" ?>;
-    ficha_tipo = "<?= $_SESSION["tipo"] ?>";
-    ficha_id = <?= $_SESSION["id"] ?>;
+    var id_usuario_actual = <?= $_SESSION["usuario"]->id ?>;
+    var hay_posts_buffer = <?= $_SESSION["hay_posts_buffer"] ? "true" : "false" ?>;
+    var ficha_tipo = "<?= $_SESSION["tipo"] ?>";
+    var ficha_id = <?= $_SESSION["id"] ?>;
   </script>
 </body>
 

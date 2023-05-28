@@ -21,8 +21,11 @@ class FichaController
 
   function index()
   {
+    // Usuario logeado
     if (isset($_SESSION["usuario"])) {
+      // Path correcto
       if (isset($_GET["tipo"]) && isset($_GET["id"])) {
+        // Obtener datos
         $tipo = $_GET["tipo"];
         $id = $_GET["id"];
         $_SESSION["ficha"] = Ficha::get_ficha_api($tipo, $id);
@@ -52,7 +55,7 @@ class FichaController
   }
 
   /**
-   * Método para crear una posts
+   * Método para crear una posts (AJAX)
    */
   function crear_post()
   {

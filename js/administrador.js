@@ -9,7 +9,6 @@ $(document).on("click", ".btn-editar", function (e) {
     { id: id_usuario },
     function (res) {
       let response = JSON.parse(res);
-      console.log(response);
       $("#id").val(response.id);
       $("#nombre").val(response.nombre);
       $("#username").val(response.username);

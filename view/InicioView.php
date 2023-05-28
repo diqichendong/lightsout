@@ -343,8 +343,8 @@
   <script src="js/denunciar.js"></script>
 
   <script>
-    id_usuario_actual = <?= $_SESSION["usuario"]->id ?>;
-    hay_posts_buffer = <?= $_SESSION["hay_posts_buffer"] ? "true" : "false" ?>;
+    var id_usuario_actual = <?= $_SESSION["usuario"]->id ?>;
+    var hay_posts_buffer = <?= $_SESSION["hay_posts_buffer"] ? "true" : "false" ?>;
   </script>
 </body>
 

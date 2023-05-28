@@ -16,8 +16,11 @@ class ExplorarController
 
   function index()
   {
+    // Usuario logeado
     if (isset($_SESSION["usuario"])) {
+      // Path correcto
       if (isset($_GET["tipo"]) && isset($_GET["genero"]) && isset($_GET["year"]) && isset($_GET["orden"]) && isset($_GET["pagina"])) {
+        // Obtener datos
         $_SESSION["tipo"] = $_GET["tipo"];
         $_SESSION["genero"] = $_GET["genero"];
         $_SESSION["year"] = $_GET["year"];
@@ -47,16 +50,25 @@ class ExplorarController
     }
   }
 
+  /**
+   * Obtener los géneros de las series (AJAX)
+   */
   function generos_series()
   {
     echo API::get_genero_series();
   }
 
+  /**
+   * Obtener los géneros de las películas (AJAX)
+   */
   function generos_peliculas()
   {
     echo API::get_genero_peliculas();
   }
 
+  /**
+   * Cargar más fichas (AJAX)
+   */
   function cargar_mas()
   {
     if (isset($_POST["tipo"]) && isset($_POST["genero"]) && isset($_POST["year"]) && isset($_POST["orden"]) && isset($_POST["pagina"])) {

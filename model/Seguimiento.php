@@ -9,11 +9,17 @@ class Seguimiento
 
   }
 
+  /**
+   * Comprobar si la ficha ya estaba en seguimiento
+   */
   static function existe_seguimiento($id_usuario, $id_ficha, $tipo)
   {
     return sizeof(Seguimiento::get_seguimiento($id_usuario, $id_ficha, $tipo)) > 0;
   }
 
+  /**
+   * Establecer el seguimiento de una ficha
+   */
   static function set_seguimiento($estado, $id_usuario, $id_ficha, $tipo)
   {
     $conn = new Conexion();
@@ -21,6 +27,9 @@ class Seguimiento
     $conn->exec($sql);
   }
 
+  /**
+   * Eliminar el seguimiento de una ficha
+   */
   static function remove_seguimiento($id_usuario, $id_ficha, $tipo)
   {
     $conn = new Conexion();
@@ -28,6 +37,9 @@ class Seguimiento
     $conn->exec($sql);
   }
 
+  /**
+   * Obtener el estado del seguimiento de una ficha
+   */
   static function get_seguimiento($id_usuario, $id_ficha, $tipo)
   {
     $conn = new Conexion();
@@ -35,6 +47,9 @@ class Seguimiento
     return $conn->consulta($sql);
   }
 
+  /**
+   * Modificar el estado del seguimiento de una ficha
+   */
   static function modificar_seguimiento($estado, $id_usuario, $id_ficha, $tipo)
   {
     $conn = new Conexion();
@@ -110,11 +125,6 @@ class Seguimiento
     $conn = new Conexion();
     $sql = "select * from fichas, seguimiento where fichas.id = seguimiento.id_ficha and seguimiento.ficha_tipo = 'tv' and seguimiento. estado = 'Siguiendo' and seguimiento.id_usuario = $id_usuario order by seguimiento.fecha_actualizacion desc";
     return $conn->consulta($sql);
-  }
-
-  function __get($name)
-  {
-    return $this->$name;
   }
 }
 

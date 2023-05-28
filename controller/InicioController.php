@@ -19,6 +19,7 @@ class InicioController
 
   function index()
   {
+    //Usuario logeado
     if (isset($_SESSION["usuario"])) {
       //Posts inicio
       $_SESSION["posts_inicio"] = Post::getPostsInicio($_SESSION["usuario"]->id);

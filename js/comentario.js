@@ -37,7 +37,6 @@ function comentarios(event) {
       } else {
         $("#comentarios-post").html("");
         response.forEach((c) => {
-          console.log(c[0]);
           $("#comentarios-post").append(
             `
             <div class='container-fluid d-flex flex-wrap border-top border-warning py-3'>

@@ -1,14 +1,13 @@
 <!-- Footer -->
 <footer class="container-fluid bg-secondary p-4 mt-2">
-  <div class="d-flex justify-content-around text-center">
-    <a href="" class="link link-warning text-decoration-none">
-      Sobre nosotros
+  <div class="d-flex justify-content-around gap-2 text-center">
+    <a href="/sobre_lightsout" class="link link-warning text-decoration-none">
+      Sobre LightsOUT
     </a>
-    <a href="" class="link link-warning text-decoration-none"> Contacto </a>
-    <a href="" class="link link-warning text-decoration-none">
+    <a href="/politica_privacidad" class="link link-warning text-decoration-none">
       Política de privacidad
     </a>
-    <a href="" class="link link-warning text-decoration-none">
+    <a href="/condiciones_uso" class="link link-warning text-decoration-none">
       Condiciones de uso
     </a>
   </div>

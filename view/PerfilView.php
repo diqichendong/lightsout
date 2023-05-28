@@ -597,9 +597,9 @@ $perfil = $_SESSION["perfil"];
       $("#menu a").eq(3).addClass("active");
     <?php } ?>
 
-    id_usuario_actual = <?= $_SESSION["usuario"]->id ?>;
-    hay_posts_buffer = <?= $_SESSION["hay_posts_buffer"] ? "true" : "false" ?>;
-    id_perfil = <?= $_SESSION["perfil"]->id ?>;
+    var id_usuario_actual = <?= $_SESSION["usuario"]->id ?>;
+    var hay_posts_buffer = <?= $_SESSION["hay_posts_buffer"] ? "true" : "false" ?>;
+    var id_perfil = <?= $_SESSION["perfil"]->id ?>;
   </script>
 </body>
 

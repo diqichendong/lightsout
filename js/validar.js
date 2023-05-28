@@ -23,7 +23,6 @@ export function validarLogin(login) {
  * @returns true si valida, false si no
  */
 export function validarEmail(email) {
-  console.log(email);
   let patron = /^[0-9a-z-_.]+[@][a-z0-9-_.]+[.][a-z]+$/;
 
   if (patron.test(email)) {
@@ -44,7 +43,7 @@ export function validarEmail(email) {
  * @returns true si valida, false si no
  */
 export function validarPwd(pwd, pwd_conf) {
-  let patron = /^[0-9A-Za-z-_.]+$/;
+  let patron = /^[0-9A-Za-zÀ-ÿ\u00f1\u00d1\-\_\.]+$/;
 
   if (patron.test(pwd)) {
     if (pwd == pwd_conf) {
@@ -67,7 +66,7 @@ export function validarPwd(pwd, pwd_conf) {
  * @returns true si valida, false si no
  */
 export function validarNombre(nombre) {
-  let patron = /^[0-9A-Za-z-.\s\"\']+$/;
+  let patron = /^[0-9A-Za-zÀ-ÿ\u00f1\u00d1\-\.\s\"\']+$/;
 
   if (patron.test(nombre)) {
     return true;

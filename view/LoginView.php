@@ -39,7 +39,9 @@
   <!-- Iniciar sesión -->
   <div class="container pt-5 mb-5">
     <div class="row justify-content-center m-3">
-      <img src="assets/img/logo.png" class="col-8 col-lg-4 img-fluid" alt="Logo" />
+      <a href="/" class="text-center col-8 col-lg-4">
+        <img src="assets/img/logo.png" class="img-fluid" alt="Logo" />
+      </a>
     </div>
     <div class="row d-flex justify-content-center">
       <div class="card col-10 col-lg-6 bg-secondary m-3">
@@ -75,11 +77,6 @@
     </div>
   </div>
   <!-- Fin Iniciar sesión -->
-
-  <?php
-  // Importar el footer
-  require_once "templates/footer.php";
-  ?>
 
   <script type="module" src="js/login.js"></script>
   <script src="js/bootstrap.bundle.min.js"></script>

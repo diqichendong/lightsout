@@ -14,11 +14,13 @@ class BusquedaController
 
   function index()
   {
+    // Usuario logeado
     if (isset($_SESSION["usuario"])) {
+      // Path correcto
       if (isset($_GET["q"])) {
         $query = strtolower($_GET["q"]);
 
-        // Usuarios
+        // Obtener usuarios
         $_SESSION["usuarios"] = Busqueda::buscar_usuario($query);
         unset($_SESSION["ver_mas_usuarios"]);
         if (sizeof($_SESSION["usuarios"]) > 6) {
@@ -26,7 +28,7 @@ class BusquedaController
           $_SESSION["usuarios"] = array_slice($_SESSION["usuarios"], 0, 6);
         }
 
-        // Películas
+        // Obtener películas
         $_SESSION["peliculas"] = Busqueda::buscar_peliculas($query);
         unset($_SESSION["ver_mas_peliculas"]);
         if (sizeof($_SESSION["peliculas"]) > 6) {
@@ -34,7 +36,7 @@ class BusquedaController
           $_SESSION["peliculas"] = array_slice($_SESSION["peliculas"], 0, 6);
         }
 
-        // Series
+        // Obtener series
         $_SESSION["series"] = Busqueda::buscar_series($query);
         unset($_SESSION["ver_mas_series"]);
         if (sizeof($_SESSION["series"]) > 6) {
@@ -51,6 +53,9 @@ class BusquedaController
     }
   }
 
+  /**
+   * Buscar ficha para crear post (AJAX)
+   */
   function buscar_ficha_crear_post()
   {
     if (isset($_POST["query"])) {

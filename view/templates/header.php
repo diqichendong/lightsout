@@ -19,11 +19,6 @@
             <i class="bi bi-compass-fill"></i> Explorar
           </a>
         </li>
-        <!-- <li class="nav-item mx-2 text-center fs-5">
-          <a class="nav-link" href="#">
-            <i class="bi bi-chat-dots-fill"></i> Chat
-          </a>
-        </li> -->
         <li class="nav-item mx-2 text-center fs-5">
           <a class="nav-link" href="/perfil/<?= $_SESSION["usuario"]->id ?>/posts">
             <i class="bi bi-person-fill"></i> Perfil

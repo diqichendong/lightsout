@@ -9,6 +9,9 @@ class Denuncia
 
   }
 
+  /**
+   * Añadir una denuncia a un post
+   */
   static function denunciar_post($id_post)
   {
     $conn = new Conexion();
@@ -16,6 +19,9 @@ class Denuncia
     $consulta = $conn->exec($sql);
   }
 
+  /**
+   * Añadir una denuncia a un comentario
+   */
   static function denunciar_comentario($id_comentario)
   {
     $conn = new Conexion();
@@ -23,6 +29,9 @@ class Denuncia
     $consulta = $conn->exec($sql);
   }
 
+  /**
+   * Eliminar una denuncia a un post
+   */
   static function eliminar_denuncia_post($id_post)
   {
     $conn = new Conexion();
@@ -30,6 +39,9 @@ class Denuncia
     $conn->exec($sql);
   }
 
+  /**
+   * Eliminar un post denunciado
+   */
   static function eliminar_post($id_post)
   {
     $conn = new Conexion();
@@ -37,6 +49,9 @@ class Denuncia
     $conn->exec($sql);
   }
 
+  /**
+   * Eliminar la denuncia a un comentario
+   */
   static function eliminar_denuncia_comentario($id_comentario)
   {
     $conn = new Conexion();
@@ -44,16 +59,14 @@ class Denuncia
     $conn->exec($sql);
   }
 
+  /**
+   * Eliminar el comentario denunciado
+   */
   static function eliminar_comentario($id_comentario)
   {
     $conn = new Conexion();
     $sql = "delete from comentarios where id = $id_comentario";
     $conn->exec($sql);
-  }
-
-  function __get($name)
-  {
-    return $this->$name;
   }
 }
 

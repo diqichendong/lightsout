@@ -7,3 +7,8 @@ RewriteRule ^ficha/(.*)/(.*)$ index.php?c=ficha&tipo=$1&id=$2 [NC,L]
 RewriteRule ^perfil/(.*)/(.*)$ index.php?c=perfil&id=$1&tab=$2 [NC,L]
 RewriteRule ^explorar$ index.php?c=explorar
 RewriteRule ^administrador/(.*)$ index.php?c=administrador&tab=$1 [NC,L]
+RewriteRule ^sobre_lightsout$ index.php?c=informacion&pagina=sobre_lightsout
+RewriteRule ^politica_privacidad$ index.php?c=informacion&pagina=politica_privacidad
+RewriteRule ^condiciones_uso$ index.php?c=informacion&pagina=condiciones_uso
+
+ErrorDocument 403 /

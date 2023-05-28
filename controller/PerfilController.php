@@ -16,7 +16,9 @@ class PerfilController
 
   function index()
   {
+    // Usuario logeado
     if (isset($_SESSION["usuario"])) {
+      // Path correcto
       if (isset($_GET["id"]) && isset($_GET["tab"])) {
         // Datos del perfil
         $id_perfil = $_GET["id"];

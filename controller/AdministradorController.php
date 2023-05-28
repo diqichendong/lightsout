@@ -16,10 +16,15 @@ class AdministradorController
 
   function index()
   {
+    // Usuario logeado
     if (isset($_SESSION["usuario"])) {
+
+      // Path incorrecto
       if ($_SESSION["usuario"]->tipo == "Normal" || !isset($_GET["tab"])) {
         header("Location: /inicio");
       }
+
+      // Obtener datos
       $_SESSION["tab"] = $_GET["tab"];
       $_SESSION["usuarios"] = Usuario::get_usuarios();
       $_SESSION["posts_denunciados"] = Post::get_posts_denunciados();
@@ -31,6 +36,9 @@ class AdministradorController
     }
   }
 
+  /**
+   * Obtener usuario (AJAX)
+   */
   function obtener_usuario()
   {
     if (isset($_POST["id"])) {
@@ -39,6 +47,9 @@ class AdministradorController
     }
   }
 
+  /**
+   * Editar usuario (AJAX)
+   */
   function editar_usuario()
   {
     $id = $_POST["id"];
@@ -53,6 +64,9 @@ class AdministradorController
     header("Location: /administrador/gestion_usuarios");
   }
 
+  /**
+   * Eliminar usuario (AJAX)
+   */
   function eliminar_usuario()
   {
     if (isset($_POST["id"]) && isset($_POST["nombre"]) && isset($_POST["username"])) {
@@ -67,6 +81,9 @@ class AdministradorController
     }
   }
 
+  /**
+   * Buscar usuarios (AJAX)
+   */
   function buscar_usuarios()
   {
     if (isset($_POST["query"])) {

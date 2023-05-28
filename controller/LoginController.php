@@ -1,11 +1,13 @@
 <?php
 
 require_once "model/Usuario.php";
+
 session_start();
 
 class LoginController
 {
   private $usuario;
+
   function __construct()
   {
     $this->usuario = new Usuario();
@@ -13,9 +15,11 @@ class LoginController
 
   function index()
   {
+    // Usuario logeado
     if (isset($_SESSION["usuario"])) {
       header("Location: inicio");
     } else if (isset($_COOKIE["login"]) && isset($_COOKIE["pwd"])) {
+      // Usuario no legeado, comprobar "recordar"
       if ($this->usuario->existeUsuario($_COOKIE["login"], $_COOKIE["pwd"])) {
         $_SESSION["usuario"] = $this->usuario;
         header("Location: inicio");
@@ -28,12 +32,17 @@ class LoginController
     }
   }
 
+  /**
+   * Realizar el login
+   */
   function login()
   {
     $login = $_POST["login"];
     $pwd = $_POST["pwd"];
 
     if ($this->usuario->existeUsuario($login, $pwd)) {
+
+      // Recordar login
       if (isset($_POST["recordar"])) {
         setcookie("login", $login, time() + 3600 * 24 * 30);
         setcookie("pwd", $pwd, time() + 3600 * 24 * 30);
