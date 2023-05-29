@@ -308,7 +308,7 @@
             <i class="bi bi-x-lg fw-bold"></i>
           </button>
         </div>
-        <form method="post" action="index.php?c=administrador&m=editar_usuario">
+        <form method="post" action="/index.php?c=administrador&m=editar_usuario">
           <div class="modal-body bg-secondary">
             <input type="hidden" name="id" id="id">
             <div class="container d-flex flex-column align-items-center mb-3 p-0">
