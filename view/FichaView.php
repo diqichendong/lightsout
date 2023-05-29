@@ -331,9 +331,11 @@ $seguimiento = sizeof($_SESSION["seguimiento"]) > 0 ? $_SESSION["seguimiento"][0
                   <?php foreach ($_SESSION["proveedores"]["flatrate"] as $proveedor) { ?>
                     <div class="container mb-2">
                       <img src="<?= API_IMG_BASE . $proveedor["logo_path"] ?>" alt="proveedor" class="rounded col-1 mx-2">
-                      <span>
+                      <a class="link link-warning text-decoration-none"
+                        href="https://www.google.es/search?q=<?= urlencode(($tipo == "tv" ? $ficha["name"] : $ficha["title"]) . " - " . $proveedor["provider_name"]) ?>"
+                        target="_blank">
                         <?= $proveedor["provider_name"] ?>
-                      </span>
+                      </a>
                     </div>
                   <?php } ?>
                 </div>
@@ -344,9 +346,11 @@ $seguimiento = sizeof($_SESSION["seguimiento"]) > 0 ? $_SESSION["seguimiento"][0
                   <?php foreach ($_SESSION["proveedores"]["rent"] as $proveedor) { ?>
                     <div class="container mb-2">
                       <img src="<?= API_IMG_BASE . $proveedor["logo_path"] ?>" alt="proveedor" class="rounded col-1 mx-2">
-                      <span>
+                      <a class="link link-warning text-decoration-none"
+                        href="https://www.google.es/search?q=<?= urlencode(($tipo == "tv" ? $ficha["name"] : $ficha["title"]) . " - " . $proveedor["provider_name"]) ?>"
+                        target="_blank">
                         <?= $proveedor["provider_name"] ?>
-                      </span>
+                      </a>
                     </div>
                   <?php } ?>
                 </div>
@@ -357,9 +361,11 @@ $seguimiento = sizeof($_SESSION["seguimiento"]) > 0 ? $_SESSION["seguimiento"][0
                   <?php foreach ($_SESSION["proveedores"]["buy"] as $proveedor) { ?>
                     <div class="container mb-2">
                       <img src="<?= API_IMG_BASE . $proveedor["logo_path"] ?>" alt="proveedor" class="rounded col-1 mx-2">
-                      <span>
+                      <a class="link link-warning text-decoration-none"
+                        href="https://www.google.es/search?q=<?= urlencode(($tipo == "tv" ? $ficha["name"] : $ficha["title"]) . " - " . $proveedor["provider_name"]) ?>"
+                        target="_blank">
                         <?= $proveedor["provider_name"] ?>
-                      </span>
+                      </a>
                     </div>
                   <?php } ?>
                 </div>

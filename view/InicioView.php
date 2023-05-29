@@ -26,6 +26,45 @@
 
   <!-- MAIN CONTENT -->
   <div class="container d-flex justify-content-center text-light mb-2 flex-fill flex-wrap">
+
+    <!-- Tendencias -->
+    <div id="tendencias" class="carousel slide col-12 col-lg-10 my-2" data-bs-ride="carousel">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#tendencias" data-bs-slide-to="0" class="active"></button>
+        <button type="button" data-bs-target="#tendencias" data-bs-slide-to="1"></button>
+        <button type="button" data-bs-target="#tendencias" data-bs-slide-to="2"></button>
+        <button type="button" data-bs-target="#tendencias" data-bs-slide-to="3"></button>
+        <button type="button" data-bs-target="#tendencias" data-bs-slide-to="4"></button>
+      </div>
+      <div class="carousel-inner">
+        <?php foreach ($_SESSION["tendencias"] as $index => $ficha) { ?>
+          <div class="carousel-item <?= $index == 0 ? "active" : "" ?>">
+            <img src="http://image.tmdb.org/t/p/original<?= $ficha["backdrop_path"] ?>"
+              class="d-block w-100 rounded border border-warning"
+              alt="<?= $ficha["media_type"] == "tv" ? $ficha["name"] : $ficha["title"] ?>">
+            <div class="carousel-caption d-block">
+              <h3 style="text-shadow: 0 0 10px black" class="text-truncate text-warning">
+                <a href="/ficha/<?= $ficha["media_type"] ?>/<?= $ficha["id"] ?>"
+                  class="link link-warning text-decoration-none">
+                  <?= $ficha["media_type"] == "tv" ? $ficha["name"] : $ficha["title"] ?>
+                  <?= $ficha["media_type"] == "tv" ? "[TV]" : "" ?>
+                </a>
+              </h3>
+            </div>
+          </div>
+        <?php } ?>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#tendencias" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#tendencias" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+    <!-- Fin Tendencias -->
+
     <!-- POSTS -->
     <section class="container col-12 col-lg-8 m-0">
       <h1 class="text-warning fw-bold border-bottom border-top border-warning text-center">
@@ -143,6 +182,9 @@
 
     <!-- ASIDE -->
     <aside class="d-none d-lg-inline col-lg-4">
+      <h1 class="text-warning fw-bold border-bottom border-top border-warning text-center">
+        TRACKER
+      </h1>
       <!-- Tracker -->
       <div class="container bg-secondary rounded py-2">
         <!-- Pills -->

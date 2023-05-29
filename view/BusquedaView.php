@@ -65,10 +65,10 @@
           <?php } ?>
         </div>
         <?php if (isset($_SESSION["ver_mas_usuarios"])) { ?>
-          <div class="container-fluid collapse" id="ver-mas-usuarios">
-            <div class="container-fluid d-flex flex-wrap">
+          <div class="collapse" id="ver-mas-usuarios">
+            <div class="container-fluid d-flex flex-wrap mb-3">
               <?php foreach ($_SESSION["ver_mas_usuarios"] as $usuario) { ?>
-                <div class="container col-4 col-md-2 d-flex flex-column mb-3">
+                <div class="container col-4 col-md-2 col-lg-1 d-flex flex-column mb-3">
                   <a class="ratio ratio-1x1" href="/perfil/<?= $usuario["id"] ?>/posts">
                     <img src="/assets/perfil/<?= $usuario["foto"] ?>" alt="" class="rounded-circle" />
                   </a>

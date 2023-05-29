@@ -6,6 +6,7 @@ require_once "model/Post.php";
 require_once "model/Comentario.php";
 require_once "model/Light.php";
 require_once "model/Seguimiento.php";
+require_once "model/API.php";
 
 session_start();
 
@@ -44,6 +45,9 @@ class InicioController
         $_SESSION["peliculas_pendientes"] = array_slice($_SESSION["peliculas_pendientes"], 0, 6);
         $_SESSION["ver_todas_peliculas_pendientes"] = true;
       }
+
+      // Tendencias
+      $_SESSION["tendencias"] = array_slice(API::get_tendencias(), 0, 5);
 
       require_once "view/InicioView.php";
     } else {

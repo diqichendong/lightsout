@@ -50,6 +50,19 @@ class API
     curl_close($c);
     return json_decode($data, true)["genres"];
   }
+
+  /**
+   * Obtener las tendencias
+   */
+  static function get_tendencias()
+  {
+    $c = curl_init();
+    curl_setopt($c, CURLOPT_URL, API_REQUEST_BASE . "/trending/all/day?api_key=" . API_KEY . "&language=es");
+    curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
+    $data = curl_exec($c);
+    curl_close($c);
+    return json_decode($data, true)["results"];
+  }
 }
 
 ?>

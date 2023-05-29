@@ -31,7 +31,7 @@ class InformacionController
       }
     } else {
       // Usuario logeado
-      if (isset($_SESSION["usuario"])) {
+      if (isset($_COOKIE["login"])) {
         header("Location: /inicio");
       } else {
         // Página por defecto
