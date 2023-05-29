@@ -1,8 +1,8 @@
 import * as v from "./validar.js";
 import * as f from "./funciones.js";
 
-// Función del icono de comentarios de un post
-function comentarios(event) {
+// Añadir evento de click en el icono de comentarios
+$(document).on("click", ".btn-comentario", function (event) {
   let post_id = $(event.target).data("id");
   $("#id-post").attr("value", post_id);
   $.post("/index.php?c=post&m=obtener_post", { id: post_id }, function (res) {
@@ -72,10 +72,7 @@ function comentarios(event) {
       }
     }
   );
-}
-
-// Añadir evento de click en el icono de comentarios
-$(document).on("click", ".btn-comentario", comentarios);
+});
 
 // Envío del comentario
 $(document).on("click", "#btn-comentar", function (e) {
@@ -102,48 +99,49 @@ $(document).on("click", "#btn-comentar", function (e) {
         $(
           ".contador-comentarios[data-id='" + $("#id-post").attr("value") + "']"
         ).html(contador);
-      }
-    );
-    // Hacer visible el comentario publicado
-    $.post(
-      "/index.php?c=comentario&m=comentario_publicado",
-      {
-        comentario: $("#comentario").val(),
-        id_post: $("#id-post").attr("value"),
-        id_usuario: $("#id-usuario").attr("value"),
-      },
-      function (res) {
-        let response = JSON.parse(res)[0];
-        $("#comentarios-post").prepend(
-          `
-            <div class='container-fluid d-flex flex-wrap border-top border-warning py-3'>
-              <h6 class='col-11 text-warning'>
-                <a href="/perfil/${
-                  response["id_usuario"]
-                }" class="link-warning text-decoration-none">
-                  ${response["nombre"]}
-                </a>
-                <small class='text-white-50'>@${response["username"]}</small>
-              </h6>
-              <div class='col-1'>
-                ${
-                  id_usuario_actual != response["id_usuario"]
-                    ? `
-                <button class="btn btn-link link-danger btn-denunciar-comentario px-1" data-id="${c[0]}" title="Denunciar">
-                  <i class="bi bi-exclamation-triangle-fill"></i>
-                </button>
+
+        // Hacer visible el comentario publicado
+        $.post(
+          "/index.php?c=comentario&m=comentario_publicado",
+          {
+            id_usuario: $("#id-usuario").attr("value"),
+          },
+          function (res) {
+            let response = JSON.parse(res);
+            $("#comentarios-post").prepend(
+              `
+                <div class='container-fluid d-flex flex-wrap border-top border-warning py-3'>
+                  <h6 class='col-11 text-warning'>
+                    <a href="/perfil/${
+                      response["id_usuario"]
+                    }" class="link-warning text-decoration-none">
+                      ${response["nombre"]}
+                    </a>
+                    <small class='text-white-50'>@${
+                      response["username"]
+                    }</small>
+                  </h6>
+                  <div class='col-1'>
+                    ${
+                      id_usuario_actual != response["id_usuario"]
+                        ? `
+                    <button class="btn btn-link link-danger btn-denunciar-comentario px-1" data-id="${c[0]}" title="Denunciar">
+                      <i class="bi bi-exclamation-triangle-fill"></i>
+                    </button>
+                    `
+                        : ""
+                    }
+                  </div>
+                  <p class='col-12 text-light'>
+                    ${response["contenido"]}
+                  </p>
+                  <span class='col-12 text-white-50'>
+                    ${f.obtener_fecha(response["fecha"])}
+                  </span>
+                </div>
                 `
-                    : ""
-                }
-              </div>
-              <p class='col-12 text-light'>
-                ${response["contenido"]}
-              </p>
-              <span class='col-12 text-white-50'>
-                ${f.obtener_fecha(response["fecha"])}
-              </span>
-            </div>
-            `
+            );
+          }
         );
       }
     );

@@ -42,11 +42,9 @@ class ComentarioController
    */
   function comentario_publicado()
   {
-    if (isset($_POST["id_post"]) && isset($_POST["id_usuario"]) && isset($_POST["comentario"])) {
-      $id_post = $_POST["id_post"];
+    if (isset($_POST["id_usuario"])) {
       $id_usuario = $_POST["id_usuario"];
-      $comentario = htmlspecialchars($_POST["comentario"]);
-      echo json_encode(Comentario::get_comentario_publicado($comentario, intval($id_post), intval($id_usuario)));
+      echo json_encode(Comentario::get_comentario_publicado($id_usuario)[0]);
     }
   }
 

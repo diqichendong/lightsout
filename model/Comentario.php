@@ -36,10 +36,10 @@ class Comentario
   /**
    * Obtener el comentario que se acabó de publicar en un post
    */
-  static function get_comentario_publicado($contenido, $id_post, $id_usuario)
+  static function get_comentario_publicado($id_usuario)
   {
     $conn = new Conexion();
-    $sql = "select * from usuarios, comentarios where usuarios.id = $id_usuario and usuarios.id = comentarios.id_usuario and comentarios.id_post = $id_post and comentarios.contenido = '$contenido' order by comentarios.fecha desc";
+    $sql = "select * from usuarios, comentarios where usuarios.id = $id_usuario and usuarios.id = comentarios.id_usuario order by comentarios.fecha desc";
     return $conn->consulta($sql);
   }
 
