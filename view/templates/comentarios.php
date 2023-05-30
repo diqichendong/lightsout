@@ -14,7 +14,7 @@
         <div
           class="container d-flex align-items-center gap-3 p-1 sticky-top bg-secondary border-bottom border-warning mh-50">
           <div class="col-3 col-sm-2 p-0 p-lg-2">
-            <img src="assets/img/default-poster.png" alt="poster" id="post-original-poster"
+            <img src="/assets/img/default-poster.png" alt="poster" id="post-original-poster"
               class="container p-0 rounded border border-warning" />
           </div>
           <div class="container col-9 col-sm-10">
