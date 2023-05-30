@@ -135,7 +135,7 @@ $perfil = $_SESSION["perfil"];
                     <!-- Post body -->
                     <div class="col-9 col-md-10 d-flex flex-wrap">
                       <!-- Título -->
-                      <a href="ficha/<?= $post["ficha_tipo"] ?>/<?= $post["id_ficha"] ?>"
+                      <a href="/ficha/<?= $post["ficha_tipo"] ?>/<?= $post["id_ficha"] ?>"
                         class="text-decoration-none col-8">
                         <h3 class="text-warning">
                           <?= $post["titulo"] ?>
