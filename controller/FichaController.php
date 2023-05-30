@@ -50,7 +50,7 @@ class FichaController
       }
       require_once "view/FichaView.php";
     } else {
-      header("Location: login");
+      header("Location: /login");
     }
   }
 

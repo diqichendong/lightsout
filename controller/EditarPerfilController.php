@@ -15,7 +15,11 @@ class EditarPerfilController
 
   function index()
   {
-    require_once "view/EditarPerfilView.php";
+    if (isset($_SESSION["usuario"])) {
+      require_once "view/EditarPerfilView.php";
+    } else {
+      header("Location: /login");
+    }
   }
 
   /**
