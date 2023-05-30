@@ -162,7 +162,7 @@ $perfil = $_SESSION["perfil"];
                       <!-- Comentarios -->
                       <div class="col-3 py-2 d-flex align-items-center justify-content-center gap-2">
                         <button class="btn btn-link link-warning btn-comentario px-1" data-bs-toggle="modal"
-                          data-bs-target="#modal-comentarios" title="Comentarios">
+                          data-bs-target="#modal-comentarios" data-id="<?= $post[0] ?>" title="Comentarios">
                           <i class="bi bi-chat" data-id="<?= $post[0] ?>"></i>
                         </button>
                         <span class="contador-comentarios" data-id="<?= $post[0] ?>"></span>
