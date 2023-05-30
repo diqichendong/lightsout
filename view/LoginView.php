@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="css/bootstrap.min.css" />
   <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon" />
-  <title>Iniciar sesión - LightsOUT</title>
+  <title>Iniciar sesión</title>
 </head>
 
 <body class="bg-dark min-vh-100 d-flex flex-column justify-content-between align-items-center">
@@ -51,7 +51,7 @@
           </h4>
           <form action="index.php?c=login&m=login" method="post" class="d-flex flex-wrap justify-content-center my-3">
             <div class="form-floating mb-3 col-12">
-              <input type="text" class="form-control" name="login" id="login" placeholder="login" required />
+              <input type="text" class="form-control" name="login" id="login" placeholder="login" required autofocus />
               <label for="login" class="form-label">Usuario</label>
             </div>
             <div class="form-floating mb-3 col-12">

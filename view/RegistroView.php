@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="css/bootstrap.min.css" />
   <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon" />
-  <title>Registrarse - LightsOUT</title>
+  <title>Registrarse</title>
 </head>
 
 <body class="bg-dark min-vh-100 d-flex flex-column align-items-center justify-content-center">

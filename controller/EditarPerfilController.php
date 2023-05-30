@@ -62,7 +62,7 @@ class EditarPerfilController
    */
   function cambiar_pwd()
   {
-    $actual_pass = $_POST["actual-pass"];
+    $actual_pass = md5($_POST["actual-pass"]);
     $new_pass = $_POST["new-pass"];
     if ($actual_pass == $this->usuario->password) {
       if ($this->usuario->actualizarPassword($new_pass)) {
