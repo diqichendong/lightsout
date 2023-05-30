@@ -33,7 +33,7 @@ class Nota
   static function remove_nota($id_usuario, $id_ficha, $tipo)
   {
     $conn = new Conexion();
-    $sql = "delete from notas where id_usuario = $id_usuario and id_ficha = $id_ficha and ficha_tipo = '$tipo')";
+    $sql = "delete from notas where id_usuario = $id_usuario and id_ficha = $id_ficha and ficha_tipo = '$tipo'";
     $conn->exec($sql);
   }
 

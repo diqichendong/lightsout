@@ -55,7 +55,7 @@ $seguimiento = sizeof($_SESSION["seguimiento"]) > 0 ? $_SESSION["seguimiento"][0
           </h1>
           <div class="form-floating col-12">
             <select class="form-select" id="nota" data-id="<?= $ficha["id"] ?>" data-tipo="<?= $tipo ?>">
-              <option value=" 0" <?= $nota_usuario == null ? "selected" : "" ?>>¡Puntúa!</option>
+              <option value="0" <?= $nota_usuario == null ? "selected" : "" ?>>¡Puntúa!</option>
               <option value="1" <?= $nota_usuario == 1 ? "selected" : "" ?>>💀 1</option>
               <option value="2" <?= $nota_usuario == 2 ? "selected" : "" ?>>🤮 2</option>
               <option value="3" <?= $nota_usuario == 3 ? "selected" : "" ?>>🤢 3</option>
