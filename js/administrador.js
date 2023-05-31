@@ -36,7 +36,7 @@ $("#guardar").click(function (e) {
 });
 
 // Botón eliminar
-$(".btn-eliminar").click(function (e) {
+$(document).on("click", ".btn-eliminar", function (e) {
   let id_usuario = $(this).data("id");
   let nombre = $(this).data("nombre");
   let username = $(this).data("username");
