@@ -133,7 +133,7 @@ class Ficha
    */
   static function get_fichas_explorar($tipo, $genero, $year, $orden, $pagina)
   {
-    $url = API_REQUEST_BASE . "/discover/$tipo?api_key=" . API_KEY . "&language=es&include_adult=false&page=$pagina";
+    $url = API_REQUEST_BASE . "/discover/$tipo?api_key=" . API_KEY . "&language=es&certification_country=ES&certification.lte=X&page=$pagina";
     if ($orden == "fecha") {
       $url .= $tipo == "tv" ? "&sort_by=first_air_data_desc" : "&sort_by=primary_release_date_desc";
     } else {

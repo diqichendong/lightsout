@@ -44,8 +44,8 @@ class LoginController
 
       // Recordar login
       if (isset($_POST["recordar"])) {
-        setcookie("login", $login, time() + 3600 * 24 * 30);
-        setcookie("pwd", $pwd, time() + 3600 * 24 * 30);
+        setcookie("login", $login, time() + 3600 * 24 * 30, "/");
+        setcookie("pwd", $pwd, time() + 3600 * 24 * 30, "/");
       }
       $_SESSION["usuario"] = $this->usuario;
       header("Location: inicio");
