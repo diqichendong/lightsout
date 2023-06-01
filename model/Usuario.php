@@ -218,7 +218,7 @@ class Usuario
   {
     $id_usuario_actual = $_SESSION["usuario"]->id;
     $conn = new Conexion();
-    $sql = "select * from usuarios where id != $id_usuario_actual";
+    $sql = "select * from usuarios where id != $id_usuario_actual order by nombre asc";
     return $conn->consulta($sql);
   }
 
@@ -260,9 +260,9 @@ class Usuario
     $id_usuario_actual = $_SESSION["usuario"]->id;
     $conn = new Conexion();
     if ($query != "") {
-      $sql = "select * from usuarios where id != $id_usuario_actual and (lower(nombre) like '%$query%' or lower(username) like '%$query%')";
+      $sql = "select * from usuarios where id != $id_usuario_actual and (lower(nombre) like '%$query%' or lower(username) like '%$query%') order by nombre asc";
     } else {
-      $sql = "select * from usuarios where id != $id_usuario_actual";
+      $sql = "select * from usuarios where id != $id_usuario_actual order by nombre asc";
     }
     return $conn->consulta($sql);
   }
