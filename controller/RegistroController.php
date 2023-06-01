@@ -33,11 +33,26 @@ class RegistroController
     $pwd = $_POST["pwd"];
     $nombre = $_POST["nombre"];
 
-    if ($this->registro->addUsuario($login, $pwd, $email, $nombre, "Normal")) {
-      $_SESSION["mensaje_ok"] = "Usuario creado correctamente.";
+    if (Usuario::existeUsername($login)) {
+      $_SESSION["username"] = $login;
+      $_SESSION["email"] = $email;
+      $_SESSION["pwd"] = $pwd;
+      $_SESSION["nombre"] = $nombre;
+      $_SESSION["mensaje_error"] = "El usuario ya existe.";
+      header("Location: /registro");
+    } else if (Usuario::existeEmail($email)) {
+      $_SESSION["username"] = $login;
+      $_SESSION["email"] = $email;
+      $_SESSION["pwd"] = $pwd;
+      $_SESSION["nombre"] = $nombre;
+      $_SESSION["mensaje_error"] = "El correo electrónico ya existe.";
+      header("Location: /registro");
+    } else {
+      if ($this->registro->addUsuario($login, $pwd, $email, $nombre, "Normal")) {
+        $_SESSION["mensaje_ok"] = "Usuario creado correctamente.";
+      }
+      header("Location: login");
     }
-
-    header("Location: login");
 
   }
 

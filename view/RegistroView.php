@@ -11,6 +11,19 @@
 </head>
 
 <body class="bg-dark min-vh-100 d-flex flex-column align-items-center justify-content-center">
+  <div class="container fixed-top p-3">
+    <!-- Mensaje de login incorrecto -->
+    <?php if (isset($_SESSION["mensaje_error"])) { ?>
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <span>
+          <?= $_SESSION["mensaje_error"] ?>
+        </span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      <?php unset($_SESSION["mensaje_error"]);
+    } ?>
+  </div>
+
   <!-- Registro -->
   <div class="container p-5">
     <div class="row justify-content-center">
@@ -25,24 +38,28 @@
           <form action="index.php?c=registro&m=registrar" method="post" id="formulario_registro"
             class="d-flex flex-wrap justify-content-center my-3">
             <div class="form-floating mb-3 col-12">
-              <input type="text" class="form-control" name="login" id="login" placeholder="login" required />
+              <input type="text" class="form-control" name="login" id="login" placeholder="login"
+                value="<?= isset($_SESSION["username"]) ? $_SESSION["username"] : "" ?>" required />
               <label for="login" class="form-label">Usuario</label>
             </div>
             <div class="form-floating mb-3 col-12">
-              <input type="text" class="form-control" name="email" id="email" placeholder="email" required />
+              <input type="email" class="form-control" name="email" id="email" placeholder="email"
+                value="<?= isset($_SESSION["email"]) ? $_SESSION["email"] : "" ?>" required />
               <label for="email" class="form-label">Correo electrónico</label>
             </div>
             <div class="form-floating mb-3 col-12">
-              <input type="password" class="form-control" name="pwd" id="pwd" placeholder="pwd" required />
+              <input type="password" class="form-control" name="pwd" id="pwd" placeholder="pwd"
+                value="<?= isset($_SESSION["pwd"]) ? $_SESSION["pwd"] : "" ?>" required />
               <label for="pwd" class="form-label">Contraseña</label>
             </div>
             <div class="form-floating mb-3 col-12">
               <input type="password" class="form-control" name="pwd-conf" id="pwd-conf" placeholder="pwd-conf"
-                required />
+                value="<?= isset($_SESSION["pwd"]) ? $_SESSION["pwd"] : "" ?>" required />
               <label for="pwd-conf" class="form-label">Confirmar contraseña</label>
             </div>
             <div class="form-floating mb-3 col-12">
-              <input type="text" class="form-control" name="nombre" id="nombre" placeholder="nombre" required />
+              <input type="text" class="form-control" name="nombre" id="nombre" placeholder="nombre"
+                value="<?= isset($_SESSION["nombre"]) ? $_SESSION["nombre"] : "" ?>" required />
               <label for="pwd" class="form-label">Nombre</label>
             </div>
             <div class="form-check col-12 mb-3">
@@ -69,5 +86,11 @@
   <script type="module" src="/js/registro.js"></script>
   <script src="/js/bootstrap.bundle.min.js"></script>
 </body>
+<?php
+unset($_SESSION["username"]);
+unset($_SESSION["nombre"]);
+unset($_SESSION["pwd"]);
+unset($_SESSION["email"]);
+?>
 
 </html>

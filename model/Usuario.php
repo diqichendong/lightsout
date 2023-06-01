@@ -56,6 +56,26 @@ class Usuario
   }
 
   /**
+   * Comprobar si existe ya un username
+   */
+  static function existeUsername($username)
+  {
+    $conn = new Conexion();
+    $sql = "select * from usuarios where username = '$username'";
+    return sizeof($conn->consulta($sql)) > 0;
+  }
+
+  /**
+   * Comprobar si existe ya un email
+   */
+  static function existeEmail($email)
+  {
+    $conn = new Conexion();
+    $sql = "select * from usuarios where email = '$email'";
+    return sizeof($conn->consulta($sql)) > 0;
+  }
+
+  /**
    * Edita la foto de un usuario
    */
   function editarFoto($foto)
