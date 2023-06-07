@@ -1,8 +1,16 @@
 import * as v from "./validar.js";
 import * as f from "./funciones.js";
+import lights from "./light.js";
+import comentarios from "./comentario.js";
 
 // Pagina activa en el menu
 $("#menu a").eq(0).addClass("active");
+
+// Lights
+lights();
+
+// Comentarios
+comentarios();
 
 // Buscador en la ventana modal de peliculas y series
 $("#crear-post-buscador").keyup((e) => {
@@ -231,18 +239,6 @@ $("#btn-cargar-mas").on("click", function (e) {
     $("#btn-cargar-mas").css("display", "none");
   }
 
-  f.reload_js("js/comentario.js");
-  f.reload_js("js/light.js");
-
-  // Contador de comentarios
-  $(".contador-comentarios").each((i, e) => {
-    let id_post = $(e).data("id");
-    $.post(
-      "/index.php?c=comentario&m=contador_comentarios",
-      { id_post: id_post },
-      function (res) {
-        $(e).html(res);
-      }
-    );
-  });
+  lights();
+  comentarios();
 });

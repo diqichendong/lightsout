@@ -447,8 +447,6 @@ $seguimiento = sizeof($_SESSION["seguimiento"]) > 0 ? $_SESSION["seguimiento"][0
   <script src="/js/bootstrap.bundle.min.js"></script>
 
   <script type="module" src="/js/ficha.js"></script>
-  <script type="module" src="/js/comentario.js"></script>
-  <script src="/js/light.js"></script>
   <script src="/js/denunciar.js"></script>
 
   <script>

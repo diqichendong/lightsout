@@ -1,4 +1,12 @@
 import * as f from "./funciones.js";
+import lights from "./light.js";
+import comentarios from "./comentario.js";
+
+// Lights
+lights();
+
+// Comentarios
+comentarios();
 
 // Cambiar ver más/ver menos
 $("a[data-bs-toggle='collapse']").click(function (e) {
@@ -128,18 +136,6 @@ $("#btn-cargar-mas").on("click", function (e) {
     $("#btn-cargar-mas").css("display", "none");
   }
 
-  f.reload_js("/js/comentario.js");
-  f.reload_js("/js/light.js");
-
-  // Contador de comentarios
-  $(".contador-comentarios").each((i, e) => {
-    let id_post = $(e).data("id");
-    $.post(
-      "/index.php?c=comentario&m=contador_comentarios",
-      { id_post: id_post },
-      function (res) {
-        $(e).html(res);
-      }
-    );
-  });
+  lights();
+  comentarios();
 });

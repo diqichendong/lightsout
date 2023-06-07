@@ -1,5 +1,13 @@
 import * as v from "/js/validar.js";
 import * as f from "/js/funciones.js";
+import lights from "./light.js";
+import comentarios from "./comentario.js";
+
+// Lights
+lights();
+
+// Comentarios
+comentarios();
 
 // Botón de Ver ficha completa / Cerrar ficha completa
 $("#btn-ficha-completa").click(function (e) {
@@ -172,17 +180,6 @@ $("#btn-cargar-mas").on("click", function (e) {
     $("#btn-cargar-mas").css("display", "none");
   }
 
-  f.reload_js("/js/comentario.js");
-  f.reload_js("/js/light.js");
-  // Contador de comentarios
-  $(".contador-comentarios").each((i, e) => {
-    let id_post = $(e).data("id");
-    $.post(
-      "/index.php?c=comentario&m=contador_comentarios",
-      { id_post: id_post },
-      function (res) {
-        $(e).html(res);
-      }
-    );
-  });
+  lights();
+  comentarios();
 });

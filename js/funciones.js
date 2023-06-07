@@ -8,8 +8,3 @@ export function obtener_fecha(timestamp) {
   let fecha_arr = fecha.split("-");
   return fecha_arr[2] + "/" + fecha_arr[1] + "/" + fecha_arr[0];
 }
-
-export function reload_js(src) {
-  $('script[src="' + src + '"]').remove();
-  $("<script type='module'>").attr("src", src).appendTo("body");
-}

@@ -380,8 +380,8 @@
   <script src="js/bootstrap.bundle.min.js"></script>
 
   <script type="module" src="js/inicio.js"></script>
-  <script type="module" src="js/comentario.js"></script>
-  <script src="js/light.js"></script>
+  <!-- <script type="module" src="js/comentario.js"></script> -->
+  <!-- <script src="js/light.js"></script> -->
   <script src="js/denunciar.js"></script>
 
   <script>

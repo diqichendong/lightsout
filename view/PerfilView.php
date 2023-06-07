@@ -587,8 +587,6 @@ $perfil = $_SESSION["perfil"];
   <script src="/js/bootstrap.bundle.min.js"></script>
 
   <script type="module" src="/js/perfil.js"></script>
-  <script type="module" src="/js/comentario.js"></script>
-  <script src="/js/light.js"></script>
   <script src="/js/denunciar.js"></script>
 
   <script>
