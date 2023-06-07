@@ -35,9 +35,12 @@ $perfil = $_SESSION["perfil"];
       <!-- Info perfil -->
       <div class="col-9 col-lg-4 mb-3">
         <div class="card bg-secondary">
-          <div class="card-body text-center">
-            <img src="/assets/perfil/<?= $perfil->foto ?>" alt="Foto de perfil"
-              class="img-fluid rounded-circle mb-3 col-6" />
+          <div class="card-body text-center d-flex flex-column align-items-center">
+            <div class="mb-3 col-6">
+              <div class="ratio ratio-1x1">
+                <img src="/assets/perfil/<?= $perfil->foto ?>" alt="Foto de perfil" class="img-fluid rounded-circle" />
+              </div>
+            </div>
             <div class="d-flex flex-column mb-3">
               <h4 class="text-warning lead fs-3">
                 <?= $perfil->nombre ?>
@@ -51,17 +54,23 @@ $perfil = $_SESSION["perfil"];
             <p class="text-light mb-3">
               <?= $perfil->sobre_mi ?>
             </p>
-            <div class="container text-light d-flex">
-              <p class="col-6 text-warning">
+            <div class="container text-light d-flex mb-3">
+              <div class="col-6 d-flex flex-column">
                 <span class="text-light">
                   <?= $perfil->numero_seguidores() ?>
-                </span> Seguidores
-              </p>
-              <p class="col-6 text-warning">
+                </span>
+                <span class="text-warning">
+                  Seguidores
+                </span>
+              </div>
+              <div class="col-6 d-flex flex-column">
                 <span class="text-light">
                   <?= $perfil->numero_siguiendo() ?>
-                </span> Siguiendo
-              </p>
+                </span>
+                <span class="text-warning">
+                  Siguiendo
+                </span>
+              </div>
             </div>
             <div class="container">
               <?php if ($perfil->id == $_SESSION["usuario"]->id) { ?>
