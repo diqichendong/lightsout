@@ -60,6 +60,8 @@ class AdministradorController
 
     Usuario::editar_usuario($id, $nombre, $username, $email, $tipo);
     $_SESSION["mensaje"] = "El usuario $nombre (@$username) ha sido editado correctamente.";
+
+    header("Location: /administrador/gestion_usuarios");
   }
 
   /**
