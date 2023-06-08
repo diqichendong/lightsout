@@ -51,6 +51,7 @@ class EditarPerfilController
     $login = $_POST["usuario"];
     $sobre_mi = $_POST["sobre_mi"];
     if ($this->usuario->actualizarDatos($nombre, $login, $sobre_mi)) {
+      setcookie("login", $login, time() + 3600 * 24 * 30, "/");
       $_SESSION["datos_actualizados"] = true;
     }
 
@@ -66,6 +67,7 @@ class EditarPerfilController
     $new_pass = $_POST["new-pass"];
     if ($actual_pass == $this->usuario->password) {
       if ($this->usuario->actualizarPassword($new_pass)) {
+        setcookie("pwd", $new_pass, time() + 3600 * 24 * 30, "/");
         $_SESSION["pwd_actualizado"] = true;
       }
     } else {
