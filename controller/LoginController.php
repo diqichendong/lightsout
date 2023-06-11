@@ -24,7 +24,8 @@ class LoginController
         $_SESSION["usuario"] = $this->usuario;
         header("Location: inicio");
       } else {
-        $_SESSION["mensaje_error"] = "Usuario o contraseña incorrectos.";
+        setcookie("login", null, -1);
+        setcookie("pwd", null, -1);
         header("Location: login");
       }
     } else {

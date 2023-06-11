@@ -6,11 +6,14 @@
 export function validarLogin(login) {
   let patron = /^[0-9A-Za-z-_.]+$/;
 
-  if (patron.test(login)) {
-    return true;
+  if (login.length > 30) {
+    alert("El usuario no puede superar los 30 caracteres.");
+    return false;
   } else if (login.length == 0) {
     alert("El usuario no puede estar vacío.");
     return false;
+  } else if (patron.test(login)) {
+    return true;
   } else {
     alert("El formato del usuario es incorrecto.");
     return false;
@@ -25,11 +28,11 @@ export function validarLogin(login) {
 export function validarEmail(email) {
   let patron = /^[0-9a-z-_.]+[@][a-z0-9-_.]+[.][a-z]+$/;
 
-  if (patron.test(email)) {
-    return true;
-  } else if (email.length == 0) {
+  if (email.length == 0) {
     alert("El correo electrónico no puede estar vacío.");
     return false;
+  } else if (patron.test(email)) {
+    return true;
   } else {
     alert("El formato del correo electrónico es incorrecto.");
     return false;
@@ -45,15 +48,15 @@ export function validarEmail(email) {
 export function validarPwd(pwd, pwd_conf) {
   let patron = /^[0-9A-Za-zÀ-ÿ\u00f1\u00d1\-\_\.]+$/;
 
-  if (patron.test(pwd)) {
+  if (pwd.length == 0) {
+    alert("La contraseña no puede estar vacía.");
+    return false;
+  } else if (patron.test(pwd)) {
     if (pwd == pwd_conf) {
       return true;
     } else {
       alert("La confirmación de contraseña no coincide con la contraseña.");
     }
-  } else if (pwd.length == 0) {
-    alert("La contraseña no puede estar vacía.");
-    return false;
   } else {
     alert("El formato de la contraseña es incorrecto.");
     return false;
@@ -68,11 +71,14 @@ export function validarPwd(pwd, pwd_conf) {
 export function validarNombre(nombre) {
   let patron = /^[0-9A-Za-zÀ-ÿ\u00f1\u00d1\-\.\s\"\']+$/;
 
-  if (patron.test(nombre)) {
-    return true;
+  if (nombre.length > 30) {
+    alert("El nombre no puede superar los 30 caracteres.");
+    return false;
   } else if (nombre.length == 0) {
     alert("El nombre no puede estar vacío.");
     return false;
+  } else if (patron.test(nombre)) {
+    return true;
   } else {
     alert("El formato del nombre es incorrecto.");
     return false;
@@ -128,7 +134,7 @@ export function validarContenido(contenido) {
 
 /**
  * Valida el comentario de un post
- * @param {string} comentario Nombre del archivo subido
+ * @param {string} comentario comentario
  * @returns true si valida, false si no
  */
 export function validarComentario(comentario) {
@@ -136,6 +142,20 @@ export function validarComentario(comentario) {
     return true;
   } else {
     alert("El comentario no puede superar los 255 caracteres.");
+    return false;
+  }
+}
+
+/**
+ * Valida el "sobre mí"
+ * @param {string} sobre_mi sobre mí
+ * @returns true si valida, false si no
+ */
+export function validarSobreMi(sobre_mi) {
+  if (sobre_mi.length < 255) {
+    return true;
+  } else {
+    alert("El apartado sobre mí no puede superar los 255 caracteres.");
     return false;
   }
 }

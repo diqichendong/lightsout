@@ -49,7 +49,7 @@ class EditarPerfilController
   {
     $nombre = $_POST["nombre"];
     $login = $_POST["usuario"];
-    $sobre_mi = $_POST["sobre_mi"];
+    $sobre_mi = htmlspecialchars($_POST["sobre_mi"]);
     if ($this->usuario->actualizarDatos($nombre, $login, $sobre_mi)) {
       setcookie("login", $login, time() + 3600 * 24 * 30, "/");
       $_SESSION["datos_actualizados"] = true;
@@ -85,6 +85,8 @@ class EditarPerfilController
     if ($this->usuario->eliminarUsuario()) {
       array_map('unlink', glob("assets/perfil/" . $this->usuario->id . ".*"));
       unset($_SESSION["usuario"]);
+      setcookie("login", null, -1);
+      setcookie("pwd", null, -1);
       $_SESSION["mensaje_ok"] = "Cuenta eliminada correctamente.";
       header("Location: login");
     }

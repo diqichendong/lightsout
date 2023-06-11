@@ -42,11 +42,11 @@ $perfil = $_SESSION["perfil"];
               </div>
             </div>
             <div class="d-flex flex-column mb-3">
-              <h4 class="text-warning lead fs-3">
+              <h4 class="text-warning lead fs-3 text-truncate">
                 <?= $perfil->nombre ?>
               </h4>
               <div>
-                <span class="text-white-50 fw-bold">
+                <span class="text-white-50 fw-bold text-truncate">
                   <?= "@" . $perfil->username ?>
                 </span>
               </div>
