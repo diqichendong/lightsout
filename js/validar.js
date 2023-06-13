@@ -1,86 +1,119 @@
 /**
  * Valida el campo usuario
- * @param {string} login Cadena login
+ * @param login Campo login
  * @returns true si valida, false si no
  */
 export function validarLogin(login) {
   let patron = /^[0-9A-Za-z-_.]+$/;
+  let login_str = login.value.trim();
+  login.classList.remove("is-valid");
+  login.classList.remove("is-invalid");
 
-  if (login.length > 30) {
+  if (login_str.length > 30) {
     alert("El usuario no puede superar los 30 caracteres.");
+    login.classList.add("is-invalid");
     return false;
-  } else if (login.length == 0) {
+  } else if (login_str.length == 0) {
     alert("El usuario no puede estar vacío.");
+    login.classList.add("is-invalid");
     return false;
-  } else if (patron.test(login)) {
+  } else if (patron.test(login_str)) {
+    login.classList.add("is-valid");
     return true;
   } else {
     alert("El formato del usuario es incorrecto.");
+    login.classList.add("is-invalid");
     return false;
   }
 }
 
 /**
  * Valida el campo correo electrónico
- * @param {string} email Cadena email
+ * @param email Campo email
  * @returns true si valida, false si no
  */
 export function validarEmail(email) {
   let patron = /^[0-9a-z-_.]+[@][a-z0-9-_.]+[.][a-z]+$/;
+  let email_str = email.value.trim();
+  email.classList.remove("is-valid");
+  email.classList.remove("is-invalid");
 
-  if (email.length == 0) {
+  if (email_str.length == 0) {
     alert("El correo electrónico no puede estar vacío.");
+    email.classList.add("is-invalid");
     return false;
-  } else if (patron.test(email)) {
+  } else if (patron.test(email_str)) {
+    email.classList.add("is-valid");
     return true;
   } else {
     alert("El formato del correo electrónico es incorrecto.");
+    email.classList.add("is-invalid");
     return false;
   }
 }
 
 /**
  * Valida el campo contraseña y confirmar contraseña
- * @param {string} pwd Cadena pwd
- * @param {string} pwd_conf Cadena pwd_conf
+ * @param pwd Campo contraseña
+ * @param pwd_conf Campo confirmar contraseña
  * @returns true si valida, false si no
  */
 export function validarPwd(pwd, pwd_conf) {
   let patron = /^[0-9A-Za-zÀ-ÿ\u00f1\u00d1\-\_\.]+$/;
+  let pwd_str = pwd.value.trim();
+  let pwd_conf_str = pwd_conf.value.trim();
+  pwd.classList.remove("is-valid");
+  pwd.classList.remove("is-invalid");
+  pwd_conf.classList.remove("is-valid");
+  pwd_conf.classList.remove("is-invalid");
 
-  if (pwd.length == 0) {
+  if (pwd_str.length == 0) {
     alert("La contraseña no puede estar vacía.");
+    pwd.classList.add("is-invalid");
     return false;
-  } else if (patron.test(pwd)) {
-    if (pwd == pwd_conf) {
+  } else if (patron.test(pwd_str)) {
+    if (pwd_str == pwd_conf_str) {
+      pwd.classList.add("is-valid");
+      pwd_conf.classList.add("is-valid");
       return true;
     } else {
       alert("La confirmación de contraseña no coincide con la contraseña.");
+      pwd.classList.add("is-valid");
+      pwd_conf.classList.add("is-invalid");
+      return false;
     }
   } else {
     alert("El formato de la contraseña es incorrecto.");
+    pwd.classList.add("is-invalid");
     return false;
   }
 }
 
 /**
  * Valida el campo nombre
- * @param {string} nombre Cadena nombre
+ * @param nombre Campo nombre
  * @returns true si valida, false si no
  */
 export function validarNombre(nombre) {
   let patron = /^[0-9A-Za-zÀ-ÿ\u00f1\u00d1\-\.\s\"\']+$/;
+  let nombre_str = nombre.value.trim();
+  nombre.classList.remove("is-valid");
+  nombre.classList.remove("is-invalid");
 
-  if (nombre.length > 30) {
+  if (nombre_str.length > 30) {
     alert("El nombre no puede superar los 30 caracteres.");
+    nombre.classList.add("is-invalid");
     return false;
-  } else if (nombre.length == 0) {
+  } else if (nombre_str.length == 0) {
     alert("El nombre no puede estar vacío.");
+    nombre.classList.add("is-invalid");
     return false;
-  } else if (patron.test(nombre)) {
+  } else if (patron.test(nombre_str)) {
+    nombre.classList.add("is-valid");
     return true;
   } else {
     alert("El formato del nombre es incorrecto.");
+    nombre.classList.add("is-invalid");
     return false;
   }
 }

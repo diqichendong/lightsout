@@ -24,8 +24,8 @@ guardar.addEventListener("click", (e) => {
 
 // Validar datos usuario
 guardar_datos.addEventListener("click", (e) => {
-  let nombre = document.getElementById("nombre").value.trim();
-  let usuario = document.getElementById("usuario").value.trim();
+  let nombre = document.getElementById("nombre");
+  let usuario = document.getElementById("usuario");
   if (!v.validarNombre(nombre) || !v.validarLogin(usuario)) {
     e.preventDefault();
   }
@@ -33,8 +33,8 @@ guardar_datos.addEventListener("click", (e) => {
 
 // Validar contraseñas del usuario
 cambiar_pwd.addEventListener("click", (e) => {
-  let new_pass = document.getElementById("new-pass").value;
-  let new_pass_conf = document.getElementById("new-pass-conf").value;
+  let new_pass = document.getElementById("new-pass");
+  let new_pass_conf = document.getElementById("new-pass-conf");
   if (!v.validarPwd(new_pass, new_pass_conf)) {
     e.preventDefault();
   }

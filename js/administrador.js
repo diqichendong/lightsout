@@ -20,16 +20,16 @@ $(document).on("click", ".btn-editar", function (e) {
 
 // Botón "Guardar" del modal de editar usuario
 $("#guardar").click(function (e) {
-  const form = document.forms[0];
+  const form = document.forms[1];
 
-  let nombre = form.elements["nombre"].value.trim();
-  let username = form.elements["username"].value.trim();
-  let email = form.elements["email"].value.trim();
+  let nombre = form.elements["nombre"];
+  let username = form.elements["username"];
+  let email = form.elements["email"];
 
   if (
+    !v.validarNombre(nombre) ||
     !v.validarLogin(username) ||
-    !v.validarEmail(email) ||
-    !v.validarNombre(nombre)
+    !v.validarEmail(email)
   ) {
     e.preventDefault();
   }
@@ -47,9 +47,7 @@ $(document).on("click", ".btn-eliminar", function (e) {
     $.post(
       "/index.php?c=administrador&m=eliminar_usuario",
       { id: id_usuario, nombre: nombre, username: username },
-      function (res) {
-        location.reload();
-      }
+      function (res) {}
     );
   }
 });
