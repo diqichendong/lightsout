@@ -81,6 +81,9 @@
         <p>
           ¡Bienvenido a LightsOUT, el lugar donde las historias cobran vida!
         </p>
+        <p class="border border-warning rounded p-3 my-2">
+          Para cualquier consulta, contáctanos a través de este correo: <em>administracion@lightsout.com</em>
+        </p>
       </div>
     </div>
   </div>

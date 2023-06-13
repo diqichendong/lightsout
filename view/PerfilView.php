@@ -601,7 +601,7 @@ $perfil = $_SESSION["perfil"];
   <script>
     <?php if ($_SESSION["perfil"]->id == $_SESSION["usuario"]->id) { ?>
       // Pagina activa en el menu
-      $("#menu a").eq(3).addClass("active");
+      $("#menu a").eq(2).addClass("active");
     <?php } ?>
 
     var id_usuario_actual = <?= $_SESSION["usuario"]->id ?>;
