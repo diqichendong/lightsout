@@ -11,4 +11,7 @@ Para la realización de este proyecto se han utilizado las siguientes tecnologí
 - MySQL
 
 
-Acceder: https://lightsout1.000webhostapp.com/
+Acceder: http://www.lightsout.com.mialias.net/
+Credenciales:
+- Usuario: lights294
+- Contraseña: 0dA9IIA0
